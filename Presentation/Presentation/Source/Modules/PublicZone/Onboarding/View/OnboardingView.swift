@@ -123,10 +123,6 @@ extension OnboardingView: UIPageViewControllerDelegate {
         
         output?.pageSwiped(to: index)
     }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-        
-    }
 }
 
 // MARK: - UIPageViewControllerDataSource
