@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2C155E962D70762200735195 /* DIConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C155E952D70762200735195 /* DIConfigurator.swift */; };
-		2C2CFBEA2D76BF4300B37F2A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C2CFBE92D76BF4300B37F2A /* Images.xcassets */; };
 		2C2DBA9A2D76F41E005D1DAC /* UseCasesAssemble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2DBA992D76F41E005D1DAC /* UseCasesAssemble.swift */; };
 		2C3DFF452D8EC74B004C4411 /* Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C3DFF3E2D8EC73F004C4411 /* Common.framework */; };
 		2C3DFF462D8EC74B004C4411 /* Common.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2C3DFF3E2D8EC73F004C4411 /* Common.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -26,10 +25,8 @@
 		2C3DFFC22D8ED44C004C4411 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 2C3DFFC12D8ED44C004C4411 /* Swinject */; };
 		2C88FF3B2D522008007D3F6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88FF312D522008007D3F6E /* AppDelegate.swift */; };
 		2C88FF402D522008007D3F6E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C88FF352D522008007D3F6E /* LaunchScreen.storyboard */; };
-		2CB66D5A2D73107000C5D0D9 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CB66D592D73107000C5D0D9 /* Colors.xcassets */; };
-		2CB66D5C2D73111500C5D0D9 /* XCAssets+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB66D5B2D73111500C5D0D9 /* XCAssets+Generated.swift */; };
+		2CB66D5A2D73107000C5D0D9 /* App.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CB66D592D73107000C5D0D9 /* App.xcassets */; };
 		2CD37D402D5361D3007C496B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CD37D3F2D5361D3007C496B /* Localizable.strings */; };
-		2CD37D432D536248007C496B /* Strings+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD37D422D536248007C496B /* Strings+Generated.swift */; };
 		2CE888072D72088B0068769F /* RepositoriesAssemble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE888062D72088B0068769F /* RepositoriesAssemble.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,7 +51,6 @@
 
 /* Begin PBXFileReference section */
 		2C155E952D70762200735195 /* DIConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIConfigurator.swift; sourceTree = "<group>"; };
-		2C2CFBE92D76BF4300B37F2A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2C2DBA992D76F41E005D1DAC /* UseCasesAssemble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCasesAssemble.swift; sourceTree = "<group>"; };
 		2C3DFF3E2D8EC73F004C4411 /* Common.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Common.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C3DFF3F2D8EC73F004C4411 /* Domain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Domain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,10 +63,8 @@
 		2C88FF312D522008007D3F6E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C88FF332D522008007D3F6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C88FF342D522008007D3F6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		2CB66D592D73107000C5D0D9 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
-		2CB66D5B2D73111500C5D0D9 /* XCAssets+Generated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCAssets+Generated.swift"; sourceTree = "<group>"; };
+		2CB66D592D73107000C5D0D9 /* App.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = App.xcassets; sourceTree = "<group>"; };
 		2CD37D3F2D5361D3007C496B /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
-		2CD37D422D536248007C496B /* Strings+Generated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Strings+Generated.swift"; sourceTree = "<group>"; };
 		2CE888062D72088B0068769F /* RepositoriesAssemble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesAssemble.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -162,7 +156,6 @@
 				2C155E942D70760C00735195 /* DI */,
 				2C88FF462D52209A007D3F6E /* App */,
 				2C88FF472D5220AB007D3F6E /* Resources */,
-				2CD37D412D536234007C496B /* Generated */,
 				2C3DFFBC2D8ED41E004C4411 /* Extensions */,
 			);
 			path = FinanceCarter;
@@ -181,20 +174,10 @@
 			children = (
 				2C88FF352D522008007D3F6E /* LaunchScreen.storyboard */,
 				2C88FF332D522008007D3F6E /* Info.plist */,
-				2CB66D592D73107000C5D0D9 /* Colors.xcassets */,
+				2CB66D592D73107000C5D0D9 /* App.xcassets */,
 				2CD37D3F2D5361D3007C496B /* Localizable.strings */,
-				2C2CFBE92D76BF4300B37F2A /* Images.xcassets */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		2CD37D412D536234007C496B /* Generated */ = {
-			isa = PBXGroup;
-			children = (
-				2CD37D422D536248007C496B /* Strings+Generated.swift */,
-				2CB66D5B2D73111500C5D0D9 /* XCAssets+Generated.swift */,
-			);
-			path = Generated;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,7 +187,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2C88FF2C2D522000007D3F6E /* Build configuration list for PBXNativeTarget "FinanceCarter" */;
 			buildPhases = (
-				2CD37D442D536276007C496B /* SwiftGen */,
 				2CEB61F32D96A93500EE6410 /* SwiftLint */,
 				2C88FF152D521FFF007D3F6E /* Sources */,
 				2C88FF162D521FFF007D3F6E /* Frameworks */,
@@ -265,8 +247,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CB66D5A2D73107000C5D0D9 /* Colors.xcassets in Resources */,
-				2C2CFBEA2D76BF4300B37F2A /* Images.xcassets in Resources */,
+				2CB66D5A2D73107000C5D0D9 /* App.xcassets in Resources */,
 				2CD37D402D5361D3007C496B /* Localizable.strings in Resources */,
 				2C88FF402D522008007D3F6E /* LaunchScreen.storyboard in Resources */,
 			);
@@ -275,25 +256,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2CD37D442D536276007C496B /* SwiftGen */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftGen;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nexport PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftgen >& /dev/null; then\n  swiftgen\nelse\n  echo \"warning: SwiftGen not installed, download from https://github.com/SwiftGen/SwiftGen\"\nfi\n";
-		};
 		2CEB61F32D96A93500EE6410 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -320,13 +282,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CD37D432D536248007C496B /* Strings+Generated.swift in Sources */,
 				2C3DFFBE2D8ED427004C4411 /* Container.swift in Sources */,
 				2C88FF3B2D522008007D3F6E /* AppDelegate.swift in Sources */,
 				2CE888072D72088B0068769F /* RepositoriesAssemble.swift in Sources */,
 				2C2DBA9A2D76F41E005D1DAC /* UseCasesAssemble.swift in Sources */,
 				2C155E962D70762200735195 /* DIConfigurator.swift in Sources */,
-				2CB66D5C2D73111500C5D0D9 /* XCAssets+Generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
