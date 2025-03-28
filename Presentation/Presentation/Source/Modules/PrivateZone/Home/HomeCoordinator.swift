@@ -48,4 +48,3 @@ final class HomeCoordinator: TabBarItemCoordinator {
 extension HomeCoordinator: HomePresenterOutput {
     
 }
-

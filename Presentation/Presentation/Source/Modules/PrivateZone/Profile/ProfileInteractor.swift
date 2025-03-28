@@ -24,4 +24,3 @@ final class ProfileInteractor: ProfileInteractorInput {
         print("\(Self.self) deinit")
     }
 }
-

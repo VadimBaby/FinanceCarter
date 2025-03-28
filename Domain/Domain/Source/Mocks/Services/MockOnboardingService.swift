@@ -5,8 +5,6 @@
 //  Created by Вадим Мартыненко on 22.03.2025.
 //
 
-
-import Foundation
 import Common
 
 public final class MockOnboardingService: OnboardingUseCase {
@@ -50,4 +48,3 @@ public final class MockOnboardingService: OnboardingUseCase {
         print("onboarding is finished")
     }
 }
-

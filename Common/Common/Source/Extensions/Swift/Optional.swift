@@ -14,4 +14,3 @@ public extension Optional {
         self != nil
     }
 }
-

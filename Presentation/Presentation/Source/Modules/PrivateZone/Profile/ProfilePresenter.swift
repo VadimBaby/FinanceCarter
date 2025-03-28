@@ -49,4 +49,3 @@ struct ProfilePresenterPreview: PreviewProvider {
     }
 }
 #endif
-

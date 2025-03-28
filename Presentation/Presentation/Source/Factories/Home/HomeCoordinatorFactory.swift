@@ -12,4 +12,3 @@ final class HomeCoordinatorFactory {
         HomeCoordinator(tabBarController: tabBarController, resolver: resolver, homeAssembly: HomeModuleFactory.create)
     }
 }
-

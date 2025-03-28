@@ -11,4 +11,3 @@ import Reusable
 final class HomeBalanceViewCell: UICollectionViewCell, Reusable {
     
 }
-

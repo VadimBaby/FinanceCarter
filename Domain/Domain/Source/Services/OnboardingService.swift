@@ -5,7 +5,6 @@
 //  Created by Вадим Мартыненко on 22.03.2025.
 //
 
-import Foundation
 import Common
 
 public final class OnboardingService: OnboardingUseCase {

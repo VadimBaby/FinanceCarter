@@ -48,4 +48,3 @@ final class ProfileCoordinator: TabBarItemCoordinator {
 extension ProfileCoordinator: ProfilePresenterOutput {
     
 }
-

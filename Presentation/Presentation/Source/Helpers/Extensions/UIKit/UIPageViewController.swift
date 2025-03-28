@@ -38,4 +38,3 @@ extension UIPageViewController {
         setViewControllers([viewController], animated: animated, disableUserInteractionDuringAnimation: disableUserInteractionDuringAnimation, completion: passedCompletion)
     }
 }
-

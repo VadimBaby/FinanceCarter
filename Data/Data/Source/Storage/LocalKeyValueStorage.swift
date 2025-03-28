@@ -7,7 +7,6 @@
 
 import Common
 import Domain
-import Foundation
 
 public final class LocalKeyValueStorage: KeyValueStorageRepository {
     private let storage = UserDefaults.standard
@@ -52,5 +51,3 @@ extension LocalKeyValueStorage {
         storage.integer(forKey: key.rawValue)
     }
 }
-
-

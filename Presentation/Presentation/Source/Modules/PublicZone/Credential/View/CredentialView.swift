@@ -114,4 +114,3 @@ struct CredentialViewPreview: PreviewProvider {
     }
 }
 #endif
-

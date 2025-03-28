@@ -212,4 +212,3 @@ private extension OnboardingItemView {
         }
     }
 }
-

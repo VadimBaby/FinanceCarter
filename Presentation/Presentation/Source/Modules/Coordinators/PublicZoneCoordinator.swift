@@ -90,4 +90,3 @@ extension PublicZoneCoordinator: CredentialPresenterOutput {
         delegate?.publicZoneDidFinish()
     }
 }
-
