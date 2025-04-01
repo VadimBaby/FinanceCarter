@@ -7,6 +7,7 @@
 
 import Common
 import Domain
+// swiftlint:disable:next foundation_using
 import Foundation
 
 public final class LocalKeyValueStorage: KeyValueStorageRepository {

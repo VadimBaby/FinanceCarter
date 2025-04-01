@@ -1,11 +1,11 @@
 import ProjectDescription
 import ProjectDescriptionHelpers
 
-fileprivate let NAME_PROJECT = "Presentation"
+fileprivate let NAME_PROJECT = Constants.Modules.Presentation.title
 
 let project = Project(
     name: NAME_PROJECT,
-    organizationName: "Vadim Martynenko",
+    organizationName: Constants.ORGANIZATION_NAME,
     packages: [
         .remote(url: "https://github.com/AliSoftware/Reusable.git", requirement: .upToNextMajor(from: "4.1.2")),
         .remote(url: "https://github.com/SnapKit/SnapKit.git", requirement: .upToNextMajor(from: "5.7.1"))
@@ -14,12 +14,14 @@ let project = Project(
         .frameworkTarget(
             name: NAME_PROJECT,
             dependencies: [
-                .project(target: "Common", path: "//Projects/Common"),
-                .project(target: "Domain", path: "//Projects/Domain"),
+                Constants.Modules.Common.dependency,
+                Constants.Modules.Domain.dependency,
                 .package(product: "Reusable"),
                 .package(product: "SnapKit")
             ],
-            isUseResources: true)
+            resources: Constants.DEFAULT_LOCATE_RESOURCES,
+            enabledSwiftGen: true
+        )
     ]
 )
 
