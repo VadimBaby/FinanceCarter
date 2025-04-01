@@ -1,6 +1,8 @@
 excluded:
   - "*/*/Generated/*.swift"
   - "*/*/Source/Generated/*.swift"
+  - "Projects/*/Project.swift"
+  - "Project.swift"
 
 line_length:
 - 200 # warning
