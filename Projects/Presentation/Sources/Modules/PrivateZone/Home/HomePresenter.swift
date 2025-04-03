@@ -18,7 +18,7 @@ protocol HomePresenterInput: AnyObject {
 final class HomePresenter: HomePresenterInput {
     weak var output: HomePresenterOutput?
     
-    private let view: HomeViewInput
+    private weak var view: HomeViewInput?
     private let interactor: HomeInteractorInput
     
     init(view: HomeViewInput, interactor: HomeInteractorInput) {

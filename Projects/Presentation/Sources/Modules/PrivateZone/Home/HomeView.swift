@@ -22,7 +22,7 @@ final class HomeView: UIViewController, HomeViewInput {
         case header, balance
     }
     
-    weak var output: HomeViewOutput?
+    var output: HomeViewOutput?
     
     private let sections = SectionKind.allCases
     

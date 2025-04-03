@@ -19,7 +19,7 @@ protocol CredentialPresenterInput: AnyObject {
 final class CredentialPresenter: CredentialPresenterInput {
     weak var output: CredentialPresenterOutput?
     
-    private let view: CredentialViewInput
+    private weak var view: CredentialViewInput?
     private let interactor: CredentialInteractorInput
     
     init(view: CredentialViewInput, interactor: CredentialInteractorInput) {

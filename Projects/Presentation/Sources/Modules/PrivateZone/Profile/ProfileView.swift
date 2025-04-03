@@ -18,7 +18,7 @@ protocol ProfileViewInput: AnyObject {
 }
 
 final class ProfileView: UIViewController, ProfileViewInput {
-    weak var output: ProfileViewOutput?
+    var output: ProfileViewOutput?
     
     private lazy var mainLabel = UILabel() &> {
         $0.text = Strings.Profile.systemTitle

@@ -18,7 +18,7 @@ protocol CredentialViewInput: AnyObject {
 }
 
 final class CredentialView: UIViewController, CredentialViewInput {
-    weak var output: CredentialViewOutput?
+    var output: CredentialViewOutput?
     
     private lazy var nameTextField: UITextField = .primary(placeholder: Strings.Credential.Textfield.Name.placeholder) &> { $0.delegate = self }
     
@@ -82,11 +82,8 @@ private extension CredentialView {
     
     @objc
     func buttonPressed() {
-        UserDefaults.standard.removeObject(forKey: "currentOnboardingPage")
-        UserDefaults.standard.removeObject(forKey: "isOnboardingCompleted")
-//        guard let value = nameTextField.text else { return }
-        
-       // output?.didTapNextButton(name: "value")
+        guard let value = nameTextField.text else { return }
+        output?.didTapNextButton(name: value)
     }
     
     @objc
