@@ -9,6 +9,12 @@ import UIKit
 import SnapKit
 import Common
 
+private struct Constants {
+    static let padding = 10
+    static let nextButtonHeight = 50
+    static let nameTextFieldHeight = 50
+}
+
 protocol CredentialViewOutput: AnyObject {
     func didTapNextButton(name: String)
 }
@@ -22,9 +28,11 @@ final class CredentialView: UIViewController, CredentialViewInput {
     
     private lazy var nameTextField: UITextField = .primary(placeholder: Strings.Credential.Textfield.Name.placeholder) &> { $0.delegate = self }
     
-    private lazy var button: UIButton = .primary(title: Strings.App.next) &> {
+    private lazy var nextButton: UIButton = .primary(title: Strings.App.next) &> {
         $0.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
     }
+    
+    var nextButtonBottomConstraint: Constraint?
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -45,10 +53,13 @@ final class CredentialView: UIViewController, CredentialViewInput {
         setupViews()
         setupConstaints()
         setupGestures()
+        setupNotifications()
+        
+        nameTextField.becomeFirstResponder()
     }
 }
 
-// MARK: - Views
+// MARK: - Setups
 
 private extension CredentialView {
     func setupViews() {
@@ -58,7 +69,7 @@ private extension CredentialView {
         navigationItem.hidesBackButton = true
         view.backgroundColor = .systemBackground
         
-        view.addSubviews(nameTextField, button)
+        view.addSubviews(nameTextField, nextButton)
     }
     
     func setupGestures() {
@@ -68,16 +79,42 @@ private extension CredentialView {
     
     func setupConstaints() {
         nameTextField.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(10)
-            make.horizontalEdges.equalToSuperview().inset(10)
-            make.height.equalTo(50)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(Constants.padding)
+            make.horizontalEdges.equalToSuperview().inset(Constants.padding)
+            make.height.equalTo(Constants.nameTextFieldHeight)
         }
         
-        button.snp.makeConstraints { make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(10)
-            make.horizontalEdges.equalToSuperview().inset(10)
-            make.height.equalTo(50)
+        nextButton.snp.makeConstraints { make in
+            nextButtonBottomConstraint = make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(Constants.nextButtonHeight).constraint
+            make.horizontalEdges.equalToSuperview().inset(Constants.padding)
+            make.height.equalTo(Constants.nextButtonHeight)
         }
+    }
+    
+    func setupNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+}
+
+// MARK: - Private Methods
+
+private extension CredentialView {
+    @objc
+    func keyboardWillShow(_ notification: NSNotification) {
+        guard let userInfo = notification.userInfo,
+              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+        
+        let keyboardHeight = keyboardFrame.size.height
+        
+        self.nextButtonBottomConstraint?.update(inset: keyboardHeight)
+        self.view.layoutIfNeeded()
+    }
+    
+    @objc
+    func keyboardWillHide(_ notification: NSNotification) {
+        self.nextButtonBottomConstraint?.update(inset: Constants.padding)
+        self.view.layoutIfNeeded()
     }
     
     @objc
@@ -102,7 +139,7 @@ extension CredentialView: UITextFieldDelegate {
     }
 }
 
-// MARK: - Previewz
+// MARK: - Preview
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
 struct CredentialViewPreview: PreviewProvider {
