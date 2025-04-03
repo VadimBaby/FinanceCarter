@@ -9,7 +9,7 @@ import UIKit
 import Common
 
 extension UITextField {
-    static func primary(placeholder: String, backgroundColor: UIColor = .systemGroupedBackground) -> UITextField {
+    static func primary(placeholder: String, backgroundColor: UIColor = .secondarySystemBackground) -> UITextField {
         let textField = UITextField()
         textField.placeholder = placeholder
         textField.backgroundColor = backgroundColor
