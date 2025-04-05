@@ -14,7 +14,7 @@ public final class LocalKeyValueStorage: KeyValueStorageRepository {
     private let storage = UserDefaults.standard
     
     private enum UserStorageKey: String {
-        case isOnboardingCompleted, currentOnboardingPage
+        case isOnboardingCompleted, currentOnboardingPage, userName
     }
     
     public init() {}
@@ -34,6 +34,14 @@ public final class LocalKeyValueStorage: KeyValueStorageRepository {
             set(newValue, forKey: .currentOnboardingPage)
         }
     }
+    
+    public var userName: String {
+        get {
+            string(forKey: .userName)
+        } set {
+            set(newValue, forKey: .userName)
+        }
+    }
 }
 
 // MARK: - Private Methods
@@ -51,5 +59,10 @@ extension LocalKeyValueStorage {
     /// The integer value associated with the specified key. If the specified key doesn‘t exist, this method returns 0.
     private func integer(forKey key: UserStorageKey) -> Int {
         storage.integer(forKey: key.rawValue)
+    }
+    
+    /// The string value associated with the specified key. If the specified key doesn‘t exist, this method returns empty string.
+    private func string(forKey key: UserStorageKey) -> String {
+        storage.string(forKey: key.rawValue) ?? ""
     }
 }

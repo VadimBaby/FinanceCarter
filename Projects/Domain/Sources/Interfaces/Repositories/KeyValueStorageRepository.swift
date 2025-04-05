@@ -8,4 +8,5 @@
 public protocol KeyValueStorageRepository: AnyObject {
     var isOnboardingCompleted: Bool { get set }
     var currentOnboardingPage: Int { get set }
+    var userName: String { get set }
 }

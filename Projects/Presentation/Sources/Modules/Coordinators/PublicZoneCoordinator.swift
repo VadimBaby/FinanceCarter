@@ -55,23 +55,32 @@ final class PublicZoneCoordinator: PublicZoneCoordinatorInput {
     }
     
     func start() {
-        defer { window.rootViewController = navigationController }
-        
-        if keyValueStorage.isOnboardingCompleted {
+        if !keyValueStorage.isOnboardingCompleted {
+            openOnboardingScreen()
+        } else if keyValueStorage.userName == .empty {
             openCredentialsScreen()
         } else {
-            openOnboardingScreen()
+            delegate?.publicZoneDidFinish()
         }
     }
     
     func openOnboardingScreen() {
         let view = onboardingViewAssembly(self, resolver)
-        navigationController.pushViewController(view, animated: true)
+        openView(view)
     }
     
     func openCredentialsScreen() {
         let view = credentialsViewAssembly(self, resolver)
+        openView(view)
+    }
+}
+
+// MARK: Private methods
+
+private extension PublicZoneCoordinator {
+    func openView(_ view: UIViewController) {
         navigationController.pushViewController(view, animated: true)
+        window.rootViewController = navigationController
     }
 }
 
@@ -86,7 +95,7 @@ extension PublicZoneCoordinator: OnboardingPresenterOutput {
 // MARK: - CredentialPresenterOutput
 
 extension PublicZoneCoordinator: CredentialPresenterOutput {
-    func didTapNext() {
+    func credentialsDidTapNext() {
         delegate?.publicZoneDidFinish()
     }
 }

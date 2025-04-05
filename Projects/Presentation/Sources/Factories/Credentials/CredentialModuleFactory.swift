@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Domain
 
 final class CredentialModuleFactory {
     private init() {}
@@ -15,7 +16,7 @@ final class CredentialModuleFactory {
         resolver: Resolver
     ) -> UIViewController & CredentialViewInput {
         let view = CredentialView()
-        let interactor = CredentialInteractor()
+        let interactor = CredentialInteractor(useCase: resolver.resolve(AccountUseCase.self)!)
         let presenter = CredentialPresenter(view: view, interactor: interactor)
         
         view.output = presenter
@@ -32,7 +33,7 @@ final class CredentialModuleFactory {
 extension CredentialModuleFactory {
     static func createMock() -> UIViewController & CredentialViewInput {
         let view = CredentialView()
-        let interactor = CredentialInteractor()
+        let interactor = CredentialInteractor(useCase: MockAccountService())
         let presenter = CredentialPresenter(view: view, interactor: interactor)
         
         view.output = presenter

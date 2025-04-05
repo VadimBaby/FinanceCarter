@@ -13,5 +13,9 @@ final class UseCasesAssemble: Assembly {
         container.register(OnboardingUseCase.self) { resolver, items in
             OnboardingService(repository: resolver.resolve(KeyValueStorageRepository.self)!, onboardingItems: items)
         }
+        
+        container.register(AccountUseCase.self) { resolver in
+            AccountService(repository: resolver.resolve(KeyValueStorageRepository.self)!)
+        }
     }
 }

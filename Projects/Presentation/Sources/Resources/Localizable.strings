@@ -1,5 +1,7 @@
 "app.next" = "Далее";
 
+"alert.nameIsNil.title" = "Имя не должно быть пустым";
+
 "onboarding.first.title" = "You ought to know where your money goes";
 "onboarding.first.description" = "Get an overview of how you are performing and motivate yourself to achieve even more.";
 "onboarding.second.title" = "Gain total control of your money";

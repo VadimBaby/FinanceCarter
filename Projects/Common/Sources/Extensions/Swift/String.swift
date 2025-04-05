@@ -9,4 +9,8 @@ public extension String {
     var isNotEmpty: Bool {
         !isEmpty
     }
+    
+    static var empty: String {
+        ""
+    }
 }

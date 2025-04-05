@@ -21,6 +21,8 @@ protocol CredentialViewOutput: AnyObject {
 
 protocol CredentialViewInput: AnyObject {
     var output: CredentialViewOutput? { get set }
+    
+    func showNameIsIncorrentError()
 }
 
 final class CredentialView: UIViewController, CredentialViewInput {
@@ -56,6 +58,10 @@ final class CredentialView: UIViewController, CredentialViewInput {
         setupNotifications()
         
         nameTextField.becomeFirstResponder()
+    }
+    
+    func showNameIsIncorrentError() {
+        self.showAlert(type: .nameIsEmpty)
     }
 }
 

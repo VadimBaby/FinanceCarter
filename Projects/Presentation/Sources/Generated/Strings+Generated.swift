@@ -10,6 +10,12 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 public enum Strings {
+  public enum Alert {
+    public enum NameIsNil {
+      /// Имя не должно быть пустым
+      public static let title = Strings.tr("Localizable", "alert.nameIsNil.title", fallback: "Имя не должно быть пустым")
+    }
+  }
   public enum App {
     /// Далее
     public static let next = Strings.tr("Localizable", "app.next", fallback: "Далее")

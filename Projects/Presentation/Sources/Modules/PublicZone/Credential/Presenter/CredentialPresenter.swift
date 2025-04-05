@@ -9,7 +9,7 @@ import UIKit
 import Common
 
 protocol CredentialPresenterOutput: AnyObject {
-    func didTapNext()
+    func credentialsDidTapNext()
 }
 
 protocol CredentialPresenterInput: AnyObject {
@@ -37,12 +37,18 @@ final class CredentialPresenter: CredentialPresenterInput {
 extension CredentialPresenter: CredentialViewOutput {
     func didTapNextButton(name: String) {
         guard name.isNotEmpty else { return }
-        output?.didTapNext()
+        interactor.setName(name)
     }
 }
 
 extension CredentialPresenter: CredentialInteractorOutput {
-    
+    func didSetName(isSuccess: Bool) {
+        if isSuccess {
+            output?.credentialsDidTapNext()
+        } else {
+            view?.showNameIsIncorrentError()
+        }
+    }
 }
 
 #if canImport(SwiftUI) && DEBUG

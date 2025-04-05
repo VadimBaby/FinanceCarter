@@ -6,3 +6,4 @@
 //
 
 public typealias VoidAction = () -> Void
+public typealias IsSuccessCompletion = (_ isSuccess: Bool) -> Void
