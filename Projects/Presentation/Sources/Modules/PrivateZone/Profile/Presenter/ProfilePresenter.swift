@@ -18,7 +18,7 @@ protocol ProfilePresenterInput: AnyObject {
 final class ProfilePresenter: ProfilePresenterInput {
     weak var output: ProfilePresenterOutput?
     
-    private weak var view: ProfileViewInput?
+    private unowned var view: ProfileViewInput
     private let interactor: ProfileInteractorInput
     
     init(view: ProfileViewInput, interactor: ProfileInteractorInput) {

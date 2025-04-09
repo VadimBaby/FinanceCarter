@@ -17,6 +17,9 @@
 
 "tabBar.home" = "Главная";
 "tabBar.profile" = "Профиль";
+"tabBar.wallets" = "Кошельки";
+"tabBar.transactions" = "Транзакции";
+"tabBar.categories" = "Категории";
 
 "home.systemTitle" = "Главная";
 

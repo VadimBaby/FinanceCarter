@@ -11,7 +11,10 @@ final class HomeModuleFactory {
     private init() {}
     
     static func create(coordinator: HomePresenterOutput, resolver: Resolver) -> HomeViewInput & UIViewController {
-        let view = HomeView()
+        let view = HomeView(homeHeaderAssembly: { cell in
+            HomeHeaderCellFactory.create(view: cell, resolver: resolver)
+        })
+        
         let interactor = HomeInteractor()
         let presenter = HomePresenter(view: view, interactor: interactor)
         
@@ -27,7 +30,7 @@ final class HomeModuleFactory {
 #if DEBUG
 extension HomeModuleFactory {
     static func createMock() -> HomeViewInput & UIViewController {
-        let view = HomeView()
+        let view = HomeView(homeHeaderAssembly: HomeHeaderCellFactory.createMock)
         let interactor = HomeInteractor()
         let presenter = HomePresenter(view: view, interactor: interactor)
         

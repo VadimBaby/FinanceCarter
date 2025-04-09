@@ -65,10 +65,16 @@ public enum Strings {
     public static let systemTitle = Strings.tr("Localizable", "profile.systemTitle", fallback: "Профиль")
   }
   public enum TabBar {
+    /// Категории
+    public static let categories = Strings.tr("Localizable", "tabBar.categories", fallback: "Категории")
     /// Главная
     public static let home = Strings.tr("Localizable", "tabBar.home", fallback: "Главная")
     /// Профиль
     public static let profile = Strings.tr("Localizable", "tabBar.profile", fallback: "Профиль")
+    /// Транзакции
+    public static let transactions = Strings.tr("Localizable", "tabBar.transactions", fallback: "Транзакции")
+    /// Кошельки
+    public static let wallets = Strings.tr("Localizable", "tabBar.wallets", fallback: "Кошельки")
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

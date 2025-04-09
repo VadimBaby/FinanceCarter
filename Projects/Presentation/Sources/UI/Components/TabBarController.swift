@@ -8,19 +8,38 @@
 import UIKit
 
 protocol TabBarControllerProtocol: AnyObject {
-    func setHomeViewController(_ viewController: UIViewController)
-    func setProfileViewController(_ viewController: UIViewController)
+    func setTab(viewController: UIViewController, for tab: TabBarItem)
+}
+
+enum TabBarItem: Int {
+    case home, categories, transactions, wallets, profile
+    
+    var title: String {
+        switch self {
+        case .home: Strings.TabBar.home
+        case .profile: Strings.TabBar.profile
+        case .wallets: Strings.TabBar.wallets
+        case .transactions: Strings.TabBar.transactions
+        case .categories: Strings.TabBar.categories
+        }
+    }
+    
+    var image: UIImage? {
+        switch self {
+        case .home: .houseIcon
+        case .profile: .personIcon
+        case .wallets: .walletIcon
+        case .transactions: .menucardIcon
+        case .categories: .documentIcon
+        }
+    }
+    
+    var tag: Int { rawValue }
 }
 
 final class TabBarController: UIAppTabBarController {
-    func setHomeViewController(_ viewController: UIViewController) {
-        viewController.tabBarItem = UITabBarItem(title: Strings.TabBar.home, image: .houseIcon, tag: 0)
-        pushViewController(viewController)
-    }
-    
-#warning("сделать один метод set(viewController: UIViewController, tabBar: TabBarItem)")
-    func setProfileViewController(_ viewController: UIViewController) {
-        viewController.tabBarItem = UITabBarItem(title: Strings.TabBar.profile, image: .personIcon, tag: 1)
+    func setTab(viewController: UIViewController, for tab: TabBarItem) {
+        viewController.tabBarItem = UITabBarItem(title: tab.title, image: tab.image, tag: tab.tag)
         pushViewController(viewController)
     }
 }

@@ -18,6 +18,10 @@ final class PrivateZoneCoordinatorFactory {
             window: window,
             resolver: resolver,
             homeCoordinatorAssembly: HomeCoordinatorFactory.create,
-            profileCoordinatorAssembly: ProfileCoordinatorFactory.create)
+            categoriesCoordinatorAssembly: CategoriesCoordinatorFactory.create,
+            transactionsCoordinatorAssembly: TransactionsCoordinatorFactory.create,
+            walletsCoordinatorAssembly: WalletsCoordinatorFactory.create,
+            profileCoordinatorAssembly: ProfileCoordinatorFactory.create
+        )
     }
 }

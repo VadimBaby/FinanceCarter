@@ -9,6 +9,10 @@ import UIKit
 import SnapKit
 import Common
 
+private enum Constants {
+    static let padding: CGFloat = 10
+}
+
 protocol HomeViewOutput: AnyObject {
     
 }
@@ -31,9 +35,15 @@ final class HomeView: UIViewController, HomeViewInput {
         $0.dataSource = self
         $0.register(cellType: HomeHeaderViewCell.self)
         $0.register(cellType: HomeBalanceViewCell.self)
+        $0.backgroundColor = view.backgroundColor
     }
     
-    init() {
+    typealias HomeHeaderAssembly = (_ homeHeaderView: HomeHeaderViewInput) -> HomeHeaderViewOutput
+    
+    private let homeHeaderAssembly: HomeHeaderAssembly
+    
+    init(homeHeaderAssembly: @escaping HomeHeaderAssembly) {
+        self.homeHeaderAssembly = homeHeaderAssembly
         super.init(nibName: nil, bundle: nil)
         
         print("\(Self.self) init")
@@ -58,8 +68,8 @@ final class HomeView: UIViewController, HomeViewInput {
 
 private extension HomeView {
     func setupViews() {
-        navigationItem.title = Strings.Home.systemTitle
-        view.backgroundColor = .systemBackground
+        navigationController?.navigationBar.isHidden = true
+        view.backgroundColor = .secondarySystemBackground
         view.addSubview(collectionView)
     }
     
@@ -88,6 +98,8 @@ extension HomeView: UICollectionViewDataSource {
         switch currentSection {
         case .header:
             let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: HomeHeaderViewCell.self)
+            let presenter = homeHeaderAssembly(cell)
+            cell.configure(with: presenter)
             return cell
         case .balance:
             let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: HomeBalanceViewCell.self)
@@ -134,7 +146,12 @@ private extension HomeView {
         )
         
         let section: NSCollectionLayoutSection = .init(group: group)
-        section.contentInsets = .init(horizontal: 10)
+        section.contentInsets = .init(
+            top: Constants.padding,
+            leading: Constants.padding,
+            bottom: .zero,
+            trailing: Constants.padding
+        )
         return section
     }
     

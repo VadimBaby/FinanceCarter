@@ -19,7 +19,7 @@ protocol CredentialPresenterInput: AnyObject {
 final class CredentialPresenter: CredentialPresenterInput {
     weak var output: CredentialPresenterOutput?
     
-    private weak var view: CredentialViewInput?
+    private unowned var view: CredentialViewInput
     private let interactor: CredentialInteractorInput
     
     init(view: CredentialViewInput, interactor: CredentialInteractorInput) {
@@ -46,7 +46,7 @@ extension CredentialPresenter: CredentialInteractorOutput {
         if isSuccess {
             output?.credentialsDidTapNext()
         } else {
-            view?.showNameIsIncorrentError()
+            view.showNameIsIncorrentError()
         }
     }
 }

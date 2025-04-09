@@ -1,5 +1,5 @@
 //
-//  HomeCoordinator.swift
+//  ProfileCoordinator.swift
 //  Presentation
 //
 //  Created by Вадим Мартыненко on 22.03.2025.
@@ -8,22 +8,22 @@
 import UIKit
 import Swinject
 
-final class HomeCoordinator: TabBarItemCoordinator {
+final class ProfileCoordinator: TabBarItemCoordinator {
     private let resolver: Resolver
     
-    let navigationController: UINavigationController
-    let tabBarController: UIAppTabBarController
+    var tabBarController: UIAppTabBarController
+    var navigationController: UINavigationController
     
-    private let homeAssembly: (_ coordinator: HomePresenterOutput, _ resolver: Resolver) -> UIViewController & HomeViewInput
+    private let profileAssembly: (_ coordinator: ProfilePresenterOutput, _ resolver: Resolver) -> UIViewController & ProfileViewInput
     
     init(
         tabBarController: UIAppTabBarController,
         navigationController: UINavigationController = UINavigationController(),
         resolver: Resolver,
-        homeAssembly: @escaping (_ coordinator: HomePresenterOutput, _ resolver: Resolver) -> UIViewController & HomeViewInput
+        profileAssembly: @escaping (_ coordinator: ProfilePresenterOutput, _ resolver: Resolver) -> UIViewController & ProfileViewInput
     ) {
         self.tabBarController = tabBarController
-        self.homeAssembly = homeAssembly
+        self.profileAssembly = profileAssembly
         
         self.resolver = resolver
         
@@ -38,13 +38,13 @@ final class HomeCoordinator: TabBarItemCoordinator {
     }
     
     func start() {
-        let view = homeAssembly(self, resolver)
+        let view = profileAssembly(self, resolver)
         
         navigationController.setRootViewController(view)
-        tabBarController.setHomeViewController(navigationController)
+        tabBarController.setTab(viewController: navigationController, for: .profile)
     }
 }
 
-extension HomeCoordinator: HomePresenterOutput {
+extension ProfileCoordinator: ProfilePresenterOutput {
     
 }

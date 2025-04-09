@@ -19,22 +19,36 @@ final class PrivateZoneCoordinator: PrivateZoneCoordinatorInput {
     private let window: UIWindow
     private let resolver: Resolver
     
-    private let homeCoordinatorAssembly: (_ tabBarController: UIAppTabBarController, _ resolver: Resolver) -> TabBarItemCoordinator
-    private let profileCoordinatorAssembly: (_ tabBarController: UIAppTabBarController, _ resolver: Resolver) -> TabBarItemCoordinator
+    typealias CoordinatorAssembly = (_ tabBarController: UIAppTabBarController, _ resolver: Resolver) -> TabBarItemCoordinator
+    
+    private let homeCoordinatorAssembly: CoordinatorAssembly
+    private let categoriesCoordinatorAssembly: CoordinatorAssembly
+    private let transactionsCoordinatorAssembly: CoordinatorAssembly
+    private let walletsCoordinatorAssembly: CoordinatorAssembly
+    private let profileCoordinatorAssembly: CoordinatorAssembly
     
     private var homeCoordinator: TabBarItemCoordinator?
+    private var categoriesCoordinator: TabBarItemCoordinator?
+    private var transactionsCoordinator: TabBarItemCoordinator?
+    private var walletsCoordinator: TabBarItemCoordinator?
     private var profileCoordinator: TabBarItemCoordinator?
     
     init(
         window: UIWindow,
         resolver: Resolver,
         tabBarController: UIAppTabBarController = TabBarController(),
-        homeCoordinatorAssembly: @escaping (_ tabBarController: UIAppTabBarController, _ resolver: Resolver) -> TabBarItemCoordinator,
-        profileCoordinatorAssembly: @escaping (_ tabBarController: UIAppTabBarController, _ resolver: Resolver) -> TabBarItemCoordinator
+        homeCoordinatorAssembly: @escaping CoordinatorAssembly,
+        categoriesCoordinatorAssembly: @escaping CoordinatorAssembly,
+        transactionsCoordinatorAssembly: @escaping CoordinatorAssembly,
+        walletsCoordinatorAssembly: @escaping CoordinatorAssembly,
+        profileCoordinatorAssembly: @escaping CoordinatorAssembly
     ) {
         self.window = window
         self.resolver = resolver
         self.homeCoordinatorAssembly = homeCoordinatorAssembly
+        self.categoriesCoordinatorAssembly = categoriesCoordinatorAssembly
+        self.transactionsCoordinatorAssembly = transactionsCoordinatorAssembly
+        self.walletsCoordinatorAssembly = walletsCoordinatorAssembly
         self.profileCoordinatorAssembly = profileCoordinatorAssembly
         self.tabBarController = tabBarController
         
@@ -50,12 +64,41 @@ final class PrivateZoneCoordinator: PrivateZoneCoordinatorInput {
     }
     
     func start(animated: Bool) {
-        homeCoordinator = homeCoordinatorAssembly(tabBarController, resolver)
-        homeCoordinator?.start()
-        
-        profileCoordinator = profileCoordinatorAssembly(tabBarController, resolver)
-        profileCoordinator?.start()
+        setupHomeCoordinator()
+        setupCategoriesCoordinator()
+        setupTransactionsCoordinator()
+        setupWalletsCoordinator()
+        setupProfileCoordinator()
         
         window.setRootViewController(tabBarController, animated: animated)
+    }
+}
+
+// MARK: Private Methods
+
+private extension PrivateZoneCoordinator {
+    func setupHomeCoordinator() {
+        homeCoordinator = homeCoordinatorAssembly(tabBarController, resolver)
+        homeCoordinator?.start()
+    }
+    
+    func setupCategoriesCoordinator() {
+        categoriesCoordinator = categoriesCoordinatorAssembly(tabBarController, resolver)
+        categoriesCoordinator?.start()
+    }
+    
+    func setupTransactionsCoordinator() {
+        transactionsCoordinator = transactionsCoordinatorAssembly(tabBarController, resolver)
+        transactionsCoordinator?.start()
+    }
+    
+    func setupWalletsCoordinator() {
+        walletsCoordinator = walletsCoordinatorAssembly(tabBarController, resolver)
+        walletsCoordinator?.start()
+    }
+    
+    func setupProfileCoordinator() {
+        profileCoordinator = profileCoordinatorAssembly(tabBarController, resolver)
+        profileCoordinator?.start()
     }
 }
