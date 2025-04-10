@@ -1,33 +1,33 @@
 //
-//  TransactionsCoordinator.swift
+//  ProfileCoordinator.swift
 //  Presentation
 //
-//  Created by Вадим Мартыненко on 09.04.2025.
-//  Copyright © 2025 Vadim Martynenko. All rights reserved.
+//  Created by Вадим Мартыненко on 22.03.2025.
 //
 
 import UIKit
+import Swinject
 
-protocol TransactionsRouterOutput: AnyObject {
+protocol ProfileRouterOutput: AnyObject {
     
 }
 
-protocol TransactionsRouterInput: Router {
-    var delegate: TransactionsRouterOutput? { get set }
+protocol ProfileRouterInput: Router {
+    var delegate: ProfileRouterOutput? { get set }
     
-    typealias ModuleAssembly = (_ router: TransactionsPresenterOutput, _ resolver: Resolver) -> TransactionsViewInput & UIViewController
+    typealias ModuleAssembly = (_ router: ProfilePresenterOutput, _ resolver: Resolver) -> UIViewController & ProfileViewInput
     
     var moduleAssembly: ModuleAssembly? { get set }
     
     func open()
 }
 
-final class TransactionsRouter: TransactionsRouterInput {
-    weak var delegate: TransactionsRouterOutput?
+final class ProfileRouter: ProfileRouterInput {
+    weak var delegate: ProfileRouterOutput?
     
     private let resolver: Resolver
     
-    let navigationController: UINavigationController
+    var navigationController: UINavigationController
     
     var moduleAssembly: ModuleAssembly?
     
@@ -36,9 +36,7 @@ final class TransactionsRouter: TransactionsRouterInput {
         resolver: Resolver
     ) {
         self.resolver = resolver
-        
         self.navigationController = navigationController
-        navigationController.navigationBar.prefersLargeTitles = true
         
         print("\(Self.self) init")
     }
@@ -53,6 +51,6 @@ final class TransactionsRouter: TransactionsRouterInput {
     }
 }
 
-extension TransactionsRouter: TransactionsPresenterOutput {
+extension ProfileRouter: ProfilePresenterOutput {
     
 }

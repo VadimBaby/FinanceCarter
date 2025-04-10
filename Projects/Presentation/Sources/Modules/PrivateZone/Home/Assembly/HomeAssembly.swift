@@ -11,7 +11,7 @@ import UIKit
 final class HomeAssembly {
     private init() {}
     
-    static func create(coordinator: HomePresenterOutput, resolver: Resolver) -> HomeViewInput & UIViewController {
+    private static func create(router: HomePresenterOutput, resolver: Resolver) -> HomeViewInput & UIViewController {
         let view = HomeView(greetingCellAssembly: { cell in
             GreetingCellAssembly.create(view: cell, resolver: resolver)
         })
@@ -22,13 +22,23 @@ final class HomeAssembly {
         view.output = presenter
         interactor.output = presenter
         
-        presenter.output = coordinator
+        presenter.output = router
         
         return view
     }
     
-    static func router(tabBarController: UIAppTabBarController, resolver: Resolver) -> TabBarItemCoordinator {
-        HomeRouter(tabBarController: tabBarController, resolver: resolver, homeAssembly: Self.create)
+    static func router(
+        navigationController: UINavigationController,
+        resolver: Resolver
+    ) -> HomeRouterInput {
+        let router = HomeRouter(
+            navigationController: navigationController,
+            resolver: resolver
+        )
+        
+        router.moduleAssembly = Self.create
+        
+        return router
     }
 }
 

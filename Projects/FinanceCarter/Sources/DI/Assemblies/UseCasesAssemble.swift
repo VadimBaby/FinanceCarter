@@ -11,11 +11,11 @@ import Domain
 final class UseCasesAssemble: Assembly {
     func assemble(container: Container) {
         container.register(OnboardingUseCase.self) { resolver, items in
-            OnboardingService(repository: resolver.resolve(KeyValueStorageRepository.self)!, onboardingItems: items)
+            OnboardingService(settingsStorage: resolver.resolve(SettingsStorageProtocol.self)!, onboardingItems: items)
         }
         
         container.register(AccountUseCase.self) { resolver in
-            AccountService(repository: resolver.resolve(KeyValueStorageRepository.self)!)
+            AccountService(settingsStorage: resolver.resolve(SettingsStorageProtocol.self)!)
         }
     }
 }

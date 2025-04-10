@@ -10,11 +10,11 @@ import Domain
 // swiftlint:disable:next foundation_using
 import Foundation
 
-public final class LocalKeyValueStorage: KeyValueStorageRepository {
+public final class UserDefaultsSettingsStorage: SettingsStorageProtocol {
     private let storage = UserDefaults.standard
     
     private enum UserStorageKey: String {
-        case isOnboardingCompleted, currentOnboardingPage, userName
+        case isOnboardingCompleted, currentOnboardingPage, userName, isPublicZoneCompleted
     }
     
     public init() {}
@@ -42,11 +42,19 @@ public final class LocalKeyValueStorage: KeyValueStorageRepository {
             set(newValue, forKey: .userName)
         }
     }
+    
+    public var isPublicZoneCompleted: Bool {
+        get {
+            bool(forKey: .isPublicZoneCompleted)
+        } set {
+            set(newValue, forKey: .isPublicZoneCompleted)
+        }
+    }
 }
 
 // MARK: - Private Methods
 
-extension LocalKeyValueStorage {
+extension UserDefaultsSettingsStorage {
     private func set(_ value: Any, forKey key: UserStorageKey) {
         storage.set(value, forKey: key.rawValue)
     }

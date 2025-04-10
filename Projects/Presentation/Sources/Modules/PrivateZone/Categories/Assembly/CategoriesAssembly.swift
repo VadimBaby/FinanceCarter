@@ -11,12 +11,12 @@ import UIKit
 final class CategoriesAssembly {
     private init() {}
     
-    static func create(coordinator: CategoriesPresenterOutput, resolver: Resolver) -> CategoriesViewInput & UIViewController {
+    static func create(router: CategoriesPresenterOutput, resolver: Resolver) -> CategoriesViewInput & UIViewController {
         let view = CategoriesView()
         let interactor = CategoriesInteractor()
         
         let presenter = CategoriesPresenter(interactor: interactor, view: view)
-        presenter.output = coordinator
+        presenter.output = router
         
         view.output = presenter
         interactor.output = presenter
@@ -24,11 +24,12 @@ final class CategoriesAssembly {
         return view
     }
     
-    static func router(tabBarController: UIAppTabBarController, resolver: Resolver) -> TabBarItemCoordinator {
-        CategoriesRouter(
-            tabBarController: tabBarController,
-            resolver: resolver,
-            categoriesAssembly: Self.create
-        )
+    static func router(
+        navigationController: UINavigationController,
+        resolver: Resolver
+    ) -> CategoriesRouterInput {
+        let router = CategoriesRouter(navigationController: navigationController, resolver: resolver)
+        router.moduleAssembly = Self.create
+        return router
     }
 }

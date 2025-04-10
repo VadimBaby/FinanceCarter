@@ -10,13 +10,13 @@ import Common
 public final class OnboardingService: OnboardingUseCase {
     private let items: [OnboardingItemEntity]
     
-    private let repository: KeyValueStorageRepository
+    private let settingsStorage: SettingsStorageProtocol
     
     public init(
-        repository: KeyValueStorageRepository,
+        settingsStorage: SettingsStorageProtocol,
         onboardingItems items: [OnboardingItemEntity]
     ) {
-        self.repository = repository
+        self.settingsStorage = settingsStorage
         self.items = items
     }
     
@@ -25,11 +25,11 @@ public final class OnboardingService: OnboardingUseCase {
     }
     
     public func getCurrentPage() -> Int {
-        repository.currentOnboardingPage
+        settingsStorage.currentOnboardingPage
     }
     
     public func setCurrentPage(_ newPage: Int) {
-        repository.currentOnboardingPage = newPage
+        settingsStorage.currentOnboardingPage = newPage
     }
     
     public func getLastPage() -> Int? {
@@ -47,6 +47,6 @@ public final class OnboardingService: OnboardingUseCase {
     }
     
     public func finishOnboarding() {
-        repository.isOnboardingCompleted = true
+        settingsStorage.isOnboardingCompleted = true
     }
 }

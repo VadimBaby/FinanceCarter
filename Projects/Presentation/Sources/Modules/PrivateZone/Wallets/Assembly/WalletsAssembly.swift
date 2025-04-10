@@ -24,11 +24,15 @@ final class WalletsAssembly {
         return view
     }
     
-    static func router(tabBarController: UIAppTabBarController, resolver: Resolver) -> TabBarItemCoordinator {
-        return WalletsRouter(
-            tabBarController: tabBarController,
-            resolver: resolver,
-            walletsAssembly: Self.create
+    static func router(
+        navigationController: UINavigationController,
+        resolver: Resolver
+    ) -> WalletsRouterInput {
+        let router = WalletsRouter(
+            navigationController: navigationController,
+            resolver: resolver
         )
+        router.moduleAssembly = Self.create
+        return router
     }
 }

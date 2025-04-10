@@ -13,7 +13,7 @@ final class OnboardingAssembly {
     private init() {}
     
     static func create(
-        coordinator: OnboardingPresenterOutput,
+        router: OnboardingPresenterOutput,
         resolver: Resolver
     ) -> UIViewController & OnboardingViewInput {
         let view = OnboardingView()
@@ -25,9 +25,18 @@ final class OnboardingAssembly {
         view.output = presenter
         interactor.output = presenter
         
-        presenter.output = coordinator
+        presenter.output = router
         
         return view
+    }
+    
+    static func router(
+        navigationController: UINavigationController,
+        resolver: Resolver
+    ) -> OnboardingRouterInput {
+        let router = OnboardingRouter(navigationController: navigationController, resolver: resolver)
+        router.moduleAssembly = Self.create
+        return router
     }
 }
 

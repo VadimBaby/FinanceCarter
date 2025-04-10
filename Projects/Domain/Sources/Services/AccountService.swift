@@ -9,14 +9,14 @@
 import Common
 
 public final class AccountService: AccountUseCase {
-    private let repository: KeyValueStorageRepository
+    private let settingsStorage: SettingsStorageProtocol
     
-    public init(repository: KeyValueStorageRepository) {
-        self.repository = repository
+    public init(settingsStorage: SettingsStorageProtocol) {
+        self.settingsStorage = settingsStorage
     }
     
     public func getUserName() -> String {
-        repository.userName
+        settingsStorage.userName
     }
     
     public func setName(_ name: String, completion: IsSuccessCompletion? = nil) {
@@ -25,7 +25,7 @@ public final class AccountService: AccountUseCase {
         if clearName.isEmpty {
             completion?(false)
         } else {
-            repository.userName = clearName
+            settingsStorage.userName = clearName
             completion?(true)
         }
     }

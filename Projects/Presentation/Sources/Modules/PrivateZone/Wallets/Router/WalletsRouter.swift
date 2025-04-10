@@ -8,29 +8,35 @@
 
 import UIKit
 
-final class WalletsRouter: TabBarItemCoordinator {
+protocol WalletsRouterOutput: AnyObject {
+    
+}
+
+protocol WalletsRouterInput: Router {
+    var delegate: WalletsRouterOutput? { get set }
+    
+    typealias ModuleAssembly = (_ router: WalletsPresenterOutput, _ resolver: Resolver) -> WalletsViewInput & UIViewController
+    
+    var moduleAssembly: ModuleAssembly? { get set }
+    
+    func open()
+}
+
+final class WalletsRouter: WalletsRouterInput {
+    weak var delegate: WalletsRouterOutput?
+    
     private let resolver: Resolver
     
     let navigationController: UINavigationController
-    let tabBarController: UIAppTabBarController
     
-    typealias WalletsAssembly = (_ coordinator: WalletsPresenterOutput, _ resolver: Resolver) -> WalletsViewInput & UIViewController
-    
-    private let walletsAssembly: WalletsAssembly
+    var moduleAssembly: ModuleAssembly?
     
     init(
-        tabBarController: UIAppTabBarController,
-        navigationController: UINavigationController = UINavigationController(),
-        resolver: Resolver,
-        walletsAssembly: @escaping WalletsAssembly
+        navigationController: UINavigationController,
+        resolver: Resolver
     ) {
-        self.tabBarController = tabBarController
-        self.walletsAssembly = walletsAssembly
-        
         self.resolver = resolver
-        
         self.navigationController = navigationController
-        navigationController.navigationBar.prefersLargeTitles = true
         
         print("\(Self.self) init")
     }
@@ -39,11 +45,9 @@ final class WalletsRouter: TabBarItemCoordinator {
         print("\(Self.self) deinit")
     }
     
-    func start() {
-        let view = walletsAssembly(self, resolver)
-        
-        navigationController.setRootViewController(view)
-        tabBarController.setTab(viewController: navigationController, for: .wallets)
+    func open() {
+        guard let module = moduleAssembly?(self, resolver) else { fatalError("moduleAssembly is nil in \(self)") }
+        navigationController.pushViewController(module, animated: true)
     }
 }
 

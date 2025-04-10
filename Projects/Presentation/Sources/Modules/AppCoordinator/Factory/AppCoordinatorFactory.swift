@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Domain
 
 public final class AppCoordinatorFactory {
     private init() {}
@@ -14,7 +15,8 @@ public final class AppCoordinatorFactory {
         AppCoordinator(
             window: window,
             resolver: resolver,
-            publicZoneCoordinatorAssembly: PublicZoneCoordinatorFactory.create,
+            settingsStorage: resolver.resolve(SettingsStorageProtocol.self)!,
+            publicZoneFlowCoordinatorAssembly: PublicZoneFlowCoordinatorFactory.create,
             privateZoneCoordinatorAssembly: PrivateZoneCoordinatorFactory.create
         )
     }

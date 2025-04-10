@@ -8,36 +8,44 @@
 
 import UIKit
 
-final class CategoriesRouter: TabBarItemCoordinator {
+protocol CategoriesRouterOutput: AnyObject {
+    
+}
+
+protocol CategoriesRouterInput: Router {
+    var delegate: CategoriesRouterOutput? { get set }
+    
+    typealias ModuleAssembly = (_ router: CategoriesPresenterOutput, _ resolver: Resolver) -> CategoriesViewInput & UIViewController
+    
+    var moduleAssembly: ModuleAssembly? { get set }
+    
+    func open()
+}
+
+final class CategoriesRouter: CategoriesRouterInput {
+    weak var delegate: CategoriesRouterOutput?
+    
     private let resolver: Resolver
     
     let navigationController: UINavigationController
-    let tabBarController: UIAppTabBarController
     
     typealias CategoriesAssembly = (_ coordinator: CategoriesPresenterOutput, _ resolver: Resolver) -> CategoriesViewInput & UIViewController
     
-    private let categoriesAssembly: CategoriesAssembly
+    var moduleAssembly: ModuleAssembly?
     
     init(
-        tabBarController: UIAppTabBarController,
-        navigationController: UINavigationController = UINavigationController(),
-        resolver: Resolver,
-        categoriesAssembly: @escaping CategoriesAssembly
+        navigationController: UINavigationController,
+        resolver: Resolver
     ) {
-        self.tabBarController = tabBarController
-        self.categoriesAssembly = categoriesAssembly
-        
         self.resolver = resolver
         
         self.navigationController = navigationController
         navigationController.navigationBar.prefersLargeTitles = true
     }
     
-    func start() {
-        let view = categoriesAssembly(self, resolver)
-        
-        navigationController.setRootViewController(view)
-        tabBarController.setTab(viewController: navigationController, for: .categories)
+    func open() {
+        guard let module = moduleAssembly?(self, resolver) else { fatalError("moduleAssembly is nil in \(self)") }
+        navigationController.pushViewController(module, animated: true)
     }
 }
 

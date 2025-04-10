@@ -11,7 +11,7 @@ import UIKit
 final class ProfileAssembly {
     private init() {}
     
-    static func create(coordinator: ProfilePresenterOutput, resolver: Resolver) -> ProfileViewInput & UIViewController {
+    private static func create(router: ProfilePresenterOutput, resolver: Resolver) -> ProfileViewInput & UIViewController {
         let view = ProfileView()
         let interactor = ProfileInteractor()
         let presenter = ProfilePresenter(view: view, interactor: interactor)
@@ -19,13 +19,18 @@ final class ProfileAssembly {
         view.output = presenter
         interactor.output = presenter
         
-        presenter.output = coordinator
+        presenter.output = router
         
         return view
     }
     
-    static func router(tabBarController: UIAppTabBarController, resolver: Resolver) -> TabBarItemCoordinator {
-        ProfileRouter(tabBarController: tabBarController, resolver: resolver, profileAssembly: Self.create)
+    static func router(
+        navigationController: UINavigationController,
+        resolver: Resolver
+    ) -> ProfileRouterInput {
+        let router = ProfileRouter(navigationController: navigationController, resolver: resolver)
+        router.moduleAssembly = Self.create
+        return router
     }
 }
 

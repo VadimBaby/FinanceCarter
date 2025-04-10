@@ -1,33 +1,33 @@
 //
-//  TransactionsCoordinator.swift
+//  OnboardingRouter.swift
 //  Presentation
 //
-//  Created by Вадим Мартыненко on 09.04.2025.
+//  Created by Вадим Мартыненко on 10.04.2025.
 //  Copyright © 2025 Vadim Martynenko. All rights reserved.
 //
 
 import UIKit
 
-protocol TransactionsRouterOutput: AnyObject {
-    
+protocol OnboardingRouterOutput: AnyObject {
+    func onboardingDidFinish()
 }
 
-protocol TransactionsRouterInput: Router {
-    var delegate: TransactionsRouterOutput? { get set }
+protocol OnboardingRouterInput: Router {
+    var delegate: OnboardingRouterOutput? { get set }
     
-    typealias ModuleAssembly = (_ router: TransactionsPresenterOutput, _ resolver: Resolver) -> TransactionsViewInput & UIViewController
+    typealias ModuleAssembly = (_ router: OnboardingPresenterOutput, _ resolver: Resolver) -> UIViewController & OnboardingViewInput
     
     var moduleAssembly: ModuleAssembly? { get set }
     
     func open()
 }
 
-final class TransactionsRouter: TransactionsRouterInput {
-    weak var delegate: TransactionsRouterOutput?
+final class OnboardingRouter: OnboardingRouterInput {
+    weak var delegate: OnboardingRouterOutput?
     
     private let resolver: Resolver
     
-    let navigationController: UINavigationController
+    var navigationController: UINavigationController
     
     var moduleAssembly: ModuleAssembly?
     
@@ -36,9 +36,7 @@ final class TransactionsRouter: TransactionsRouterInput {
         resolver: Resolver
     ) {
         self.resolver = resolver
-        
         self.navigationController = navigationController
-        navigationController.navigationBar.prefersLargeTitles = true
         
         print("\(Self.self) init")
     }
@@ -53,6 +51,8 @@ final class TransactionsRouter: TransactionsRouterInput {
     }
 }
 
-extension TransactionsRouter: TransactionsPresenterOutput {
-    
+extension OnboardingRouter: OnboardingPresenterOutput {
+    func onboardingDidFinish() {
+        delegate?.onboardingDidFinish()
+    }
 }

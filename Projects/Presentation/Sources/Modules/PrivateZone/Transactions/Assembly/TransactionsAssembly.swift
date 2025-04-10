@@ -11,12 +11,12 @@ import UIKit
 final class TransactionsAssembly {
     private init() {}
     
-    static func create(coordinator: TransactionsPresenterOutput, resolver: Resolver) -> TransactionsViewInput & UIViewController {
+    static func create(router: TransactionsPresenterOutput, resolver: Resolver) -> TransactionsViewInput & UIViewController {
         let view = TransactionsView()
         let interactor = TransactionsInteractor()
         
         let presenter = TransactionsPresenter(interactor: interactor, view: view)
-        presenter.output = coordinator
+        presenter.output = router
         
         view.output = presenter
         interactor.output = presenter
@@ -24,11 +24,12 @@ final class TransactionsAssembly {
         return view
     }
     
-    static func router(tabBarController: UIAppTabBarController, resolver: Resolver) -> TabBarItemCoordinator {
-        return TransactionsRouter(
-            tabBarController: tabBarController,
-            resolver: resolver,
-            transactionsAssembly: Self.create
-        )
+    static func router(
+        navigationController: UINavigationController,
+        resolver: Resolver
+    ) -> TransactionsRouterInput {
+        let router = TransactionsRouter(navigationController: navigationController, resolver: resolver)
+        router.moduleAssembly = Self.create
+        return router
     }
 }

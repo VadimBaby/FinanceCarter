@@ -13,7 +13,7 @@ final class CredentialAssembly {
     private init() {}
     
     static func create(
-        coordinator: CredentialPresenterOutput,
+        router: CredentialPresenterOutput,
         resolver: Resolver
     ) -> UIViewController & CredentialViewInput {
         let view = CredentialView()
@@ -23,9 +23,18 @@ final class CredentialAssembly {
         view.output = presenter
         interactor.output = presenter
         
-        presenter.output = coordinator
+        presenter.output = router
         
         return view
+    }
+    
+    static func router(
+        navigationController: UINavigationController,
+        resolver: Resolver
+    ) -> CredentialRouterInput {
+        let router = CredentialRouter(navigationController: navigationController, resolver: resolver)
+        router.moduleAssembly = Self.create
+        return router
     }
 }
 
