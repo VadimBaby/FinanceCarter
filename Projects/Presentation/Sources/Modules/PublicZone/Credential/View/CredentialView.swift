@@ -150,7 +150,7 @@ extension CredentialView: UITextFieldDelegate {
 import SwiftUI
 struct CredentialViewPreview: PreviewProvider {
     static var previews: some View {
-        UINavigationController(rootViewController: CredentialModuleFactory.createMock()).asPreview()
+        UINavigationController(rootViewController: CredentialAssembly.createMock()).asPreview()
     }
 }
 #endif

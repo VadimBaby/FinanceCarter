@@ -16,8 +16,8 @@ final class PublicZoneCoordinatorFactory {
             window: window,
             resolver: resolver,
             keyValueStorage: resolver.resolve(KeyValueStorageRepository.self)!,
-            onboardingViewAssembly: OnboardingModuleFactory.create,
-            credentialsViewAssembly: CredentialModuleFactory.create
+            onboardingViewAssembly: OnboardingAssembly.create,
+            credentialsViewAssembly: CredentialAssembly.create
         )
     }
 }

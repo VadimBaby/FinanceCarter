@@ -66,7 +66,7 @@ private extension ProfileView {
 import SwiftUI
 struct ProfileViewPreview: PreviewProvider {
     static var previews: some View {
-        UINavigationController(rootViewController: ProfileModuleFactory.createMock()).asPreview()
+        UINavigationController(rootViewController: ProfileAssembly.createMock()).asPreview()
     }
 }
 #endif

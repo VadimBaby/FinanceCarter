@@ -14,7 +14,7 @@ protocol PrivateZoneCoordinatorInput: Coordinator {
 }
 
 final class PrivateZoneCoordinator: PrivateZoneCoordinatorInput {
-    var tabBarController: UIAppTabBarController
+    let tabBarController: UIAppTabBarController
     
     private let window: UIWindow
     private let resolver: Resolver

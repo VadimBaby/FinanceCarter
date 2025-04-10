@@ -33,17 +33,17 @@ final class HomeView: UIViewController, HomeViewInput {
     private lazy var collectionView = UICollectionView(frame: view.frame, collectionViewLayout: createLayout()) &> {
         $0.contentInsetAdjustmentBehavior = .automatic
         $0.dataSource = self
-        $0.register(cellType: HomeHeaderViewCell.self)
+        $0.register(cellType: GreetingCellViewCell.self)
         $0.register(cellType: HomeBalanceViewCell.self)
         $0.backgroundColor = view.backgroundColor
     }
     
-    typealias HomeHeaderAssembly = (_ homeHeaderView: HomeHeaderViewInput) -> HomeHeaderViewOutput
+    typealias GreetingCellAssembly = (_ homeHeaderView: GreetingCellViewInput) -> GreetingCellViewOutput
     
-    private let homeHeaderAssembly: HomeHeaderAssembly
+    private let greetingCellAssembly: GreetingCellAssembly
     
-    init(homeHeaderAssembly: @escaping HomeHeaderAssembly) {
-        self.homeHeaderAssembly = homeHeaderAssembly
+    init(greetingCellAssembly: @escaping GreetingCellAssembly) {
+        self.greetingCellAssembly = greetingCellAssembly
         super.init(nibName: nil, bundle: nil)
         
         print("\(Self.self) init")
@@ -97,8 +97,8 @@ extension HomeView: UICollectionViewDataSource {
         
         switch currentSection {
         case .header:
-            let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: HomeHeaderViewCell.self)
-            let presenter = homeHeaderAssembly(cell)
+            let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: GreetingCellViewCell.self)
+            let presenter = greetingCellAssembly(cell)
             cell.configure(with: presenter)
             return cell
         case .balance:
@@ -181,7 +181,7 @@ private extension HomeView {
 import SwiftUI
 struct HomeViewPreview: PreviewProvider {
     static var previews: some View {
-        HomeModuleFactory.createMock().asPreview()
+        HomeAssembly.createMock().asPreview()
     }
 }
 #endif

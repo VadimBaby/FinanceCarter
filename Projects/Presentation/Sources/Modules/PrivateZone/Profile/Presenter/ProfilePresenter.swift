@@ -45,7 +45,7 @@ extension ProfilePresenter: ProfileInteractorOutput {
 import SwiftUI
 struct ProfilePresenterPreview: PreviewProvider {
     static var previews: some View {
-        UINavigationController(rootViewController: ProfileModuleFactory.createMock()).asPreview()
+        UINavigationController(rootViewController: ProfileAssembly.createMock()).asPreview()
     }
 }
 #endif

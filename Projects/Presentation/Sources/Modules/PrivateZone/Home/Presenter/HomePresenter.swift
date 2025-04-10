@@ -45,7 +45,7 @@ extension HomePresenter: HomeInteractorOutput {
 import SwiftUI
 struct HomePresenterPreview: PreviewProvider {
     static var previews: some View {
-        UINavigationController(rootViewController: HomeModuleFactory.createMock()).asPreview()
+        UINavigationController(rootViewController: HomeAssembly.createMock()).asPreview()
     }
 }
 #endif

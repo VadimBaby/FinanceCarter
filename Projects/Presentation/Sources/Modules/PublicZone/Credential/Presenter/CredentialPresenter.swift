@@ -55,7 +55,7 @@ extension CredentialPresenter: CredentialInteractorOutput {
 import SwiftUI
 struct CredentialPresenterPreview: PreviewProvider {
     static var previews: some View {
-        UINavigationController(rootViewController: CredentialModuleFactory.createMock()).asPreview()
+        UINavigationController(rootViewController: CredentialAssembly.createMock()).asPreview()
     }
 }
 #endif

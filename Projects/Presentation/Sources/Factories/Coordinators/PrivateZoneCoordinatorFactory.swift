@@ -17,11 +17,11 @@ final class PrivateZoneCoordinatorFactory {
         PrivateZoneCoordinator(
             window: window,
             resolver: resolver,
-            homeCoordinatorAssembly: HomeCoordinatorFactory.create,
-            categoriesCoordinatorAssembly: CategoriesCoordinatorFactory.create,
-            transactionsCoordinatorAssembly: TransactionsCoordinatorFactory.create,
-            walletsCoordinatorAssembly: WalletsCoordinatorFactory.create,
-            profileCoordinatorAssembly: ProfileCoordinatorFactory.create
+            homeCoordinatorAssembly: HomeAssembly.router,
+            categoriesCoordinatorAssembly: CategoriesAssembly.router,
+            transactionsCoordinatorAssembly: TransactionsAssembly.router,
+            walletsCoordinatorAssembly: WalletsAssembly.router,
+            profileCoordinatorAssembly: ProfileAssembly.router
         )
     }
 }

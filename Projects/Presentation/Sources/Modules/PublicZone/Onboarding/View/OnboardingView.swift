@@ -154,7 +154,7 @@ import SwiftUI
 struct OnboardingViewPreview: PreviewProvider {
     static var previews: some View {
         UINavigationController(
-            rootViewController: OnboardingModuleFactory.createMock()
+            rootViewController: OnboardingAssembly.createMock()
         ).asPreview()
     }
 }
