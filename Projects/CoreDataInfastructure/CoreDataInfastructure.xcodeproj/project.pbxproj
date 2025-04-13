@@ -3,12 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C524EAF2DAC71AC00B54763 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C524EAD2DAC71AC00B54763 /* Model.xcdatamodeld */; };
 		751A6BED62295E5C45810A25 /* Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25BDF9568CD0061FD81B46E5 /* Common.framework */; };
-		D6FAD8615B630D95A95EC73F /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DB0DAE3C06180ED7F6D319 /* test.swift */; };
+		BAA4485BD8C412154990AAC3 /* PersistenceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547277F77E024AEB1EA03906 /* PersistenceStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,9 +27,10 @@
 
 /* Begin PBXFileReference section */
 		25BDF9568CD0061FD81B46E5 /* Common.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Common.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C524EAE2DAC71AC00B54763 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		547277F77E024AEB1EA03906 /* PersistenceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceStore.swift; sourceTree = "<group>"; };
 		9AD2B7B1AB945B511146CFDF /* CoreDataInfastructure.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreDataInfastructure.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE4B0C80C9B62649D1431046 /* CoreDataInfastructure-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "CoreDataInfastructure-Info.plist"; sourceTree = "<group>"; };
-		C4DB0DAE3C06180ED7F6D319 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,7 +56,7 @@
 		3F194220400F5C54E2783EF6 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				C4DB0DAE3C06180ED7F6D319 /* test.swift */,
+				BEE97A0611A12A7B0FBF2B9F /* Store */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -74,6 +76,15 @@
 				9AD2B7B1AB945B511146CFDF /* CoreDataInfastructure.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		BEE97A0611A12A7B0FBF2B9F /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				547277F77E024AEB1EA03906 /* PersistenceStore.swift */,
+				2C524EAD2DAC71AC00B54763 /* Model.xcdatamodeld */,
+			);
+			path = Store;
 			sourceTree = "<group>";
 		};
 		E776AE07C68CC376AAFAAD7A = {
@@ -181,7 +192,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6FAD8615B630D95A95EC73F /* test.swift in Sources */,
+				BAA4485BD8C412154990AAC3 /* PersistenceStore.swift in Sources */,
+				2C524EAF2DAC71AC00B54763 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,10 +224,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -392,6 +401,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2C524EAD2DAC71AC00B54763 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2C524EAE2DAC71AC00B54763 /* Model.xcdatamodel */,
+			);
+			currentVersion = 2C524EAE2DAC71AC00B54763 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 13D15D7139AF35B4D84ECF49 /* Project object */;
 }
