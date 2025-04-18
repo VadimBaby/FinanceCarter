@@ -7,7 +7,7 @@ let project = Project(
     name: NAME_PROJECT,
     organizationName: Constants.ORGANIZATION_NAME,
     targets: [
-        .frameworkTarget(name: NAME_PROJECT, dependencies: [
+        .staticFrameworkTarget(name: NAME_PROJECT, dependencies: [
             Constants.Modules.Common.dependency
         ])
     ]

@@ -3,12 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2C524EAF2DAC71AC00B54763 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C524EAD2DAC71AC00B54763 /* Model.xcdatamodeld */; };
-		751A6BED62295E5C45810A25 /* Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25BDF9568CD0061FD81B46E5 /* Common.framework */; };
+		A9A69EABDFAE5EE6ED648B16 /* libCommon.a in Dependencies */ = {isa = PBXBuildFile; fileRef = AD911721F669F968DD99B112 /* libCommon.a */; };
 		BAA4485BD8C412154990AAC3 /* PersistenceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547277F77E024AEB1EA03906 /* PersistenceStore.swift */; };
 /* End PBXBuildFile section */
 
@@ -23,14 +22,22 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B2E8C261742829DF0937793B /* Dependencies */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 8;
+			dstSubfolderSpec = 16;
+			files = (
+				A9A69EABDFAE5EE6ED648B16 /* libCommon.a in Dependencies */,
+			);
+			name = Dependencies;
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		25BDF9568CD0061FD81B46E5 /* Common.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Common.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2C524EAE2DAC71AC00B54763 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		547277F77E024AEB1EA03906 /* PersistenceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceStore.swift; sourceTree = "<group>"; };
-		9AD2B7B1AB945B511146CFDF /* CoreDataInfastructure.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreDataInfastructure.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AE4B0C80C9B62649D1431046 /* CoreDataInfastructure-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "CoreDataInfastructure-Info.plist"; sourceTree = "<group>"; };
+		AD911721F669F968DD99B112 /* libCommon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCommon.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4DE81FC6B133D1A6D0C5C1E /* libCoreDataInfastructure.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCoreDataInfastructure.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,21 +45,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				751A6BED62295E5C45810A25 /* Common.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1774965D18057AFF7B82BB4D /* InfoPlists */ = {
-			isa = PBXGroup;
-			children = (
-				AE4B0C80C9B62649D1431046 /* CoreDataInfastructure-Info.plist */,
-			);
-			path = InfoPlists;
-			sourceTree = "<group>";
-		};
 		3F194220400F5C54E2783EF6 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -61,19 +59,11 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
-		60CDF153DBB4D819ACFAF664 /* Derived */ = {
-			isa = PBXGroup;
-			children = (
-				1774965D18057AFF7B82BB4D /* InfoPlists */,
-			);
-			path = Derived;
-			sourceTree = "<group>";
-		};
 		7C80AB618C9B49170B094F98 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				25BDF9568CD0061FD81B46E5 /* Common.framework */,
-				9AD2B7B1AB945B511146CFDF /* CoreDataInfastructure.framework */,
+				AD911721F669F968DD99B112 /* libCommon.a */,
+				F4DE81FC6B133D1A6D0C5C1E /* libCoreDataInfastructure.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -82,7 +72,6 @@
 			isa = PBXGroup;
 			children = (
 				547277F77E024AEB1EA03906 /* PersistenceStore.swift */,
-				2C524EAD2DAC71AC00B54763 /* Model.xcdatamodeld */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -98,7 +87,6 @@
 		ED99F21F2837C791116059C5 /* Project */ = {
 			isa = PBXGroup;
 			children = (
-				60CDF153DBB4D819ACFAF664 /* Derived */,
 				3F194220400F5C54E2783EF6 /* Sources */,
 			);
 			name = Project;
@@ -116,6 +104,7 @@
 				09231E318B3D75B666FF0946 /* Resources */,
 				8F9F2C36F24A0D7527998769 /* Frameworks */,
 				9898D573D4D3A5B1818B3B19 /* Embed Frameworks */,
+				B2E8C261742829DF0937793B /* Dependencies */,
 			);
 			buildRules = (
 			);
@@ -125,8 +114,8 @@
 			packageProductDependencies = (
 			);
 			productName = CoreDataInfastructure;
-			productReference = 9AD2B7B1AB945B511146CFDF /* CoreDataInfastructure.framework */;
-			productType = "com.apple.product-type.framework";
+			productReference = F4DE81FC6B133D1A6D0C5C1E /* libCoreDataInfastructure.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
@@ -193,7 +182,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAA4485BD8C412154990AAC3 /* PersistenceStore.swift in Sources */,
-				2C524EAF2DAC71AC00B54763 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,20 +191,9 @@
 		01E8D735AFE48F58887BCAB7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Derived/InfoPlists/CoreDataInfastructure-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.martynenko.vadim.CoreDataInfastructure;
 				PRODUCT_NAME = CoreDataInfastructure;
 				SDKROOT = iphoneos;
@@ -224,33 +201,23 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+					"$(inherited)",
+					DEBUG,
+				);
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
 		31C003754FECC190D86476F7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Derived/InfoPlists/CoreDataInfastructure-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.martynenko.vadim.CoreDataInfastructure;
 				PRODUCT_NAME = CoreDataInfastructure;
 				SDKROOT = iphoneos;
@@ -262,8 +229,6 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -401,19 +366,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		2C524EAD2DAC71AC00B54763 /* Model.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				2C524EAE2DAC71AC00B54763 /* Model.xcdatamodel */,
-			);
-			currentVersion = 2C524EAE2DAC71AC00B54763 /* Model.xcdatamodel */;
-			path = Model.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 13D15D7139AF35B4D84ECF49 /* Project object */;
 }
