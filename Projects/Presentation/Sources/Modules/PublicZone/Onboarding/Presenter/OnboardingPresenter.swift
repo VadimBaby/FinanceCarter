@@ -22,7 +22,7 @@ final class OnboardingPresenter: OnboardingPresenterInput {
     private unowned var view: OnboardingViewInput
     private let interactor: OnboardingInteractorInput
     
-    private var items: [OnboardingItemEntity] = []
+    private var items: [OnboardingItemPresentationEntity] = []
     
     init(view: OnboardingViewInput, interactor: OnboardingInteractorInput) {
         self.view = view
@@ -61,7 +61,7 @@ extension OnboardingPresenter: OnboardingInteractorOutput {
         view.changeButtonTitle(at: page)
     }
     
-    func set(items: [OnboardingItemEntity]) {
+    func set(items: [OnboardingItemPresentationEntity]) {
         guard items.count > 0 else { onboardingDidFinish(); return }
         self.items = items
         view.configure(with: items)

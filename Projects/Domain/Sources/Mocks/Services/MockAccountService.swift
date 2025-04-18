@@ -17,14 +17,13 @@ public final class MockAccountService: AccountUseCase {
         name
     }
     
-    public func setName(_ name: String, completion: IsSuccessCompletion? = nil) {
+    @discardableResult
+    public func setName(_ name: String) -> OperationResult {
         let clearName = name.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        if clearName.isEmpty {
-            completion?(false)
-        } else {
-            self.name = clearName
-            completion?(true)
-        }
+        guard clearName.isNotEmpty else { return .failure(AccountUseCaseError.invalidName) }
+        
+        self.name = clearName
+        return .success
     }
 }

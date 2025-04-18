@@ -10,7 +10,7 @@ import Swinject
 import Domain
 import Data
 
-final class StoragesAssemble: Assembly {
+final class StoragesAssembly: Assembly {
     func assemble(container: Container) {
         container.register(SettingsStorageProtocol.self, factory: UserDefaultsSettingsStorage.init)
     }

@@ -8,19 +8,19 @@
 import Domain
 
 enum AppConstants {
-    static let onboardingItems: [OnboardingItemEntity] = [
+    static let onboardingItems: [OnboardingItem] = [
         .init(
-            image: Asset.Images.Onboarding.firstOnboardingImage.image,
+            image: .first,
             title: Strings.Onboarding.First.title,
             description: Strings.Onboarding.First.description
         ),
         .init(
-            image: Asset.Images.Onboarding.secondOnboardingImage.image,
+            image: .second,
             title: Strings.Onboarding.Second.title,
             description: Strings.Onboarding.Second.description
         ),
         .init(
-            image: Asset.Images.Onboarding.thirdOnboardingImage.image,
+            image: .third,
             title: Strings.Onboarding.Third.title,
             description: Strings.Onboarding.Third.description
         )

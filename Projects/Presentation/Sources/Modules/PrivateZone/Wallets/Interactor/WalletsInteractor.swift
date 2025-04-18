@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Domain
 
 protocol WalletsInteractorOutput: AnyObject {
     
@@ -19,7 +20,10 @@ protocol WalletsInteractorInput: AnyObject {
 final class WalletsInteractor: WalletsInteractorInput {
     weak var output: WalletsInteractorOutput?
     
-    init() {
+    private let useCase: WalletsUseCase
+    
+    init(useCase: WalletsUseCase) {
+        self.useCase = useCase
         print("\(Self.self) init")
     }
     

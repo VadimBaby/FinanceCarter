@@ -6,9 +6,10 @@
 //
 
 import Domain
+import Common
 
 protocol CredentialInteractorOutput: AnyObject {
-    func didSetName(isSuccess: Bool)
+    func didSetName(result: OperationResult)
 }
 
 protocol CredentialInteractorInput: AnyObject {
@@ -33,6 +34,7 @@ final class CredentialInteractor: CredentialInteractorInput {
     }
     
     func setName(_ name: String) {
-        useCase.setName(name, completion: output?.didSetName)
+        let result = useCase.setName(name)
+        output?.didSetName(result: result)
     }
 }

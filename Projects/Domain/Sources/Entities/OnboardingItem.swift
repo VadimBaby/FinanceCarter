@@ -5,21 +5,23 @@
 //  Created by Вадим Мартыненко on 22.03.2025.
 //
 
-import UIKit.UIImage
+public enum OnboardingImage {
+    case first, second, third
+}
 
-public struct OnboardingItemEntity: Equatable {
-    public let image: UIImage
+public struct OnboardingItem: Equatable {
+    public let image: OnboardingImage
     public let title: String
     public let description: String
     
-    public init(image: UIImage, title: String, description: String) {
+    public init(image: OnboardingImage, title: String, description: String) {
         self.image = image
         self.title = title
         self.description = description
     }
     
-    public static let mock = OnboardingItemEntity(
-        image: UIImage.add,
+    public static let mock = OnboardingItem(
+        image: .first,
         title: "Title",
         description: "Description"
     )

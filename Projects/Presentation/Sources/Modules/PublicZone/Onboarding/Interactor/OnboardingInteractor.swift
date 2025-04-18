@@ -9,7 +9,7 @@ import Domain
 
 protocol OnboardingInteractorOutput: AnyObject {
     func display(page: Int?)
-    func set(items: [OnboardingItemEntity])
+    func set(items: [OnboardingItemPresentationEntity])
     func changeButtonTitle(for page: Int?)
 }
 
@@ -53,7 +53,8 @@ final class OnboardingInteractor: OnboardingInteractorInput {
     
     func getItems() {
         let items = useCase.getItems()
-        output?.set(items: items)
+        let presentationItems = items.map{ OnboardingItemPresentationEntity(from: $0) }
+        output?.set(items: presentationItems)
     }
     
     func getCurrentItem() {

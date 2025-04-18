@@ -6,7 +6,7 @@
 //
 
 public protocol OnboardingUseCase: AnyObject {
-    func getItems() -> [OnboardingItemEntity]
+    func getItems() -> [OnboardingItem]
     func getCurrentPage() -> Int
     func getNextPage() -> Int?
     func getLastPage() -> Int?

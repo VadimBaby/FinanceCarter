@@ -8,17 +8,17 @@
 import Common
 
 public final class MockOnboardingService: OnboardingUseCase {
-    private let items: [OnboardingItemEntity]
+    private let items: [OnboardingItem]
     
     private var currentPage = 0
     
     public init(
-        onboardingItems items: [OnboardingItemEntity]
+        onboardingItems items: [OnboardingItem]
     ) {
         self.items = items
     }
     
-    public func getItems() -> [OnboardingItemEntity] {
+    public func getItems() -> [OnboardingItem] {
         items
     }
     

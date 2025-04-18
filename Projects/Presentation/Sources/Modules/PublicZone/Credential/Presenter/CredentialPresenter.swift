@@ -42,10 +42,11 @@ extension CredentialPresenter: CredentialViewOutput {
 }
 
 extension CredentialPresenter: CredentialInteractorOutput {
-    func didSetName(isSuccess: Bool) {
-        if isSuccess {
+    func didSetName(result: OperationResult) {
+        switch result {
+        case .success:
             output?.credentialsDidTapNext()
-        } else {
+        case .failure:
             view.showNameIsIncorrentError()
         }
     }

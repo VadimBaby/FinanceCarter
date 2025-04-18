@@ -20,7 +20,7 @@ protocol OnboardingViewOutput: AnyObject {
 protocol OnboardingViewInput: AnyObject {
     var output: OnboardingViewOutput? { get set }
     
-    func configure(with items: [OnboardingItemEntity])
+    func configure(with items: [OnboardingItemPresentationEntity])
     func presentItem(with page: Int)
     func changeButtonTitle(at page: Int)
 }
@@ -61,7 +61,7 @@ final class OnboardingView: UIPageViewController, OnboardingViewInput {
         navigationController?.navigationBar.isHidden = false
     }
     
-    func configure(with items: [OnboardingItemEntity]) {
+    func configure(with items: [OnboardingItemPresentationEntity]) {
         itemsViewControllers = mapToOnboardingViewController(items)
         output?.viewDidConfigure()
     }
@@ -80,7 +80,7 @@ final class OnboardingView: UIPageViewController, OnboardingViewInput {
 // MARK: - Private Methods
 
 private extension OnboardingView {
-    func mapToOnboardingViewController(_ items: [OnboardingItemEntity]) -> [OnboardingItemViewController] {
+    func mapToOnboardingViewController(_ items: [OnboardingItemPresentationEntity]) -> [OnboardingItemViewController] {
         items.enumerated().map { index, item in
             let viewController = OnboardingItemViewController(
                 page: index,

@@ -10,5 +10,7 @@ import Common
 
 public protocol AccountUseCase: AnyObject {
     func getUserName() -> String
-    func setName(_ name: String, completion: IsSuccessCompletion?) 
+    
+    @discardableResult
+    func setName(_ name: String) -> OperationResult
 }

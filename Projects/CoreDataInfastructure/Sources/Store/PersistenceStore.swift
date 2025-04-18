@@ -9,11 +9,15 @@
 import CoreData
 
 public final class PersistenceStore {
-    public let persistenceContainer: NSPersistentContainer
+    public let container: NSPersistentContainer
+    
+    public var viewContext: NSManagedObjectContext {
+        container.viewContext
+    }
     
     public init(model: String) {
-        self.persistenceContainer = NSPersistentContainer(name: model)
-        self.persistenceContainer.loadPersistentStores { description, error in
+        self.container = NSPersistentContainer(name: model)
+        self.container.loadPersistentStores { _, error in
             if let error {
                 print(error.localizedDescription)
             }

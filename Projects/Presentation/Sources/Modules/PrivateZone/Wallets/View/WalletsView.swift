@@ -33,3 +33,14 @@ final class WalletsView: UIViewController, WalletsViewInput {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+#if canImport(SwiftUI) && DEBUG
+import SwiftUI
+struct WalletsViewPreview: PreviewProvider {
+    static var previews: some View {
+        UINavigationController(
+            rootViewController: WalletsAssembly.createMock()
+        ).asPreview()
+    }
+}
+#endif

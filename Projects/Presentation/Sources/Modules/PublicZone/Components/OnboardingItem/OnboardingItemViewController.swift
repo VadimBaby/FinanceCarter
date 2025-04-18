@@ -111,7 +111,7 @@ extension OnboardingItemViewController: OnboardingItemViewOutput {
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
 struct OnboardingItemViewPreview: PreviewProvider {
-    static let mock = OnboardingItemEntity.mock
+    static let mock = OnboardingItemPresentationEntity.mock
 
     static var previews: some View {
         OnboardingItemViewController(

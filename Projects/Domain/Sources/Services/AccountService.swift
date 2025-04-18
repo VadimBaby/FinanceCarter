@@ -6,6 +6,8 @@
 //  Copyright © 2025 Vadim Martynenko. All rights reserved.
 //
 
+// swiftlint:disable:next foundation_using
+import Foundation
 import Common
 
 public final class AccountService: AccountUseCase {
@@ -19,14 +21,14 @@ public final class AccountService: AccountUseCase {
         settingsStorage.userName
     }
     
-    public func setName(_ name: String, completion: IsSuccessCompletion? = nil) {
+    @discardableResult
+    public func setName(_ name: String) -> OperationResult {
         let clearName = name.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        if clearName.isEmpty {
-            completion?(false)
-        } else {
-            settingsStorage.userName = clearName
-            completion?(true)
-        }
+        guard clearName.isNotEmpty else { return .failure(AccountUseCaseError.invalidName) }
+        
+        settingsStorage.userName = clearName
+        
+        return .success
     }
 }

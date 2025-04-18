@@ -8,19 +8,19 @@
 import Common
 
 public final class OnboardingService: OnboardingUseCase {
-    private let items: [OnboardingItemEntity]
+    private let items: [OnboardingItem]
     
     private let settingsStorage: SettingsStorageProtocol
     
     public init(
         settingsStorage: SettingsStorageProtocol,
-        onboardingItems items: [OnboardingItemEntity]
+        onboardingItems items: [OnboardingItem]
     ) {
         self.settingsStorage = settingsStorage
         self.items = items
     }
     
-    public func getItems() -> [OnboardingItemEntity] {
+    public func getItems() -> [OnboardingItem] {
         items
     }
     
