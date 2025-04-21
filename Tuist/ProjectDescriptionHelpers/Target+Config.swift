@@ -10,7 +10,8 @@ extension Target {
         swiftLint: TargetScript? = .swiftlint(),
         swiftGen: TargetScript? = nil,
         otherScripts: [TargetScript] = [],
-        dependencies: [TargetDependency] = []
+        dependencies: [TargetDependency] = [],
+        coreDataModels: [CoreDataModel] = []
     ) -> Self {
         var scripts = otherScripts
         
@@ -33,7 +34,8 @@ extension Target {
             sources: source,
             resources: resources,
             scripts: scripts,
-            dependencies: dependencies
+            dependencies: dependencies,
+            coreDataModels: coreDataModels
         )
     }
 }

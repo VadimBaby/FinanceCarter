@@ -11,7 +11,8 @@ let project = Project(
         .remote(url: "https://github.com/SnapKit/SnapKit.git", requirement: .upToNextMajor(from: "5.7.1"))
     ],
     targets: [
-        .dynamicFrameworkTarget(
+        .createTarget(
+            type: .dynamicFramework,
             name: NAME_PROJECT,
             dependencies: [
                 Constants.Modules.Common.dependency,

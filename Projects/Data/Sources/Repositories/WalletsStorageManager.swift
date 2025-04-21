@@ -12,12 +12,12 @@ import Domain
 
 public final class WalletsStorageManager: CoreDataStorageManager, WalletsRepository {
     public func fetchWallets() throws -> [Wallet] {
-        let entites = try fetch(type: WalletEntity.self)
+        let entites = try fetch(type: DBWallet.self)
         return WalletMapper.toDomain(from: entites)
     }
     
     public func addWallet(from domainEntity: Wallet) throws {
-        let newWallet = WalletEntity(context: store.viewContext)
+        let newWallet = DBWallet(context: store.viewContext)
         
         newWallet.id = domainEntity.id
         newWallet.title = domainEntity.title

@@ -1,53 +1,44 @@
 import ProjectDescription
 
+public enum TypeTarget {
+    case app, dynamicFramework, staticFramework
+    
+    var product: Product {
+        switch self {
+        case .app: return .app
+        case .dynamicFramework: return .framework
+        case .staticFramework: return .staticFramework
+        }
+    }
+    
+    var infoPlist: InfoPlist {
+        guard self == .app else { return .default }
+        
+        return .extendingDefault(
+            with: [
+                "UILaunchStoryboardName": "LaunchScreen.storyboard"
+            ]
+        )
+    }
+}
+
 extension Target {
-    public static func dynamicFrameworkTarget(
+    public static func createTarget(
+        type: TypeTarget,
         name: String,
         dependencies: [TargetDependency] = [],
         resources: ResourceFileElements? = nil,
-        enabledSwiftGen: Bool = false
+        enabledSwiftGen: Bool = false,
+        coreDataModels: [CoreDataModel] = []
     ) -> Target {
-        .myTarget(
+        return .myTarget(
             name: name,
-            product: .framework,
+            product: type.product,
+            infoPlist: type.infoPlist,
             resources: resources,
             swiftGen: enabledSwiftGen ? .swiftgen() : nil,
-            dependencies: dependencies
-        )
-    }
-    
-    public static func staticFrameworkTarget(
-        name: String,
-        dependencies: [TargetDependency] = [],
-        resources: ResourceFileElements? = nil,
-        enabledSwiftGen: Bool = false
-    ) -> Target {
-        .myTarget(
-            name: name,
-            product: .staticFramework,
-            resources: resources,
-            swiftGen: enabledSwiftGen ? .swiftgen() : nil,
-            dependencies: dependencies
-        )
-    }
-    
-    public static func appTarget(
-        name: String,
-        dependencies: [TargetDependency] = [],
-        resources: ResourceFileElements? = nil,
-        enabledSwiftGen: Bool = false
-    ) -> Target {
-        .myTarget(
-            name: name,
-            product: .app,
-            infoPlist: .extendingDefault(
-                with: [
-                    "UILaunchStoryboardName": "LaunchScreen.storyboard"
-                ]
-            ),
-            resources: resources,
-            swiftGen: enabledSwiftGen ? .swiftgen() : nil,
-            dependencies: dependencies
+            dependencies: dependencies,
+            coreDataModels: coreDataModels
         )
     }
 }

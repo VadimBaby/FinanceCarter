@@ -10,7 +10,8 @@ let project = Project(
         .remote(url: "https://github.com/Swinject/Swinject.git", requirement: .upToNextMajor(from: "2.9.1"))
     ],
     targets: [
-        .appTarget(
+        .createTarget(
+            type: .app,
             name: NAME_PROJECT,
             dependencies: [
                 Constants.Modules.Common.dependency,
