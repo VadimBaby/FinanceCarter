@@ -1,20 +1,19 @@
 //
 //  CoreDataStorageManager.swift
-//  Data
+//  CoreDataInfastructure
 //
-//  Created by Вадим Мартыненко on 18.04.2025.
+//  Created by Вадим Мартыненко on 22.04.2025.
 //  Copyright © 2025 Vadim Martynenko. All rights reserved.
 //
 
-import CoreDataInfastructure
 import CoreData
 
-private enum Constants {
+private struct Constants {
     // swiftlint:disable:next identifier_name
     static let CORE_DATA_MODEL = "Model"
 }
 
-public class CoreDataStorageManager {
+open class CoreDataStorageManager {
     public init() {}
     
     public let store = PersistenceStore(model: Constants.CORE_DATA_MODEL)

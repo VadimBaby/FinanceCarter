@@ -7,17 +7,29 @@
 //
 
 import UIKit
+import Domain
+import Common
 
 protocol WalletsViewOutput: AnyObject {
-    
+    func viewDidLoad()
+    func addButtonHasPressed()
 }
 
 protocol WalletsViewInput: AnyObject {
     var output: WalletsViewOutput? { get set }
+    
+    func setWallets(_ wallets: [Wallet])
 }
 
 final class WalletsView: UIViewController, WalletsViewInput {
-    var output: WalletsViewOutput? 
+    var output: WalletsViewOutput?
+    
+    private lazy var tableView = UITableView(frame: view.bounds) &> {
+        $0.dataSource = self
+        $0.register(cellType: WalletTitleCellView.self)
+    }
+    
+    private var wallets: [Wallet] = []
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -32,7 +44,59 @@ final class WalletsView: UIViewController, WalletsViewInput {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        output?.viewDidLoad()
+        setupViews()
+        setupNavigationBar()
+    }
+    
+    func setWallets(_ wallets: [Wallet]) {
+        self.wallets = wallets
+    }
 }
+
+// MARK: - Private Methods
+
+private extension WalletsView {
+    func setupViews() {
+        view.addSubviews(tableView)
+    }
+    
+    func setupNavigationBar() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = Strings.Wallets.systemTitle
+        
+        let addButton = UIBarButtonItem(
+            barButtonSystemItem: .add,
+            target: self,
+            action: #selector(addButtonPressed)
+        )
+        
+        navigationItem.rightBarButtonItem = addButton
+    }
+    
+    @objc
+    func addButtonPressed() {
+        output?.addButtonHasPressed()
+    }
+}
+
+extension WalletsView: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        wallets.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: WalletTitleCellView.self)
+        let wallet = wallets[indexPath.row]
+        cell.configure(with: wallet.title)
+        return cell
+    }
+}
+
+// MARK: - Preview
 
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI

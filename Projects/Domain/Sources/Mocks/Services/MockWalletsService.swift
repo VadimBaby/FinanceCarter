@@ -23,9 +23,9 @@ public final class MockWalletsService: WalletsUseCase {
     public func addWallet(
         title: String,
         balance: Double
-    ) -> OperationResult {
+    ) -> Result<Wallet, Error> {
         let wallet = Wallet(title: title, balance: balance)
         wallets.append(wallet)
-        return .success
+        return .success(wallet)
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Domain
 
 protocol WalletsPresenterOutput: AnyObject {
     
@@ -35,9 +36,17 @@ final class WalletsPresenter: WalletsPresenterInput {
 }
 
 extension WalletsPresenter: WalletsViewOutput {
+    func viewDidLoad() {
+        interactor.getAllWallets()
+    }
     
+    func addButtonHasPressed() {
+        interactor.createNewWallet()
+    }
 }
 
 extension WalletsPresenter: WalletsInteractorOutput {
-    
+    func setWallets(_ wallets: [Wallet]) {
+        view.setWallets(wallets)
+    }
 }

@@ -12,5 +12,5 @@ public protocol WalletsUseCase: AnyObject {
     func fetchWallets() -> Result<[Wallet], Error>
     
     @discardableResult
-    func addWallet(title: String, balance: Double) -> OperationResult
+    func addWallet(title: String, balance: Double) -> Result<Wallet, Error>
 }

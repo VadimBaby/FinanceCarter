@@ -13,7 +13,7 @@ let project = Project(
             dependencies: [
                 Constants.Modules.Common.dependency
             ],
-            coreDataModels: [.coreDataModel(.path("Sources/Model.xcdatamodeld"))]
+            coreDataModels: [.coreDataModel(.path("Sources/Store/Model.xcdatamodeld"))]
         )
     ]
 )

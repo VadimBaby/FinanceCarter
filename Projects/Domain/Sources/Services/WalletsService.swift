@@ -28,12 +28,12 @@ public final class WalletsService: WalletsUseCase {
     public func addWallet(
         title: String,
         balance: Double
-    ) -> OperationResult {
+    ) -> Result<Wallet, Error> {
         let wallet = Wallet(title: title, balance: balance)
         
         do {
             try repository.addWallet(from: wallet)
-            return .success
+            return .success(wallet)
         } catch {
             return .failure(error)
         }
