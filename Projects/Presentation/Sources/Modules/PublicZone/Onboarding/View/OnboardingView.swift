@@ -57,7 +57,7 @@ final class OnboardingView: UIPageViewController, OnboardingViewInput {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+        super.viewWillDisappear(animated)
         navigationController?.navigationBar.isHidden = false
     }
     

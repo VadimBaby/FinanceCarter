@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		18389B0243E0DDA11A601528 /* TuistBundle+CoreDataInfastructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CC8C5D4C65CAD9CCBCCE50 /* TuistBundle+CoreDataInfastructure.swift */; };
-		2C27B0402DB6C84C00023C13 /* CoreDataStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C27B03F2DB6C84C00023C13 /* CoreDataStorageManager.swift */; };
+		4A96387FCE80B50252EA0EBE /* CoreDataStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E69A288F422B5EAE3C032C /* CoreDataStorageManager.swift */; };
 		751A6BED62295E5C45810A25 /* Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25BDF9568CD0061FD81B46E5 /* Common.framework */; };
 		BAA4485BD8C412154990AAC3 /* PersistenceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547277F77E024AEB1EA03906 /* PersistenceStore.swift */; };
 		DD16D3BC90EB4FE3382E539C /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9BB41621C7F22D784DAD2558 /* Model.xcdatamodeld */; };
@@ -30,11 +30,11 @@
 /* Begin PBXFileReference section */
 		25BDF9568CD0061FD81B46E5 /* Common.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Common.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		26CC8C5D4C65CAD9CCBCCE50 /* TuistBundle+CoreDataInfastructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+CoreDataInfastructure.swift"; sourceTree = "<group>"; };
-		2C27B03F2DB6C84C00023C13 /* CoreDataStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorageManager.swift; sourceTree = "<group>"; };
 		547277F77E024AEB1EA03906 /* PersistenceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceStore.swift; sourceTree = "<group>"; };
 		9AD2B7B1AB945B511146CFDF /* CoreDataInfastructure.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreDataInfastructure.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7A5B95736B3D10E5801278C /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		AE4B0C80C9B62649D1431046 /* CoreDataInfastructure-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "CoreDataInfastructure-Info.plist"; sourceTree = "<group>"; };
+		D6E69A288F422B5EAE3C032C /* CoreDataStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorageManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,14 +57,6 @@
 			path = InfoPlists;
 			sourceTree = "<group>";
 		};
-		2C27B03E2DB6C84200023C13 /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-				2C27B03F2DB6C84C00023C13 /* CoreDataStorageManager.swift */,
-			);
-			path = Managers;
-			sourceTree = "<group>";
-		};
 		3B151BF5C9BD5005448CAA10 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -76,10 +68,18 @@
 		3F194220400F5C54E2783EF6 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				2C27B03E2DB6C84200023C13 /* Managers */,
+				4B7EC6DEDA6FCCC011029A1F /* Managers */,
 				BEE97A0611A12A7B0FBF2B9F /* Store */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		4B7EC6DEDA6FCCC011029A1F /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				D6E69A288F422B5EAE3C032C /* CoreDataStorageManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		60CDF153DBB4D819ACFAF664 /* Derived */ = {
@@ -215,8 +215,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				18389B0243E0DDA11A601528 /* TuistBundle+CoreDataInfastructure.swift in Sources */,
+				4A96387FCE80B50252EA0EBE /* CoreDataStorageManager.swift in Sources */,
 				BAA4485BD8C412154990AAC3 /* PersistenceStore.swift in Sources */,
-				2C27B0402DB6C84C00023C13 /* CoreDataStorageManager.swift in Sources */,
 				DD16D3BC90EB4FE3382E539C /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
