@@ -24,17 +24,22 @@ final class WalletsFlowCoordinator: WalletsFlowCoordinatorInput {
     let navigationController: UINavigationController
     
     typealias WalletsRouterAssembly = (_ navigationController: UINavigationController, _ resolver: Resolver) -> WalletsRouterInput
+    typealias CreateWalletRouterAssembly = (_ navigationController: UINavigationController, _ resolver: Resolver) -> CreateWalletRouterInput
     
     private let walletsRouterAssembly: WalletsRouterAssembly
+    private let createWalletRouterAssembly: CreateWalletRouterAssembly
     
     private var walletsRouter: WalletsRouterInput?
+    private var createWalletRouter: CreateWalletRouterInput?
     
     init(
         navigationController: UINavigationController = UINavigationController(),
         resolver: Resolver,
-        walletsRouterAssembly: @escaping WalletsRouterAssembly
+        walletsRouterAssembly: @escaping WalletsRouterAssembly,
+        createWalletRouterAssembly: @escaping CreateWalletRouterAssembly
     ) {
         self.walletsRouterAssembly = walletsRouterAssembly
+        self.createWalletRouterAssembly = createWalletRouterAssembly
         
         self.resolver = resolver
         
@@ -49,13 +54,37 @@ final class WalletsFlowCoordinator: WalletsFlowCoordinatorInput {
     }
     
     func start() {
-        walletsRouter = walletsRouterAssembly(navigationController, resolver)
-        walletsRouter?.delegate = self
-        walletsRouter?.open()
-        delegate?.walletsFlowCoordinatorDidStart(with: navigationController)
+        defer { delegate?.walletsFlowCoordinatorDidStart(with: navigationController) }
+        openWalletsScreen()
     }
 }
 
+// MARK: - Private Methods
+
+private extension WalletsFlowCoordinator {
+    func openWalletsScreen() {
+        walletsRouter = walletsRouterAssembly(navigationController, resolver)
+        walletsRouter?.delegate = self
+        walletsRouter?.open()
+    }
+    
+    func openCreateWalletScreen() {
+        createWalletRouter = createWalletRouterAssembly(navigationController, resolver)
+        createWalletRouter?.delegate = self
+        createWalletRouter?.open()
+    }
+}
+
+// MARK: - WalletsRouterOutput
+
 extension WalletsFlowCoordinator: WalletsRouterOutput {
+    func walletsAddButtonDidTap() {
+        openCreateWalletScreen()
+    }
+}
+
+// MARK: - CreateWalletsRouterOutput
+
+extension WalletsFlowCoordinator: CreateWalletRouterOutput {
     
 }

@@ -11,13 +11,13 @@ import Domain
 
 protocol WalletsInteractorOutput: AnyObject {
     func setWallets(_ wallets: [Wallet])
+    func throwError(_ error: Error)
 }
 
 protocol WalletsInteractorInput: AnyObject {
     var output: WalletsInteractorOutput? { get set }
     
     func getAllWallets()
-    func createNewWallet()
     func deleteWallet(_ wallet: Wallet)
 }
 
@@ -45,21 +45,7 @@ final class WalletsInteractor: WalletsInteractorInput {
             self.wallets = wallets
             output?.setWallets(wallets)
         case .failure(let error):
-#warning("варнинг с алертом")
-            return
-        }
-    }
-    
-    func createNewWallet() {
-        let operationResult = useCase.addWallet(title: UUID().uuidString, balance: .random(in: 0...9999))
-        
-        switch operationResult {
-        case .success(let wallet):
-            self.wallets.append(wallet)
-            output?.setWallets(wallets)
-        case .failure(let error):
-            #warning("варнинг с алертом")
-            return
+            output?.throwError(error)
         }
     }
     

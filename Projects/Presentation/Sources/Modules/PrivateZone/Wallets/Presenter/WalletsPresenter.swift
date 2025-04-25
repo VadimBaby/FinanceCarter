@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import Foundation
 import Domain
 
 protocol WalletsPresenterOutput: AnyObject {
-    
+    func addButtonDidTap()
 }
 
 protocol WalletsPresenterInput: AnyObject {
@@ -41,7 +42,7 @@ extension WalletsPresenter: WalletsViewOutput {
     }
     
     func addButtonHasPressed() {
-        interactor.createNewWallet()
+        output?.addButtonDidTap()
     }
     
     func walletHasDeleted(_ wallet: Wallet) {
@@ -52,5 +53,9 @@ extension WalletsPresenter: WalletsViewOutput {
 extension WalletsPresenter: WalletsInteractorOutput {
     func setWallets(_ wallets: [Wallet]) {
         view.setWallets(wallets)
+    }
+    
+    func throwError(_ error: Error) {
+        view.showError(error)
     }
 }

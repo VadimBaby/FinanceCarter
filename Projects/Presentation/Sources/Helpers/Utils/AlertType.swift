@@ -9,23 +9,25 @@
 import UIKit
 
 enum AlertType {
-    case nameIsEmpty
+    case nameIsEmpty, unknown(error: Error)
     
     var title: String? {
         switch self {
         case .nameIsEmpty: Strings.Alert.NameIsNil.title
+        case .unknown: Strings.Alert.Unknown.title
         }
     }
     
     var message: String? {
         switch self {
         case .nameIsEmpty: nil
+        case .unknown(error: let error): error.localizedDescription
         }
     }
     
     var actions: [UIAlertAction] {
         switch self {
-        case .nameIsEmpty: [.default]
+        case .nameIsEmpty, .unknown: [.OK]
         }
     }
 }

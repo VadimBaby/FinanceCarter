@@ -12,7 +12,8 @@ final class WalletsFlowCoordinatorFactory {
     static func create(resolver: Resolver) -> WalletsFlowCoordinatorInput {
         WalletsFlowCoordinator(
             resolver: resolver,
-            walletsRouterAssembly: WalletsAssembly.router
+            walletsRouterAssembly: WalletsAssembly.router,
+            createWalletRouterAssembly: CreateWalletAssembly.router
         )
     }
 }

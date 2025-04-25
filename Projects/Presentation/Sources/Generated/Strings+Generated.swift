@@ -15,6 +15,10 @@ public enum Strings {
       /// Имя не должно быть пустым
       public static let title = Strings.tr("Localizable", "alert.nameIsNil.title", fallback: "Имя не должно быть пустым")
     }
+    public enum Unknown {
+      /// Ошибка
+      public static let title = Strings.tr("Localizable", "alert.unknown.title", fallback: "Ошибка")
+    }
   }
   public enum App {
     /// Далее

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol WalletsRouterOutput: AnyObject {
-    
+    func walletsAddButtonDidTap()
 }
 
 protocol WalletsRouterInput: Router {
@@ -51,6 +51,10 @@ final class WalletsRouter: WalletsRouterInput {
     }
 }
 
+// MARK: - WalletsPresenterOutput
+
 extension WalletsRouter: WalletsPresenterOutput {
-    
+    func addButtonDidTap() {
+        delegate?.walletsAddButtonDidTap()
+    }
 }

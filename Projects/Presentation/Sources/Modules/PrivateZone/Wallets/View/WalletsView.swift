@@ -20,6 +20,7 @@ protocol WalletsViewInput: AnyObject {
     var output: WalletsViewOutput? { get set }
     
     func setWallets(_ wallets: [Wallet])
+    func showError(_ error: Error)
 }
 
 final class WalletsView: UIViewController, WalletsViewInput {
@@ -57,6 +58,10 @@ final class WalletsView: UIViewController, WalletsViewInput {
         defer { tableView.reloadData() }
         
         self.wallets = wallets
+    }
+    
+    func showError(_ error: Error) {
+        showAlert(type: .unknown(error: error))
     }
 }
 

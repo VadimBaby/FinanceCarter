@@ -9,5 +9,5 @@
 import UIKit
 
 extension UIAlertAction {
-    static let `default` = UIAlertAction(title: "OK", style: .default)
+    static let OK = UIAlertAction(title: "OK", style: .default)
 }
