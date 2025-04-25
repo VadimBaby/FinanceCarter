@@ -6,6 +6,8 @@
 //  Copyright © 2025 Vadim Martynenko. All rights reserved.
 //
 
+// swiftlint:disable:next foundation_using
+import Foundation
 import Common
 
 public final class WalletsService: WalletsUseCase {
@@ -33,6 +35,16 @@ public final class WalletsService: WalletsUseCase {
         
         do {
             try repository.addWallet(from: wallet)
+            return .success(wallet)
+        } catch {
+            return .failure(error)
+        }
+    }
+    
+    @discardableResult
+    public func deleteWallet(_ wallet: Wallet) -> Result<Wallet, Error> {
+        do {
+            try repository.deleteWalletBy(id: wallet.id)
             return .success(wallet)
         } catch {
             return .failure(error)

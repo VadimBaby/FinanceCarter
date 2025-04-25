@@ -18,6 +18,7 @@ protocol WalletsInteractorInput: AnyObject {
     
     func getAllWallets()
     func createNewWallet()
+    func deleteWallet(_ wallet: Wallet)
 }
 
 final class WalletsInteractor: WalletsInteractorInput {
@@ -60,5 +61,9 @@ final class WalletsInteractor: WalletsInteractorInput {
             #warning("варнинг с алертом")
             return
         }
+    }
+    
+    func deleteWallet(_ wallet: Wallet) {
+        useCase.deleteWallet(wallet)
     }
 }

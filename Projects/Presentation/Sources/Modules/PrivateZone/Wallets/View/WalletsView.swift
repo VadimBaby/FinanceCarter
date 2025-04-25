@@ -13,6 +13,7 @@ import Common
 protocol WalletsViewOutput: AnyObject {
     func viewDidLoad()
     func addButtonHasPressed()
+    func walletHasDeleted(_ wallet: Wallet)
 }
 
 protocol WalletsViewInput: AnyObject {
@@ -53,6 +54,8 @@ final class WalletsView: UIViewController, WalletsViewInput {
     }
     
     func setWallets(_ wallets: [Wallet]) {
+        defer { tableView.reloadData() }
+        
         self.wallets = wallets
     }
 }
@@ -83,6 +86,8 @@ private extension WalletsView {
     }
 }
 
+// MARK: - UITableViewDataSource
+
 extension WalletsView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         wallets.count
@@ -91,8 +96,14 @@ extension WalletsView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: WalletTitleCellView.self)
         let wallet = wallets[indexPath.row]
-        cell.configure(with: wallet.title)
+        cell.configure(with: wallet)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let deletedWallet = self.wallets.remove(at: indexPath.row)
+        output?.walletHasDeleted(deletedWallet)
+        tableView.deleteRows(at: [indexPath], with: .fade)
     }
 }
 

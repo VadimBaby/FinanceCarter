@@ -26,4 +26,12 @@ public final class WalletsStorageManager: CoreDataStorageManager, WalletsReposit
         
         try saveContext()
     }
+    
+    public func deleteWalletBy(id: UUID) throws {
+        let entities = try fetch(type: DBWallet.self)
+        
+        guard let entity = entities.first(where: { $0.id == id }) else { return }
+        
+        try delete(entity: entity)
+    }
 }

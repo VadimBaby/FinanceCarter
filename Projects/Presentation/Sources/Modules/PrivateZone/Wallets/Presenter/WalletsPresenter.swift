@@ -43,6 +43,10 @@ extension WalletsPresenter: WalletsViewOutput {
     func addButtonHasPressed() {
         interactor.createNewWallet()
     }
+    
+    func walletHasDeleted(_ wallet: Wallet) {
+        interactor.deleteWallet(wallet)
+    }
 }
 
 extension WalletsPresenter: WalletsInteractorOutput {

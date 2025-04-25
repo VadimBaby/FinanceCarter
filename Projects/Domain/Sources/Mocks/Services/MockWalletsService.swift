@@ -28,4 +28,10 @@ public final class MockWalletsService: WalletsUseCase {
         wallets.append(wallet)
         return .success(wallet)
     }
+    
+    @discardableResult
+    public func deleteWallet(_ wallet: Wallet) -> Result<Wallet, Error> {
+        wallets.removeAll(where: { $0.id == wallet.id })
+        return .success(wallet)
+    }
 }

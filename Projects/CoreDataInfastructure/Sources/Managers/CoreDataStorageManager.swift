@@ -27,4 +27,10 @@ open class CoreDataStorageManager {
         let request = NSFetchRequest<Entity>(entityName: "\(Entity.self)")
         return try store.viewContext.fetch(request)
     }
+    
+    // swiftlint:disable:next generic_constraint_naming
+    public func delete<Entity: NSManagedObject>(entity: Entity) throws {
+        store.viewContext.delete(entity)
+        try saveContext()
+    }
 }

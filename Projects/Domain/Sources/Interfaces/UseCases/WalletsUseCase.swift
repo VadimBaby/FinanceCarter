@@ -6,6 +6,8 @@
 //  Copyright © 2025 Vadim Martynenko. All rights reserved.
 //
 
+// swiftlint:disable:next foundation_using
+import Foundation
 import Common
 
 public protocol WalletsUseCase: AnyObject {
@@ -13,4 +15,7 @@ public protocol WalletsUseCase: AnyObject {
     
     @discardableResult
     func addWallet(title: String, balance: Double) -> Result<Wallet, Error>
+    
+    @discardableResult
+    func deleteWallet(_ wallet: Wallet) -> Result<Wallet, Error>
 }
