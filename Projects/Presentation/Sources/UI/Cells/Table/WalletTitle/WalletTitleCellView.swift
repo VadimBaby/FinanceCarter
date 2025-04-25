@@ -32,7 +32,7 @@ final class WalletTitleCellView: UITableViewCell, Reusable {
     
     func configure(with wallet: Wallet) {
         walletTitle.text = wallet.title
-        walletBalance.text = NumbersFormatter.formatWithMinimalDecimals(wallet.balance)
+        walletBalance.text = NumbersFormatter.formatWithMinimalDecimals(wallet.balance) + .rubleSign
     }
 }
 
