@@ -45,7 +45,9 @@ final class CreateWalletRouter: CreateWalletRouterInput {
     
     func open() {
         guard let module = moduleAssembly?(self, resolver) else { fatalError("moduleAssembly is nil in \(self)") }
-        navigationController.present(module, animated: true)
+        let moduleCoveredInNavigationVC = UINavigationController(rootViewController: module)
+        
+        navigationController.present(moduleCoveredInNavigationVC, animated: true)
     }
 }
 

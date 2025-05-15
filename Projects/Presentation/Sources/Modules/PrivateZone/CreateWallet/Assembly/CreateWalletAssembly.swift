@@ -33,3 +33,19 @@ final class CreateWalletAssembly {
         return router
     }
 }
+
+#if DEBUG
+extension CreateWalletAssembly {
+    static func createMock() -> CreateWalletViewInput & UIViewController {
+        let view = CreateWalletView()
+        let interactor = CreateWalletInteractor()
+        
+        let presenter = CreateWalletPresenter(interactor: interactor, view: view)
+        
+        view.output = presenter
+        interactor.output = presenter
+        
+        return view
+    }
+}
+#endif

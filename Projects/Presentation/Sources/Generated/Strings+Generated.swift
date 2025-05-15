@@ -24,6 +24,14 @@ public enum Strings {
     /// Далее
     public static let next = Strings.tr("Localizable", "app.next", fallback: "Далее")
   }
+  public enum CreateWallet {
+    public enum Label {
+      /// Баланс кошелька
+      public static let balance = Strings.tr("Localizable", "createWallet.label.balance", fallback: "Баланс кошелька")
+      /// Название кошелька
+      public static let title = Strings.tr("Localizable", "createWallet.label.title", fallback: "Название кошелька")
+    }
+  }
   public enum Credential {
     /// Регистрация
     public static let systemTitle = Strings.tr("Localizable", "credential.systemTitle", fallback: "Регистрация")

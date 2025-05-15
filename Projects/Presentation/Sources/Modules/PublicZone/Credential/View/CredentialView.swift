@@ -131,7 +131,7 @@ private extension CredentialView {
     
     @objc
     func mainViewTapped() {
-        nameTextField.resignFirstResponder()
+        view.endEditing(true)
     }
 }
 

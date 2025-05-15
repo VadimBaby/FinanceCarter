@@ -27,3 +27,6 @@
 "profile.systemTitle" = "Профиль";
 
 "wallets.systemTitle" = "Кошельки";
+
+"createWallet.label.title" = "Название кошелька";
+"createWallet.label.balance" = "Баланс кошелька";
