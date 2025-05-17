@@ -12,8 +12,7 @@ let project = Project(
             name: NAME_PROJECT,
             dependencies: [
                 Constants.Modules.Common.dependency,
-                Constants.Modules.Domain.dependency,
-                Constants.Modules.CoreDataInfastructure.dependency
+                Constants.Modules.Domain.dependency
             ]
         )
     ]

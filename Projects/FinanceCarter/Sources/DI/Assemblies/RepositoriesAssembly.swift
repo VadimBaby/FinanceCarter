@@ -11,6 +11,8 @@ import Data
 
 final class RepositoriesAssembly: Assembly {
     func assemble(container: Container) {
-        container.register(WalletsRepository.self, factory: WalletsStorageManager.init)
+        container.register(WalletsRepository.self) { resolver in
+            WalletsStorageManager(localDataSource: resolver.resolve(WalletsLocalDataSourceProtocol.self)!)
+        }
     }
 }

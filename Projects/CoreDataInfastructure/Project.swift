@@ -11,7 +11,9 @@ let project = Project(
             type: .dynamicFramework,
             name: NAME_PROJECT,
             dependencies: [
-                Constants.Modules.Common.dependency
+                Constants.Modules.Common.dependency,
+                Constants.Modules.Domain.dependency,
+                Constants.Modules.Data.dependency
             ],
             coreDataModels: [.coreDataModel(.path("Sources/Store/Model.xcdatamodeld"))]
         )

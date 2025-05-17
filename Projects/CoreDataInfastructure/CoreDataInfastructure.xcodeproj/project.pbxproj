@@ -3,15 +3,19 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		18389B0243E0DDA11A601528 /* TuistBundle+CoreDataInfastructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CC8C5D4C65CAD9CCBCCE50 /* TuistBundle+CoreDataInfastructure.swift */; };
-		4A96387FCE80B50252EA0EBE /* CoreDataStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E69A288F422B5EAE3C032C /* CoreDataStorageManager.swift */; };
+		2174AE345A93F1CEE307FABB /* CoreDataStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF03B29C79E01F9451AA24F /* CoreDataStorageManager.swift */; };
+		2D274572ED77885E7071CA2A /* WalletsLocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323C75F58DF010ADAEB2F444 /* WalletsLocalDataSource.swift */; };
+		33B29900D9737174A81E945C /* WalletMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39DC7F644CEC45C5DAB20A2 /* WalletMapper.swift */; };
 		751A6BED62295E5C45810A25 /* Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25BDF9568CD0061FD81B46E5 /* Common.framework */; };
 		BAA4485BD8C412154990AAC3 /* PersistenceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547277F77E024AEB1EA03906 /* PersistenceStore.swift */; };
+		D4DC94C8DDB3BD6C0FAE1357 /* Data.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 982B88D520625D7EABACA5A5 /* Data.framework */; };
 		DD16D3BC90EB4FE3382E539C /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9BB41621C7F22D784DAD2558 /* Model.xcdatamodeld */; };
+		F14A573EBD135CC4409236A6 /* Domain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 186247F9B377E33A460B852C /* Domain.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,13 +32,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		186247F9B377E33A460B852C /* Domain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Domain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		25BDF9568CD0061FD81B46E5 /* Common.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Common.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		26CC8C5D4C65CAD9CCBCCE50 /* TuistBundle+CoreDataInfastructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+CoreDataInfastructure.swift"; sourceTree = "<group>"; };
+		323C75F58DF010ADAEB2F444 /* WalletsLocalDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsLocalDataSource.swift; sourceTree = "<group>"; };
 		547277F77E024AEB1EA03906 /* PersistenceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceStore.swift; sourceTree = "<group>"; };
+		982B88D520625D7EABACA5A5 /* Data.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Data.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AD2B7B1AB945B511146CFDF /* CoreDataInfastructure.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreDataInfastructure.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9EF03B29C79E01F9451AA24F /* CoreDataStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorageManager.swift; sourceTree = "<group>"; };
 		A7A5B95736B3D10E5801278C /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		AE4B0C80C9B62649D1431046 /* CoreDataInfastructure-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "CoreDataInfastructure-Info.plist"; sourceTree = "<group>"; };
-		D6E69A288F422B5EAE3C032C /* CoreDataStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorageManager.swift; sourceTree = "<group>"; };
+		B39DC7F644CEC45C5DAB20A2 /* WalletMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletMapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,12 +51,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				751A6BED62295E5C45810A25 /* Common.framework in Frameworks */,
+				D4DC94C8DDB3BD6C0FAE1357 /* Data.framework in Frameworks */,
+				F14A573EBD135CC4409236A6 /* Domain.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E9CA02F037B9C6F6F1ABB8B /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				323C75F58DF010ADAEB2F444 /* WalletsLocalDataSource.swift */,
+			);
+			path = DataSources;
+			sourceTree = "<group>";
+		};
 		1774965D18057AFF7B82BB4D /* InfoPlists */ = {
 			isa = PBXGroup;
 			children = (
@@ -68,18 +86,12 @@
 		3F194220400F5C54E2783EF6 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				4B7EC6DEDA6FCCC011029A1F /* Managers */,
+				B8AAF371095081F6D43D84F0 /* CoreDataStore */,
+				0E9CA02F037B9C6F6F1ABB8B /* DataSources */,
+				F6A9FAEB6BEB8377FB4972B0 /* Mappers */,
 				BEE97A0611A12A7B0FBF2B9F /* Store */,
 			);
 			path = Sources;
-			sourceTree = "<group>";
-		};
-		4B7EC6DEDA6FCCC011029A1F /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-				D6E69A288F422B5EAE3C032C /* CoreDataStorageManager.swift */,
-			);
-			path = Managers;
 			sourceTree = "<group>";
 		};
 		60CDF153DBB4D819ACFAF664 /* Derived */ = {
@@ -96,8 +108,18 @@
 			children = (
 				25BDF9568CD0061FD81B46E5 /* Common.framework */,
 				9AD2B7B1AB945B511146CFDF /* CoreDataInfastructure.framework */,
+				982B88D520625D7EABACA5A5 /* Data.framework */,
+				186247F9B377E33A460B852C /* Domain.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		B8AAF371095081F6D43D84F0 /* CoreDataStore */ = {
+			isa = PBXGroup;
+			children = (
+				9EF03B29C79E01F9451AA24F /* CoreDataStorageManager.swift */,
+			);
+			path = CoreDataStore;
 			sourceTree = "<group>";
 		};
 		BEE97A0611A12A7B0FBF2B9F /* Store */ = {
@@ -124,6 +146,14 @@
 				3F194220400F5C54E2783EF6 /* Sources */,
 			);
 			name = Project;
+			sourceTree = "<group>";
+		};
+		F6A9FAEB6BEB8377FB4972B0 /* Mappers */ = {
+			isa = PBXGroup;
+			children = (
+				B39DC7F644CEC45C5DAB20A2 /* WalletMapper.swift */,
+			);
+			path = Mappers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,7 +245,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				18389B0243E0DDA11A601528 /* TuistBundle+CoreDataInfastructure.swift in Sources */,
-				4A96387FCE80B50252EA0EBE /* CoreDataStorageManager.swift in Sources */,
+				2174AE345A93F1CEE307FABB /* CoreDataStorageManager.swift in Sources */,
+				2D274572ED77885E7071CA2A /* WalletsLocalDataSource.swift in Sources */,
+				33B29900D9737174A81E945C /* WalletMapper.swift in Sources */,
 				BAA4485BD8C412154990AAC3 /* PersistenceStore.swift in Sources */,
 				DD16D3BC90EB4FE3382E539C /* Model.xcdatamodeld in Sources */,
 			);
@@ -248,7 +280,10 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+					"$(inherited)",
+					DEBUG,
+				);
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;

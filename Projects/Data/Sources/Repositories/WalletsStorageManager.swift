@@ -6,32 +6,26 @@
 //  Copyright © 2025 Vadim Martynenko. All rights reserved.
 //
 
-import CoreDataInfastructure
-import CoreData
+// swiftlint:disable:next foundation_using
+import Foundation
 import Domain
 
-public final class WalletsStorageManager: CoreDataStorageManager, WalletsRepository {
-    public func fetchWallets() throws -> [Wallet] {
-        let entites = try fetch(type: DBWallet.self)
-        return WalletMapper.toDomain(from: entites)
+public final class WalletsStorageManager: WalletsRepository {
+    private let localDataSource: WalletsLocalDataSourceProtocol
+    
+    public init(localDataSource: WalletsLocalDataSourceProtocol) {
+        self.localDataSource = localDataSource
     }
     
-    public func addWallet(from domainEntity: Wallet) throws {
-        let newWallet = DBWallet(context: store.viewContext)
-        
-        newWallet.id = domainEntity.id
-        newWallet.title = domainEntity.title
-        newWallet.balance = domainEntity.balance
-        newWallet.createdAt = domainEntity.createdAt
-        
-        try saveContext()
+    public func fetchWallets() throws -> [Wallet] {
+        return try localDataSource.fetchWallets()
+    }
+    
+    public func addWallet(_ wallet: Wallet) throws {
+        try localDataSource.addWallet(wallet)
     }
     
     public func deleteWalletBy(id: UUID) throws {
-        let entities = try fetch(type: DBWallet.self)
-        
-        guard let entity = entities.first(where: { $0.id == id }) else { return }
-        
-        try delete(entity: entity)
+        try localDataSource.deleteWalletBy(id: id)
     }
 }

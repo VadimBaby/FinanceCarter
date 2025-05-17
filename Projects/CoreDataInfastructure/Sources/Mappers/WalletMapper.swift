@@ -1,13 +1,12 @@
 //
 //  WalletMapper.swift
-//  Data
+//  CoreDataInfastructure
 //
-//  Created by Вадим Мартыненко on 18.04.2025.
+//  Created by Вадим Мартыненко on 17.05.2025.
 //  Copyright © 2025 Vadim Martynenko. All rights reserved.
 //
 
 import Domain
-import CoreDataInfastructure
 import CoreData
 
 struct WalletMapper {

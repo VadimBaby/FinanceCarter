@@ -13,7 +13,7 @@ private struct Constants {
     static let CORE_DATA_MODEL = "Model"
 }
 
-open class CoreDataStorageManager {
+public class CoreDataStore {
     public init() {}
     
     public let store = PersistenceStore(model: Constants.CORE_DATA_MODEL)

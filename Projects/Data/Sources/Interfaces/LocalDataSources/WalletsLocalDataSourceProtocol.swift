@@ -1,15 +1,16 @@
 //
-//  WalletsRepository.swift
-//  Domain
+//  WalletsLocalDataSourceProtocol.swift
+//  Data
 //
-//  Created by Вадим Мартыненко on 18.04.2025.
+//  Created by Вадим Мартыненко on 17.05.2025.
 //  Copyright © 2025 Vadim Martynenko. All rights reserved.
 //
 
 // swiftlint:disable:next foundation_using
 import Foundation
+import Domain
 
-public protocol WalletsRepository: AnyObject {
+public protocol WalletsLocalDataSourceProtocol: AnyObject {
     func fetchWallets() throws -> [Wallet]
     func addWallet(_ wallet: Wallet) throws
     func deleteWalletBy(id: UUID) throws

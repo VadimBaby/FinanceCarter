@@ -18,6 +18,7 @@ let project = Project(
                 Constants.Modules.Domain.dependency,
                 Constants.Modules.Data.dependency,
                 Constants.Modules.Presentation.dependency,
+                Constants.Modules.CoreDataInfastructure.dependency,
                 .package(product: "Swinject")
             ],
             resources: Constants.DEFAULT_LOCATE_RESOURCES

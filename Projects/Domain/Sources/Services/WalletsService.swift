@@ -34,7 +34,7 @@ public final class WalletsService: WalletsUseCase {
         let wallet = Wallet(title: title, balance: balance)
         
         do {
-            try repository.addWallet(from: wallet)
+            try repository.addWallet(wallet)
             return .success(wallet)
         } catch {
             return .failure(error)
