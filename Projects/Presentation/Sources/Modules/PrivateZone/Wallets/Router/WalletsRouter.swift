@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import Common
 
 protocol WalletsRouterOutput: AnyObject {
-    func walletsAddButtonDidTap()
+    func walletsAddButtonDidTap(updateWalletsViewClosure: @escaping VoidAction)
 }
 
 protocol WalletsRouterInput: Router {
@@ -54,7 +55,7 @@ final class WalletsRouter: WalletsRouterInput {
 // MARK: - WalletsPresenterOutput
 
 extension WalletsRouter: WalletsPresenterOutput {
-    func addButtonDidTap() {
-        delegate?.walletsAddButtonDidTap()
+    func addButtonDidTap(updateWalletsViewClosure: @escaping VoidAction) {
+        delegate?.walletsAddButtonDidTap(updateWalletsViewClosure: updateWalletsViewClosure)
     }
 }

@@ -10,8 +10,9 @@ import CoreDataInfastructure
 import Data
 import Swinject
 
-final class DataStoresAssembly: Assembly {
+final class DataSourcesAssembly: Assembly {
     func assemble(container: Container) {
-        container.register(WalletsLocalDataSourceProtocol.self, factory: WalletsLocalDataSource.init)
+        container.register(WalletsLocalDataSource.self, factory: WalletsCoreDataSource.init)
+        container.register(CategoriesLocalDataSource.self, factory: CategoriesCoreDataSource.init)
     }
 }

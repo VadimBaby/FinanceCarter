@@ -36,13 +36,12 @@ final class CredentialPresenter: CredentialPresenterInput {
 
 extension CredentialPresenter: CredentialViewOutput {
     func didTapNextButton(name: String) {
-        guard name.isNotEmpty else { return }
         interactor.setName(name)
     }
 }
 
 extension CredentialPresenter: CredentialInteractorOutput {
-    func didSetName(result: OperationResult) {
+    func nameDidSet(result: OperationResult) {
         switch result {
         case .success:
             output?.credentialsDidTapNext()

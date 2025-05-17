@@ -8,9 +8,10 @@
 
 // swiftlint:disable:next foundation_using
 import Foundation
+import Common
 
 public protocol WalletsRepository: AnyObject {
-    func fetchWallets() throws -> [Wallet]
-    func addWallet(_ wallet: Wallet) throws
-    func deleteWalletBy(id: UUID) throws
+    func fetchWallets(completion:  @escaping  (_ result: Result<[WalletEntity], Error>) -> Void)
+    func addWallet(_ wallet: WalletEntity, completion:  @escaping  OperationResultCompletion)
+    func removeWallet(by id: UUID, completion:  @escaping  OperationResultCompletion)
 }

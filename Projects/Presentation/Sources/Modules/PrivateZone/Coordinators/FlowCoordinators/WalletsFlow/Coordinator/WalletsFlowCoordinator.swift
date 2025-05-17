@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Common
 
 protocol WalletsFlowCoordinatorOutput: AnyObject {
     func walletsFlowCoordinatorDidStart(with viewController: UIViewController)
@@ -49,6 +50,8 @@ final class WalletsFlowCoordinator: WalletsFlowCoordinatorInput {
         print("\(Self.self) init")
     }
     
+    private var updateWalletsViewClosure: VoidAction? = nil
+    
     deinit {
         print("\(Self.self) deinit")
     }
@@ -73,12 +76,19 @@ private extension WalletsFlowCoordinator {
         createWalletRouter?.delegate = self
         createWalletRouter?.open()
     }
+    
+    func closeCreateWalletScreen() {
+        createWalletRouter?.close()
+        createWalletRouter = nil
+        updateWalletsViewClosure = nil
+    }
 }
 
 // MARK: - WalletsRouterOutput
 
 extension WalletsFlowCoordinator: WalletsRouterOutput {
-    func walletsAddButtonDidTap() {
+    func walletsAddButtonDidTap(updateWalletsViewClosure: @escaping VoidAction) {
+        self.updateWalletsViewClosure = updateWalletsViewClosure
         openCreateWalletScreen()
     }
 }
@@ -86,5 +96,12 @@ extension WalletsFlowCoordinator: WalletsRouterOutput {
 // MARK: - CreateWalletsRouterOutput
 
 extension WalletsFlowCoordinator: CreateWalletRouterOutput {
+    func closeButtonDidPressed() {
+        closeCreateWalletScreen()
+    }
     
+    func walletDidAdded() {
+        self.updateWalletsViewClosure?()
+        closeCreateWalletScreen()
+    }
 }

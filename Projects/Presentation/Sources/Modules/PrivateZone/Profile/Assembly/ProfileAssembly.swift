@@ -48,4 +48,3 @@ extension ProfileAssembly {
     }
 }
 #endif
-

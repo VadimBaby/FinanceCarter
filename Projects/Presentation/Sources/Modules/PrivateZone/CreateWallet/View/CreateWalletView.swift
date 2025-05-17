@@ -18,11 +18,14 @@ private struct Constants {
 }
 
 protocol CreateWalletViewOutput: AnyObject {
-    
+    func closeButtonDidPressed()
+    func addButtonDidPressed(title: String, balance: String)
 }
 
 protocol CreateWalletViewInput: AnyObject {
     var output: CreateWalletViewOutput? { get set }
+    
+    func showError(_ error: Error)
 }
 
 final class CreateWalletView: UIViewController, CreateWalletViewInput {
@@ -62,6 +65,10 @@ final class CreateWalletView: UIViewController, CreateWalletViewInput {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         titleTextField.becomeFirstResponder()
+    }
+    
+    func showError(_ error: Error) {
+        showAlert(type: .unknown(error: error))
     }
 }
 
@@ -117,12 +124,15 @@ private extension CreateWalletView {
 private extension CreateWalletView {
     @objc
     func closeButtonPressed() {
-        dismiss(animated: true)
+        output?.closeButtonDidPressed()
     }
     
     @objc
     func addButtonPressed() {
+        guard let title = titleTextField.text,
+              let balance = balanceTextField.text else { return }
         
+        output?.addButtonDidPressed(title: title, balance: balance)
     }
     
     @objc

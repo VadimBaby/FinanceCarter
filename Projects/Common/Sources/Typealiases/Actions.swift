@@ -6,3 +6,4 @@
 //
 
 public typealias VoidAction = () -> Void
+public typealias OperationResultCompletion = (_ result: OperationResult) -> Void

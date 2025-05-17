@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import Domain
 
 final class CategoriesAssembly {
     private init() {}
     
     static func create(router: CategoriesPresenterOutput, resolver: Resolver) -> CategoriesViewInput & UIViewController {
         let view = CategoriesView()
-        let interactor = CategoriesInteractor()
+        let interactor = CategoriesInteractor(useCase: resolver.resolve(CategoriesUseCase.self)!)
         
         let presenter = CategoriesPresenter(interactor: interactor, view: view)
         presenter.output = router
@@ -33,3 +34,19 @@ final class CategoriesAssembly {
         return router
     }
 }
+
+#if DEBUG
+extension CategoriesAssembly {
+    static func createMock() -> CategoriesViewInput & UIViewController {
+        let view = CategoriesView()
+        let interactor = CategoriesInteractor(useCase: MockCategoriesService())
+        
+        let presenter = CategoriesPresenter(interactor: interactor, view: view)
+        
+        view.output = presenter
+        interactor.output = presenter
+        
+        return view
+    }
+}
+#endif

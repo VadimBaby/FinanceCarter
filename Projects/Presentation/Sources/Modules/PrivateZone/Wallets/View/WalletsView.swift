@@ -12,14 +12,14 @@ import Common
 
 protocol WalletsViewOutput: AnyObject {
     func viewDidLoad()
-    func addButtonHasPressed()
-    func walletHasDeleted(_ wallet: Wallet)
+    func addButtonDidPressed()
+    func walletDidRemoved(_ wallet: WalletEntity)
 }
 
 protocol WalletsViewInput: AnyObject {
     var output: WalletsViewOutput? { get set }
     
-    func setWallets(_ wallets: [Wallet])
+    func setWallets(_ wallets: [WalletEntity])
     func showError(_ error: Error)
 }
 
@@ -28,10 +28,11 @@ final class WalletsView: UIViewController, WalletsViewInput {
     
     private lazy var tableView = UITableView(frame: view.bounds) &> {
         $0.dataSource = self
+        $0.delegate = self
         $0.register(cellType: WalletTitleCellView.self)
     }
     
-    private var wallets: [Wallet] = []
+    private var wallets: [WalletEntity] = []
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -54,9 +55,8 @@ final class WalletsView: UIViewController, WalletsViewInput {
         setupNavigationBar()
     }
     
-    func setWallets(_ wallets: [Wallet]) {
+    func setWallets(_ wallets: [WalletEntity]) {
         defer { tableView.reloadData() }
-        
         self.wallets = wallets
     }
     
@@ -87,7 +87,7 @@ private extension WalletsView {
     
     @objc
     func addButtonPressed() {
-        output?.addButtonHasPressed()
+        output?.addButtonDidPressed()
     }
 }
 
@@ -106,9 +106,15 @@ extension WalletsView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        let deletedWallet = self.wallets.remove(at: indexPath.row)
-        output?.walletHasDeleted(deletedWallet)
+        let removedWallet = self.wallets.remove(at: indexPath.row)
+        output?.walletDidRemoved(removedWallet)
         tableView.deleteRows(at: [indexPath], with: .fade)
+    }
+}
+
+extension WalletsView: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        false
     }
 }
 

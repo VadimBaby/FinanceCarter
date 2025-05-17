@@ -9,7 +9,8 @@
 import UIKit
 
 protocol CreateWalletRouterOutput: AnyObject {
-    
+    func closeButtonDidPressed()
+    func walletDidAdded()
 }
 
 protocol CreateWalletRouterInput: Router {
@@ -20,6 +21,7 @@ protocol CreateWalletRouterInput: Router {
     var moduleAssembly: ModuleAssembly? { get set }
     
     func open()
+    func close()
 }
 
 final class CreateWalletRouter: CreateWalletRouterInput {
@@ -32,6 +34,8 @@ final class CreateWalletRouter: CreateWalletRouterInput {
     typealias CategoriesAssembly = (_ coordinator: CreateWalletPresenterOutput, _ resolver: Resolver) -> CreateWalletViewInput & UIViewController
     
     var moduleAssembly: ModuleAssembly?
+    
+    private weak var presentedModule: UIViewController?
     
     init(
         navigationController: UINavigationController,
@@ -46,11 +50,22 @@ final class CreateWalletRouter: CreateWalletRouterInput {
     func open() {
         guard let module = moduleAssembly?(self, resolver) else { fatalError("moduleAssembly is nil in \(self)") }
         let moduleCoveredInNavigationVC = UINavigationController(rootViewController: module)
+        self.presentedModule = moduleCoveredInNavigationVC
         
         navigationController.present(moduleCoveredInNavigationVC, animated: true)
+    }
+    
+    func close() {
+        presentedModule?.dismiss(animated: true)
     }
 }
 
 extension CreateWalletRouter: CreateWalletPresenterOutput {
+    func closeButtonDidPressed() {
+        delegate?.closeButtonDidPressed()
+    }
     
+    func walletDidAdded() {
+        delegate?.walletDidAdded()
+    }
 }

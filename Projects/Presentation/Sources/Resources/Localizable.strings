@@ -30,3 +30,5 @@
 
 "createWallet.label.title" = "Название кошелька";
 "createWallet.label.balance" = "Баланс кошелька";
+
+"categories.systemTitle" = "Категории";

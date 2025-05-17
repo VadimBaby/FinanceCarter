@@ -10,12 +10,11 @@
 import Foundation
 import Common
 
+public typealias WalletsUseCaseCompletionManyEntities = (_ result: Result<[WalletEntity], Error>) -> Void
+public typealias WalletsUseCaseCompletionOneEntity = (_ result: Result<WalletEntity, Error>) -> Void
+
 public protocol WalletsUseCase: AnyObject {
-    func fetchWallets() -> Result<[Wallet], Error>
-    
-    @discardableResult
-    func addWallet(title: String, balance: Double) -> Result<Wallet, Error>
-    
-    @discardableResult
-    func deleteWallet(_ wallet: Wallet) -> Result<Wallet, Error>
+    func fetchWallets(completion: @escaping WalletsUseCaseCompletionManyEntities)
+    func addWallet(title: String, balance: Double, completion: @escaping WalletsUseCaseCompletionOneEntity)
+    func removeWallet(_ wallet: WalletEntity, completion: @escaping WalletsUseCaseCompletionOneEntity)
 }

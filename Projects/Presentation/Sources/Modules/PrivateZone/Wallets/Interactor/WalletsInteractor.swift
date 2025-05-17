@@ -10,23 +10,21 @@ import UIKit
 import Domain
 
 protocol WalletsInteractorOutput: AnyObject {
-    func setWallets(_ wallets: [Wallet])
+    func walletsDidGet(_ wallets: [WalletEntity])
     func throwError(_ error: Error)
 }
 
 protocol WalletsInteractorInput: AnyObject {
     var output: WalletsInteractorOutput? { get set }
     
-    func getAllWallets()
-    func deleteWallet(_ wallet: Wallet)
+    func getWallets()
+    func removeWallet(_ wallet: WalletEntity)
 }
 
 final class WalletsInteractor: WalletsInteractorInput {
     weak var output: WalletsInteractorOutput?
     
     private let useCase: WalletsUseCase
-    
-    private var wallets: [Wallet] = []
     
     init(useCase: WalletsUseCase) {
         self.useCase = useCase
@@ -37,19 +35,21 @@ final class WalletsInteractor: WalletsInteractorInput {
         print("\(Self.self) deinit")
     }
     
-    func getAllWallets() {
-        let operationResult = useCase.fetchWallets()
-        
-        switch operationResult {
-        case .success(let wallets):
-            self.wallets = wallets
-            output?.setWallets(wallets)
-        case .failure(let error):
-            output?.throwError(error)
+    func getWallets() {
+        useCase.fetchWallets { [weak self] result in
+            switch result {
+            case .success(let wallets):
+                self?.output?.walletsDidGet(wallets)
+            case .failure(let error):
+                self?.output?.throwError(error)
+            }
         }
     }
     
-    func deleteWallet(_ wallet: Wallet) {
-        useCase.deleteWallet(wallet)
+    func removeWallet(_ wallet: WalletEntity) {
+        useCase.removeWallet(wallet) { [weak self] result in
+            guard case let .failure(error) = result else { return }
+            self?.output?.throwError(error)
+        }
     }
 }

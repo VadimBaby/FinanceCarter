@@ -1,24 +1,25 @@
 //
-//  WalletTitleCellView.swift
+//  CategoryTitleCellView.swift
 //  Presentation
 //
-//  Created by Вадим Мартыненко on 22.04.2025.
+//  Created by Вадим Мартыненко on 17.05.2025.
 //  Copyright © 2025 Vadim Martynenko. All rights reserved.
 //
 
+#warning("Why title!?")
+
 import UIKit
-import Reusable
 import SnapKit
-import Common
 import Domain
+import Reusable
 
 private struct Constants {
     static let padding = 10
 }
 
-final class WalletTitleCellView: UITableViewCell, Reusable {
-    private lazy var walletTitle = UILabel()
-    private lazy var walletBalance = UILabel()
+final class CategoryTitleCellView: UITableViewCell, Reusable {
+    private lazy var categoryTitle = UILabel()
+    private lazy var categoryType = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -30,26 +31,26 @@ final class WalletTitleCellView: UITableViewCell, Reusable {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with wallet: WalletEntity) {
-        walletTitle.text = wallet.title
-        walletBalance.text = NumbersFormatter.formatWithMinimalDecimals(wallet.balance) + .rubleSign
+    func configure(with category: CategoryEntity) {
+        categoryTitle.text = category.title
+        categoryType.text = category.type.rawValue
     }
 }
 
-// MARK: - Private Methods
+// MARK: - Setups Views
 
-private extension WalletTitleCellView {
+private extension CategoryTitleCellView {
     func setupViews() {
-        contentView.addSubviews(walletTitle, walletBalance)
+        contentView.addSubviews(categoryTitle, categoryType)
     }
     
     func setupConstraints() {
-        walletTitle.snp.makeConstraints { make in
+        categoryTitle.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(Constants.padding)
             make.centerY.equalToSuperview()
         }
         
-        walletBalance.snp.makeConstraints { make in
+        categoryType.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(Constants.padding)
             make.centerY.equalToSuperview()
         }

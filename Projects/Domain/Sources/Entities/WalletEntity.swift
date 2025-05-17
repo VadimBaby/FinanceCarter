@@ -9,7 +9,7 @@
 // swiftlint:disable:next foundation_using
 import Foundation
 
-public struct Wallet: Identifiable {
+public struct WalletEntity: Identifiable {
     public let id: UUID
     public let title: String
     public let balance: Double
@@ -23,9 +23,6 @@ public struct Wallet: Identifiable {
     }
     
     public init(title: String, balance: Double) {
-        self.id = UUID()
-        self.title = title
-        self.balance = balance
-        self.createdAt = .now
+        self.init(id: .init(), title: title, balance: balance, createdAt: .now)
     }
 }

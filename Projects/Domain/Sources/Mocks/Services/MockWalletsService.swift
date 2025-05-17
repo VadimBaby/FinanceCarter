@@ -11,27 +11,22 @@ import Common
 public final class MockWalletsService: WalletsUseCase {
     public init() { }
     
-    private var wallets: [Wallet] = [
-        Wallet(title: "Tinkoff", balance: 1799)
+    private var wallets: [WalletEntity] = [
+        WalletEntity(title: "Tinkoff", balance: 1799)
     ]
     
-    public func fetchWallets() -> Result<[Wallet], Error> {
-        return .success(wallets)
+    public func fetchWallets(completion: @escaping WalletsUseCaseCompletionManyEntities) {
+        completion(.success(wallets))
     }
     
-    @discardableResult
-    public func addWallet(
-        title: String,
-        balance: Double
-    ) -> Result<Wallet, Error> {
-        let wallet = Wallet(title: title, balance: balance)
+    public func addWallet(title: String, balance: Double, completion: @escaping WalletsUseCaseCompletionOneEntity) {
+        let wallet = WalletEntity(title: title, balance: balance)
         wallets.append(wallet)
-        return .success(wallet)
+        completion(.success(wallet))
     }
     
-    @discardableResult
-    public func deleteWallet(_ wallet: Wallet) -> Result<Wallet, Error> {
+    public func removeWallet(_ wallet: WalletEntity, completion: @escaping WalletsUseCaseCompletionOneEntity) {
         wallets.removeAll(where: { $0.id == wallet.id })
-        return .success(wallet)
+        completion(.success(wallet))
     }
 }

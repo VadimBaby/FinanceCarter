@@ -6,6 +6,8 @@
 //  Copyright © 2025 Vadim Martynenko. All rights reserved.
 //
 
+import Domain
+
 protocol CategoriesPresenterOutput: AnyObject {
     
 }
@@ -27,9 +29,25 @@ final class CategoriesPresenter: CategoriesPresenterInput {
 }
 
 extension CategoriesPresenter: CategoriesViewOutput {
+    func viewDidLoad() {
+        interactor.getCategories()
+    }
     
+    func categoryDidRemoved(_ category: CategoryEntity) {
+        interactor.removeCategory(category)
+    }
+    
+    func addButtonDidPressed() {
+        interactor.addCategory()
+    }
 }
 
 extension CategoriesPresenter: CategoriesInteractorOutput {
+    func categoriesDidGet(_ categories: [CategoryEntity]) {
+        view.setCategories(categories)
+    }
     
+    func throwError(_ error: Error) {
+        view.showError(error)
+    }
 }

@@ -9,9 +9,10 @@
 import UIKit
 import Foundation
 import Domain
+import Common
 
 protocol WalletsPresenterOutput: AnyObject {
-    func addButtonDidTap()
+    func addButtonDidTap(updateWalletsViewClosure: @escaping VoidAction)
 }
 
 protocol WalletsPresenterInput: AnyObject {
@@ -38,20 +39,22 @@ final class WalletsPresenter: WalletsPresenterInput {
 
 extension WalletsPresenter: WalletsViewOutput {
     func viewDidLoad() {
-        interactor.getAllWallets()
+        interactor.getWallets()
     }
     
-    func addButtonHasPressed() {
-        output?.addButtonDidTap()
+    func addButtonDidPressed() {
+        output?.addButtonDidTap(updateWalletsViewClosure: { [weak self] in
+            self?.interactor.getWallets()
+        })
     }
     
-    func walletHasDeleted(_ wallet: Wallet) {
-        interactor.deleteWallet(wallet)
+    func walletDidRemoved(_ wallet: WalletEntity) {
+        interactor.removeWallet(wallet)
     }
 }
 
 extension WalletsPresenter: WalletsInteractorOutput {
-    func setWallets(_ wallets: [Wallet]) {
+    func walletsDidGet(_ wallets: [WalletEntity]) {
         view.setWallets(wallets)
     }
     

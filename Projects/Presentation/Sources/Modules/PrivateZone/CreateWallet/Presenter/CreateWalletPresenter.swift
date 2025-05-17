@@ -6,8 +6,12 @@
 //  Copyright © 2025 Vadim Martynenko. All rights reserved.
 //
 
+import Common
+import Domain
+
 protocol CreateWalletPresenterOutput: AnyObject {
-    
+    func closeButtonDidPressed()
+    func walletDidAdded()
 }
 
 protocol CreateWalletPresenterInput: AnyObject {
@@ -35,11 +39,23 @@ final class CreateWalletPresenter: CreateWalletPresenterInput {
 // MARK: - CreateWalletViewOutput
 
 extension CreateWalletPresenter: CreateWalletViewOutput {
+    func closeButtonDidPressed() {
+        output?.closeButtonDidPressed()
+    }
     
+    func addButtonDidPressed(title: String, balance: String) {
+        interactor.addWallet(title: title, balance: balance)
+    }
 }
 
 // MARK: - CreateWalletInteractorOutput
 
 extension CreateWalletPresenter: CreateWalletInteractorOutput {
+    func walletDidAdded() {
+        output?.walletDidAdded()
+    }
     
+    func throwError(_ error: Error) {
+        view.showError(error)
+    }
 }
