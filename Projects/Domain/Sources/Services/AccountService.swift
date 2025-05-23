@@ -28,7 +28,6 @@ public final class AccountService: AccountUseCase {
         guard clearName.isNotEmpty else { return .failure(AccountUseCaseError.invalidName) }
         
         settingsStorage.userName = clearName
-        
         return .success
     }
 }

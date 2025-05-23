@@ -27,20 +27,52 @@ public enum Strings {
   public enum CreateCategory {
     /// Создать категорию
     public static let systemTitle = Strings.tr("Localizable", "createCategory.systemTitle", fallback: "Создать категорию")
+    public enum Error {
+      /// Введите корректные данные
+      public static let segmentOrTextFieldIsIncorrect = Strings.tr("Localizable", "createCategory.error.segmentOrTextFieldIsIncorrect", fallback: "Введите корректные данные")
+    }
+    public enum Label {
+      /// Название категории
+      public static let title = Strings.tr("Localizable", "createCategory.label.title", fallback: "Название категории")
+    }
+    public enum Segment {
+      /// Доход
+      public static let income = Strings.tr("Localizable", "createCategory.segment.income", fallback: "Доход")
+      /// Расход
+      public static let spending = Strings.tr("Localizable", "createCategory.segment.spending", fallback: "Расход")
+    }
+    public enum Textfield {
+      /// Название категории
+      public static let title = Strings.tr("Localizable", "createCategory.textfield.title", fallback: "Название категории")
+    }
   }
   public enum CreateWallet {
     /// Создать кошелек
     public static let systemTitle = Strings.tr("Localizable", "createWallet.systemTitle", fallback: "Создать кошелек")
+    public enum Error {
+      /// Баланс должен быть больше нуля
+      public static let balanceLessThanZero = Strings.tr("Localizable", "createWallet.error.balanceLessThanZero", fallback: "Баланс должен быть больше нуля")
+    }
     public enum Label {
       /// Баланс кошелька
       public static let balance = Strings.tr("Localizable", "createWallet.label.balance", fallback: "Баланс кошелька")
       /// Название кошелька
       public static let title = Strings.tr("Localizable", "createWallet.label.title", fallback: "Название кошелька")
     }
+    public enum Textfield {
+      /// Баланс кошелька
+      public static let balance = Strings.tr("Localizable", "createWallet.textfield.balance", fallback: "Баланс кошелька")
+      /// Название кошелька
+      public static let title = Strings.tr("Localizable", "createWallet.textfield.title", fallback: "Название кошелька")
+    }
   }
   public enum Credential {
     /// Регистрация
     public static let systemTitle = Strings.tr("Localizable", "credential.systemTitle", fallback: "Регистрация")
+    public enum Error {
+      /// Пустое имя
+      public static let emptyName = Strings.tr("Localizable", "credential.error.emptyName", fallback: "Пустое имя")
+    }
     public enum Textfield {
       public enum Name {
         /// Имя

@@ -16,6 +16,7 @@
 
 "credential.textfield.name.placeholder" = "Имя";
 "credential.systemTitle" = "Регистрация";
+"credential.error.emptyName" = "Пустое имя";
 
 "tabBar.home" = "Главная";
 "tabBar.profile" = "Профиль";
@@ -32,7 +33,15 @@
 "createWallet.systemTitle" = "Создать кошелек";
 "createWallet.label.title" = "Название кошелька";
 "createWallet.label.balance" = "Баланс кошелька";
+"createWallet.textfield.title" = "Название кошелька";
+"createWallet.textfield.balance" = "Баланс кошелька";
 
 "categories.systemTitle" = "Категории";
 
 "createCategory.systemTitle" = "Создать категорию";
+"createCategory.segment.income" = "Доход";
+"createCategory.segment.spending" = "Расход";
+"createCategory.label.title" = "Название категории";
+"createCategory.textfield.title" = "Название категории";
+"createCategory.error.segmentOrTextFieldIsIncorrect" = "Введите корректные данные";
+"createWallet.error.balanceLessThanZero" = "Баланс должен быть больше нуля";

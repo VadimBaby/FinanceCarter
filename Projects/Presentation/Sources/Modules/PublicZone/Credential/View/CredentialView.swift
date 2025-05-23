@@ -142,7 +142,7 @@ enum CredentialViewError: LocalizedError {
     
     var errorDescription: String? {
         switch self {
-        case .emptyName: "Пустое имя"
+        case .emptyName: Strings.Credential.Error.emptyName
         }
     }
 }

@@ -39,8 +39,8 @@ enum TypeSegmentedControlItem: Int, CaseIterable {
     
     var title: String {
         switch self {
-        case .income: "Доход"
-        case .spending: "Расход"
+        case .income: Strings.CreateCategory.Segment.income
+        case .spending: Strings.CreateCategory.Segment.spending
         }
     }
     
@@ -59,9 +59,9 @@ final class CreateCategoryView: UIViewController, CreateCategoryViewInput {
         $0.selectedSegmentIndex = .zero
     }
     
-    private lazy var titleLabel: UILabel = .textfield(text: "Название категории")
+    private lazy var titleLabel: UILabel = .textfield(text: Strings.CreateCategory.Label.title)
     
-    private lazy var titleTextField: UITextField = .primary(placeholder: "Название категории")
+    private lazy var titleTextField: UITextField = .primary(placeholder: Strings.CreateCategory.Textfield.title)
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -166,7 +166,7 @@ enum CreateCategoryViewError: LocalizedError {
     
     var errorDescription: String? {
         switch self {
-        case .segmentOrTextFieldIsIncorrect: "Введите корректные данные"
+        case .segmentOrTextFieldIsIncorrect: Strings.CreateCategory.Error.segmentOrTextFieldIsIncorrect
         case .backend: Strings.Error.backend
         }
     }

@@ -32,12 +32,12 @@ final class CreateWalletView: UIViewController, CreateWalletViewInput {
     var output: CreateWalletViewOutput?
     
     private lazy var titleLabel: UILabel = .textfield(text: Strings.CreateWallet.Label.title)
-    private lazy var titleTextField: UITextField = .primary(placeholder: Strings.CreateWallet.Label.title) &> {
+    private lazy var titleTextField: UITextField = .primary(placeholder: Strings.CreateWallet.Textfield.title) &> {
         $0.delegate = self
     }
     
     private lazy var balanceLabel: UILabel = .textfield(text: Strings.CreateWallet.Label.balance)
-    private lazy var balanceTextField: UITextField = .primary(placeholder: Strings.CreateWallet.Label.balance) &> {
+    private lazy var balanceTextField: UITextField = .primary(placeholder: Strings.CreateWallet.Textfield.balance) &> {
         $0.delegate = self
         $0.keyboardType = .numberPad
     }
@@ -149,7 +149,7 @@ enum CreateWalletError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .backend: Strings.Error.backend
-        case .balanceLessThanZero: "Баланс должен быть больше нуля"
+        case .balanceLessThanZero: Strings.CreateWallet.Error.balanceLessThanZero
         }
     }
 }
