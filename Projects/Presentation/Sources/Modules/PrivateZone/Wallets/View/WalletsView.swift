@@ -20,7 +20,8 @@ protocol WalletsViewInput: AnyObject {
     var output: WalletsViewOutput? { get set }
     
     func setWallets(_ wallets: [WalletEntity])
-    func showError(_ error: Error)
+    func showError(_ error: WalletsViewError)
+    func insertWallet(_ wallet: WalletEntity)
 }
 
 final class WalletsView: UIViewController, WalletsViewInput {
@@ -60,8 +61,18 @@ final class WalletsView: UIViewController, WalletsViewInput {
         self.wallets = wallets
     }
     
-    func showError(_ error: Error) {
+    func showError(_ error: WalletsViewError) {
         showAlert(type: .error(error))
+    }
+    
+    func insertWallet(_ wallet: WalletEntity) {
+        wallets.append(wallet)
+        wallets.sortByCreatedAt()
+        
+        guard let indexOfWallet = wallets.firstIndex(where: { $0.id == wallet.id }) else { return }
+        
+        let indexPath = IndexPath(row: indexOfWallet, section: .zero)
+        tableView.insertRows(at: [indexPath], with: .fade)
     }
 }
 
@@ -91,6 +102,18 @@ private extension WalletsView {
     }
 }
 
+// MARK: - Errors
+
+enum WalletsViewError: LocalizedError {
+    case backend
+    
+    var errorDescription: String? {
+        switch self {
+        case .backend: Strings.Error.backend
+        }
+    }
+}
+
 // MARK: - UITableViewDataSource
 
 extension WalletsView: UITableViewDataSource {
@@ -107,8 +130,8 @@ extension WalletsView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         let removedWallet = self.wallets.remove(at: indexPath.row)
-        output?.walletDidRemoved(removedWallet)
         tableView.deleteRows(at: [indexPath], with: .fade)
+        output?.walletDidRemoved(removedWallet)
     }
 }
 

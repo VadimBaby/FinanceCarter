@@ -29,7 +29,7 @@ protocol CreateCategoryViewOutput: AnyObject {
 protocol CreateCategoryViewInput: AnyObject {
     var output: CreateCategoryViewOutput? { get set }
     
-    func throwError(_ error: CreateCategoryViewError)
+    func showError(_ error: CreateCategoryViewError)
 }
 
 // MARK: - TypeSegmentedControlItems
@@ -84,7 +84,7 @@ final class CreateCategoryView: UIViewController, CreateCategoryViewInput {
         setupGestures()
     }
     
-    func throwError(_ error: CreateCategoryViewError) {
+    func showError(_ error: CreateCategoryViewError) {
         showAlert(type: .error(error))
     }
 }
@@ -149,7 +149,7 @@ private extension CreateCategoryView {
            let textFieldValue = titleTextField.text {
             output?.addButtonDidPressed(type: segmentedItem, title: textFieldValue)
         } else {
-            throwError(.segmentOrTextFieldIsIncorrect)
+            showError(.segmentOrTextFieldIsIncorrect)
         }
     }
     
@@ -162,12 +162,12 @@ private extension CreateCategoryView {
 // MARK: - Errors
 
 enum CreateCategoryViewError: LocalizedError {
-    case segmentOrTextFieldIsIncorrect, backendError
+    case segmentOrTextFieldIsIncorrect, backend
     
     var errorDescription: String? {
         switch self {
         case .segmentOrTextFieldIsIncorrect: "Введите корректные данные"
-        case .backendError: "Проверьте соединение с Интернетом или поробуйте позже"
+        case .backend: Strings.Error.backend
         }
     }
 }

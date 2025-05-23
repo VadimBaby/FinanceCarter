@@ -25,7 +25,7 @@ protocol CreateWalletViewOutput: AnyObject {
 protocol CreateWalletViewInput: AnyObject {
     var output: CreateWalletViewOutput? { get set }
     
-    func showError(_ error: Error)
+    func showError(_ error: CreateWalletError)
 }
 
 final class CreateWalletView: UIViewController, CreateWalletViewInput {
@@ -67,7 +67,7 @@ final class CreateWalletView: UIViewController, CreateWalletViewInput {
         titleTextField.becomeFirstResponder()
     }
     
-    func showError(_ error: Error) {
+    func showError(_ error: CreateWalletError) {
         showAlert(type: .error(error))
     }
 }
@@ -138,6 +138,19 @@ private extension CreateWalletView {
     @objc
     func mainViewTapped() {
         view.endEditing(true)
+    }
+}
+
+// MARK: - Errors
+
+enum CreateWalletError: LocalizedError {
+    case backend, balanceLessThanZero
+    
+    var errorDescription: String? {
+        switch self {
+        case .backend: Strings.Error.backend
+        case .balanceLessThanZero: "Баланс должен быть больше нуля"
+        }
     }
 }
 

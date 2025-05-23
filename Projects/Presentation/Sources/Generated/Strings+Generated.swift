@@ -11,10 +11,6 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 public enum Strings {
   public enum Alert {
-    public enum NameIsNil {
-      /// Имя не должно быть пустым
-      public static let title = Strings.tr("Localizable", "alert.nameIsNil.title", fallback: "Имя не должно быть пустым")
-    }
     public enum Unknown {
       /// Ошибка
       public static let title = Strings.tr("Localizable", "alert.unknown.title", fallback: "Ошибка")
@@ -51,6 +47,10 @@ public enum Strings {
         public static let placeholder = Strings.tr("Localizable", "credential.textfield.name.placeholder", fallback: "Имя")
       }
     }
+  }
+  public enum Error {
+    /// Проверьте соединение с Интернетом или поробуйте позже
+    public static let backend = Strings.tr("Localizable", "error.backend", fallback: "Проверьте соединение с Интернетом или поробуйте позже")
   }
   public enum Home {
     /// Главная

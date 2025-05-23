@@ -45,7 +45,7 @@ final class CreateCategoryInteractor: CreateCategoryInteractorInput {
                 self?.output?.categoryDidAdded()
             case let .failure(error):
                 debugPrint(error)
-                self?.output?.throwError(.backendError)
+                self?.output?.throwError(.backend)
             }
         }
     }

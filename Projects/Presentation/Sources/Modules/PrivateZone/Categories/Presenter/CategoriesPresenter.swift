@@ -50,7 +50,11 @@ extension CategoriesPresenter: CategoriesInteractorOutput {
         view.setCategories(categories)
     }
     
-    func throwError(_ error: Error) {
+    func throwError(_ error: CategoriesViewError) {
         view.showError(error)
+    }
+    
+    func removeCategoryDidFall(_ category: CategoryEntity) {
+        view.insertCategory(category)
     }
 }

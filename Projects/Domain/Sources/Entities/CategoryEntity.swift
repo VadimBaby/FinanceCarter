@@ -13,7 +13,7 @@ public enum CategoryType: String {
     case income, spending
 }
 
-public struct CategoryEntity: Identifiable {
+public struct CategoryEntity: Identifiable, CreatedAtContainable {
     public let id: UUID
     public let title: String
     public let type: CategoryType

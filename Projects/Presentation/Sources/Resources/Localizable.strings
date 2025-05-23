@@ -1,6 +1,7 @@
 "app.next" = "Далее";
 
-"alert.nameIsNil.title" = "Имя не должно быть пустым";
+"error.backend" = "Проверьте соединение с Интернетом или поробуйте позже";
+
 "alert.unknown.title" = "Ошибка";
 
 "onboarding.first.title" = "You ought to know where your money goes";

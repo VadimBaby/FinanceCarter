@@ -55,7 +55,7 @@ extension CreateWalletPresenter: CreateWalletInteractorOutput {
         output?.walletDidAdded()
     }
     
-    func throwError(_ error: Error) {
+    func throwError(_ error: CreateWalletError) {
         view.showError(error)
     }
 }

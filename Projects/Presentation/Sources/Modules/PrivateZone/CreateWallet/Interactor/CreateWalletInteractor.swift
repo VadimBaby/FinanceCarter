@@ -8,19 +8,10 @@
 
 import Domain
 import Common
-import Foundation
-
-enum CreateWalletError: LocalizedError {
-    case balanceLessThanZero
-    
-    var errorDescription: String? {
-        "Баланс должен быть больше нуля"
-    }
-}
 
 protocol CreateWalletInteractorOutput: AnyObject {
     func walletDidAdded()
-    func throwError(_ error: Error)
+    func throwError(_ error: CreateWalletError)
 }
 
 protocol CreateWalletInteractorInput: AnyObject {
@@ -45,14 +36,15 @@ final class CreateWalletInteractor: CreateWalletInteractorInput {
     
     func addWallet(title: String, balance: String) {
         guard let doubleBalance = Double(balance),
-              doubleBalance >= .zero else { output?.throwError(CreateWalletError.balanceLessThanZero); return }
+              doubleBalance >= .zero else { output?.throwError(.balanceLessThanZero); return }
         
         useCase.addWallet(title: title, balance: doubleBalance) { [weak self] result in
             switch result {
             case .success:
                 self?.output?.walletDidAdded()
             case .failure(let error):
-                self?.output?.throwError(error)
+                debugPrint(error)
+                self?.output?.throwError(.backend)
             }
         }
     }

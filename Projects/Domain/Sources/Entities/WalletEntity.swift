@@ -9,7 +9,7 @@
 // swiftlint:disable:next foundation_using
 import Foundation
 
-public struct WalletEntity: Identifiable {
+public struct WalletEntity: Identifiable, CreatedAtContainable {
     public let id: UUID
     public let title: String
     public let balance: Double

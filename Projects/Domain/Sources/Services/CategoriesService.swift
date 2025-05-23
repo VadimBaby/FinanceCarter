@@ -14,10 +14,18 @@ public final class CategoriesService: CategoriesUseCase {
     }
     
     public func fetchCategories(completion: @escaping CategoriesUseCaseCompletionManyEntities) {
-        repository.fetchCategories(completion: completion)
+        repository.fetchCategories { result in
+            switch result {
+            case .success(let categories):
+                let sortedCategories = categories.sortedByCreatedAt()
+                completion(.success(sortedCategories))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
     
-    public func addCategory(title: String, type: CategoryType, completion: @escaping CategoriesUseCaseCompletionOneEntities) {
+    public func addCategory(title: String, type: CategoryType, completion: @escaping CategoriesUseCaseCompletionOneEntity) {
         let category = CategoryEntity(title: title, type: type)
         
         repository.addCategory(category) { result in
@@ -28,7 +36,7 @@ public final class CategoriesService: CategoriesUseCase {
         }
     }
     
-    public func removeCategory(_ category: CategoryEntity, completion: @escaping CategoriesUseCaseCompletionOneEntities) {
+    public func removeCategory(_ category: CategoryEntity, completion: @escaping CategoriesUseCaseCompletionOneEntity) {
         repository.removeCategory(by: category.id) { result in
             switch result {
             case .success: completion(.success(category))

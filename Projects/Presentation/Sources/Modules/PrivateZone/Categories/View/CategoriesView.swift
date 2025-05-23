@@ -20,7 +20,8 @@ protocol CategoriesViewInput: AnyObject {
     var output: CategoriesViewOutput? { get set }
     
     func setCategories(_ categories: [CategoryEntity])
-    func showError(_ error: Error)
+    func showError(_ error: CategoriesViewError)
+    func insertCategory(_ category: CategoryEntity)
 }
 
 final class CategoriesView: UIViewController, CategoriesViewInput {
@@ -60,8 +61,18 @@ final class CategoriesView: UIViewController, CategoriesViewInput {
         self.categories = categories
     }
     
-    func showError(_ error: Error) {
+    func showError(_ error: CategoriesViewError) {
         showAlert(type: .error(error))
+    }
+    
+    func insertCategory(_ category: CategoryEntity) {
+        categories.append(category)
+        categories.sortByCreatedAt()
+        
+        guard let indexOfCategory = categories.firstIndex(where: { $0.id == category.id }) else { return }
+        
+        let indexPath = IndexPath(row: indexOfCategory, section: .zero)
+        tableView.insertRows(at: [indexPath], with: .fade)
     }
 }
 
@@ -91,6 +102,18 @@ private extension CategoriesView {
     }
 }
 
+// MARK: - Errors
+
+enum CategoriesViewError: LocalizedError {
+    case backend
+    
+    var errorDescription: String? {
+        switch self {
+        case .backend: Strings.Error.backend
+        }
+    }
+}
+
 // MARK: - UITableViewDataSource
 
 extension CategoriesView: UITableViewDataSource {
@@ -107,8 +130,8 @@ extension CategoriesView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         let removed = categories.remove(at: indexPath.row)
-        output?.categoryDidRemoved(removed)
         tableView.deleteRows(at: [indexPath], with: .fade)
+        output?.categoryDidRemoved(removed)
     }
 }
 

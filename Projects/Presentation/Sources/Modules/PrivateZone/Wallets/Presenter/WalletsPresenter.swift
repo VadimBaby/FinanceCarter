@@ -58,7 +58,11 @@ extension WalletsPresenter: WalletsInteractorOutput {
         view.setWallets(wallets)
     }
     
-    func throwError(_ error: Error) {
+    func throwError(_ error: WalletsViewError) {
         view.showError(error)
+    }
+    
+    func removeWalletDidFall(_ wallet: WalletEntity) {
+        view.insertWallet(wallet)
     }
 }

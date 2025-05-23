@@ -17,13 +17,13 @@ public final class MockCategoriesService: CategoriesUseCase {
         completion(.success(categories))
     }
     
-    public func addCategory(title: String, type: CategoryType, completion: @escaping CategoriesUseCaseCompletionOneEntities) {
+    public func addCategory(title: String, type: CategoryType, completion: @escaping CategoriesUseCaseCompletionOneEntity) {
         let category = CategoryEntity(title: title, type: type)
         self.categories.append(category)
         completion(.success(category))
     }
     
-    public func removeCategory(_ category: CategoryEntity, completion: @escaping CategoriesUseCaseCompletionOneEntities) {
+    public func removeCategory(_ category: CategoryEntity, completion: @escaping CategoriesUseCaseCompletionOneEntity) {
         self.categories.removeAll(where: { $0.id == category.id })
         completion(.success(category))
     }

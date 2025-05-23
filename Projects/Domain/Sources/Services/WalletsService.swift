@@ -18,7 +18,15 @@ public final class WalletsService: WalletsUseCase {
     }
     
     public func fetchWallets(completion: @escaping WalletsUseCaseCompletionManyEntities) {
-        repository.fetchWallets(completion: completion)
+        repository.fetchWallets { result in
+            switch result {
+            case .success(let wallets):
+                let sortedWallets = wallets.sortedByCreatedAt()
+                completion(.success(sortedWallets))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
     
     public func addWallet(title: String, balance: Double, completion: @escaping WalletsUseCaseCompletionOneEntity) {

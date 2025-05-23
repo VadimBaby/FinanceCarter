@@ -11,7 +11,8 @@ import Foundation
 
 protocol CategoriesInteractorOutput: AnyObject {
     func categoriesDidGet(_ categories: [CategoryEntity])
-    func throwError(_ error: Error)
+    func throwError(_ error: CategoriesViewError)
+    func removeCategoryDidFall(_ category: CategoryEntity)
 }
 
 protocol CategoriesInteractorInput: AnyObject {
@@ -41,7 +42,8 @@ final class CategoriesInteractor: CategoriesInteractorInput {
             case .success(let categories):
                 self?.output?.categoriesDidGet(categories)
             case .failure(let error):
-                self?.output?.throwError(error)
+                debugPrint(error)
+                self?.output?.throwError(.backend)
             }
         }
     }
@@ -49,7 +51,9 @@ final class CategoriesInteractor: CategoriesInteractorInput {
     func removeCategory(_ category: CategoryEntity) {
         useCase.removeCategory(category) { [weak self] result in
             guard case let .failure(error) = result else { return }
-            self?.output?.throwError(error)
+            debugPrint(error)
+            self?.output?.throwError(.backend)
+            self?.output?.removeCategoryDidFall(category)
         }
     }
 }
