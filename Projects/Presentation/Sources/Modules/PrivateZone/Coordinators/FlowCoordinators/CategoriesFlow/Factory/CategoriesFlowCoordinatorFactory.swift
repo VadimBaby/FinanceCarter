@@ -12,7 +12,8 @@ final class CategoriesFlowCoordinatorFactory {
     static func create(resolver: Resolver) -> CategoriesFlowCoordinatorInput {
         CategoriesFlowCoordinator(
             resolver: resolver,
-            categoriesRouterAssembly: CategoriesAssembly.router
+            categoriesRouterAssembly: CategoriesAssembly.router,
+            createCategoryRouterAssembly: CreateCategoryAssembly.router
         )
     }
 }

@@ -7,9 +7,10 @@
 //
 
 import Domain
+import Common
 
 protocol CategoriesPresenterOutput: AnyObject {
-    
+    func addButtonDidPressed(updateCategoriesViewClosure: @escaping VoidAction)
 }
 
 protocol CategoriesPresenterInput: AnyObject {
@@ -38,7 +39,9 @@ extension CategoriesPresenter: CategoriesViewOutput {
     }
     
     func addButtonDidPressed() {
-        interactor.addCategory()
+        output?.addButtonDidPressed(updateCategoriesViewClosure: { [weak self] in
+            self?.interactor.getCategories()
+        })
     }
 }
 

@@ -22,7 +22,7 @@ protocol CredentialViewOutput: AnyObject {
 protocol CredentialViewInput: AnyObject {
     var output: CredentialViewOutput? { get set }
     
-    func showNameIsIncorrentError()
+    func throwError(_ error: CredentialViewError)
 }
 
 final class CredentialView: UIViewController, CredentialViewInput {
@@ -60,8 +60,8 @@ final class CredentialView: UIViewController, CredentialViewInput {
         nameTextField.becomeFirstResponder()
     }
     
-    func showNameIsIncorrentError() {
-        self.showAlert(type: .nameIsEmpty)
+    func throwError(_ error: CredentialViewError) {
+        showAlert(type: .error(error))
     }
 }
 
@@ -132,6 +132,18 @@ private extension CredentialView {
     @objc
     func mainViewTapped() {
         view.endEditing(true)
+    }
+}
+
+// MARK: - Errors
+
+enum CredentialViewError: LocalizedError {
+    case emptyName
+    
+    var errorDescription: String? {
+        switch self {
+        case .emptyName: "Пустое имя"
+        }
     }
 }
 

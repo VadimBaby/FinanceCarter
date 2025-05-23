@@ -68,7 +68,7 @@ final class CreateWalletView: UIViewController, CreateWalletViewInput {
     }
     
     func showError(_ error: Error) {
-        showAlert(type: .unknown(error: error))
+        showAlert(type: .error(error))
     }
 }
 
@@ -77,7 +77,7 @@ final class CreateWalletView: UIViewController, CreateWalletViewInput {
 private extension CreateWalletView {
     func setupViews() {
         view.backgroundColor = .systemBackground
-        navigationItem.title = Strings.Credential.systemTitle
+        navigationItem.title = Strings.CreateWallet.systemTitle
         
         let leftToolbarItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeButtonPressed))
         

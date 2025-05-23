@@ -19,7 +19,6 @@ protocol CategoriesInteractorInput: AnyObject {
     
     func getCategories()
     func removeCategory(_ category: CategoryEntity)
-    func addCategory()
 }
 
 final class CategoriesInteractor: CategoriesInteractorInput {
@@ -51,17 +50,6 @@ final class CategoriesInteractor: CategoriesInteractorInput {
         useCase.removeCategory(category) { [weak self] result in
             guard case let .failure(error) = result else { return }
             self?.output?.throwError(error)
-        }
-    }
-    
-#warning("need to remove it")
-    func addCategory() {
-        let title = UUID().uuidString
-        useCase.addCategory(title: title, type: .income) { [weak self] result in
-            switch result {
-            case .success: self?.getCategories()
-            case let .failure(error): self?.output?.throwError(error)
-            }
         }
     }
 }

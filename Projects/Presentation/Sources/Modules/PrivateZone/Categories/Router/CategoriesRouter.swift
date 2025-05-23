@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import Common
 
 protocol CategoriesRouterOutput: AnyObject {
-    
+    func categoriesAddButtonDidPressed(updateCategoriesViewClosure: @escaping VoidAction)
 }
 
 protocol CategoriesRouterInput: Router {
@@ -50,5 +51,7 @@ final class CategoriesRouter: CategoriesRouterInput {
 }
 
 extension CategoriesRouter: CategoriesPresenterOutput {
-    
+    func addButtonDidPressed(updateCategoriesViewClosure: @escaping VoidAction) {
+        delegate?.categoriesAddButtonDidPressed(updateCategoriesViewClosure: updateCategoriesViewClosure)
+    }
 }

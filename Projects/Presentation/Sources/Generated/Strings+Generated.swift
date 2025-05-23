@@ -28,7 +28,13 @@ public enum Strings {
     /// Категории
     public static let systemTitle = Strings.tr("Localizable", "categories.systemTitle", fallback: "Категории")
   }
+  public enum CreateCategory {
+    /// Создать категорию
+    public static let systemTitle = Strings.tr("Localizable", "createCategory.systemTitle", fallback: "Создать категорию")
+  }
   public enum CreateWallet {
+    /// Создать кошелек
+    public static let systemTitle = Strings.tr("Localizable", "createWallet.systemTitle", fallback: "Создать кошелек")
     public enum Label {
       /// Баланс кошелька
       public static let balance = Strings.tr("Localizable", "createWallet.label.balance", fallback: "Баланс кошелька")

@@ -8,7 +8,7 @@
 
 public final class MockCategoriesService: CategoriesUseCase {
     private var categories: [CategoryEntity] = [
-        .init(id: .init(), title: "Транспорт", type: .spanding, createdAt: .now)
+        .init(id: .init(), title: "Транспорт", type: .spending, createdAt: .now)
     ]
     
     public init() {}

@@ -28,7 +28,10 @@
 
 "wallets.systemTitle" = "Кошельки";
 
+"createWallet.systemTitle" = "Создать кошелек";
 "createWallet.label.title" = "Название кошелька";
 "createWallet.label.balance" = "Баланс кошелька";
 
 "categories.systemTitle" = "Категории";
+
+"createCategory.systemTitle" = "Создать категорию";

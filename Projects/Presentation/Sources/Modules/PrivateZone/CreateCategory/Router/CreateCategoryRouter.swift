@@ -1,35 +1,35 @@
 //
-//  CreateWalletRouter.swift
+//  CreateCategoryRouter.swift
 //  Presentation
 //
-//  Created by Вадим Мартыненко on 25.04.2025.
+//  Created by Вадим Мартыненко on 19.05.2025.
 //  Copyright © 2025 Vadim Martynenko. All rights reserved.
 //
 
 import UIKit
 
-protocol CreateWalletRouterOutput: AnyObject {
-    func createWalletcloseButtonDidPressed()
-    func walletDidAdded()
+protocol CreateCategoryRouterOutput: AnyObject {
+    func createCategoryCloseButtonDidPressed()
+    func categoryDidAdded()
 }
 
-protocol CreateWalletRouterInput: Router {
-    var delegate: CreateWalletRouterOutput? { get set }
+protocol CreateCategoryRouterInput: Router {
+    var delegate: CreateCategoryRouterOutput? { get set }
     
-    typealias ModuleAssembly = (_ router: CreateWalletPresenterOutput, _ resolver: Resolver) -> CreateWalletViewInput & UIViewController
+    typealias ModuleAssembly = (_ router: CreateCategoryPresenterOutput, _ resolver: Resolver) -> CreateCategoryViewInput & UIViewController
     
     var moduleAssembly: ModuleAssembly? { get set }
     
     func open()
-    func close()
+    func close() 
 }
 
-final class CreateWalletRouter: CreateWalletRouterInput {
-    weak var delegate: CreateWalletRouterOutput?
+final class CreateCategoryRouter: CreateCategoryRouterInput {
+    weak var delegate: CreateCategoryRouterOutput?
+    
+    var navigationController: UINavigationController
     
     private let resolver: Resolver
-    
-    let navigationController: UINavigationController
     
     var moduleAssembly: ModuleAssembly?
     
@@ -58,12 +58,14 @@ final class CreateWalletRouter: CreateWalletRouterInput {
     }
 }
 
-extension CreateWalletRouter: CreateWalletPresenterOutput {
+// MARK: - CreateCategoryPresenterOutput
+
+extension CreateCategoryRouter: CreateCategoryPresenterOutput {
     func closeButtonDidPressed() {
-        delegate?.createWalletcloseButtonDidPressed()
+        delegate?.createCategoryCloseButtonDidPressed()
     }
     
-    func walletDidAdded() {
-        delegate?.walletDidAdded()
+    func categoryDidAdded() {
+        delegate?.categoryDidAdded()
     }
 }

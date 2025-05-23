@@ -11,7 +11,7 @@ import Foundation
 import Common
 
 public protocol WalletsRepository: AnyObject {
-    func fetchWallets(completion:  @escaping  (_ result: Result<[WalletEntity], Error>) -> Void)
-    func addWallet(_ wallet: WalletEntity, completion:  @escaping  OperationResultCompletion)
-    func removeWallet(by id: UUID, completion:  @escaping  OperationResultCompletion)
+    func fetchWallets(completion: @escaping (_ result: Result<[WalletEntity], Error>) -> Void)
+    func addWallet(_ wallet: WalletEntity, completion: @escaping OperationResultCompletion)
+    func removeWallet(by id: UUID, completion: @escaping OperationResultCompletion)
 }

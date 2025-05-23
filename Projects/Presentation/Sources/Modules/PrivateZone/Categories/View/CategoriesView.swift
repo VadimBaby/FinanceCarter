@@ -61,7 +61,7 @@ final class CategoriesView: UIViewController, CategoriesViewInput {
     }
     
     func showError(_ error: Error) {
-        showAlert(type: .unknown(error: error))
+        showAlert(type: .error(error))
     }
 }
 

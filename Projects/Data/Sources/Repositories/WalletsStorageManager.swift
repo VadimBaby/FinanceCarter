@@ -18,7 +18,7 @@ public final class WalletsStorageManager: WalletsRepository {
         self.localDataSource = localDataSource
     }
     
-    public func fetchWallets(completion:  @escaping (_ result: Result<[WalletEntity], Error>) -> Void) {
+    public func fetchWallets(completion: @escaping (_ result: Result<[WalletEntity], Error>) -> Void) {
         let result = localDataSource.fetchWallets()
         completion(result)
     }

@@ -10,7 +10,7 @@
 import Foundation
 
 public enum CategoryType: String {
-    case income, spanding
+    case income, spending
 }
 
 public struct CategoryEntity: Identifiable {

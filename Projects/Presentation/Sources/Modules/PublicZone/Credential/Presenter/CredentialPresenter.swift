@@ -46,7 +46,7 @@ extension CredentialPresenter: CredentialInteractorOutput {
         case .success:
             output?.credentialsDidTapNext()
         case .failure:
-            view.showNameIsIncorrentError()
+            view.throwError(.emptyName)
         }
     }
 }

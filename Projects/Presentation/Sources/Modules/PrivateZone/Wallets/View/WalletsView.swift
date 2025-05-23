@@ -61,7 +61,7 @@ final class WalletsView: UIViewController, WalletsViewInput {
     }
     
     func showError(_ error: Error) {
-        showAlert(type: .unknown(error: error))
+        showAlert(type: .error(error))
     }
 }
 

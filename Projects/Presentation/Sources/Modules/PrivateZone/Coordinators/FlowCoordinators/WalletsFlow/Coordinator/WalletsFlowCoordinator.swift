@@ -50,7 +50,7 @@ final class WalletsFlowCoordinator: WalletsFlowCoordinatorInput {
         print("\(Self.self) init")
     }
     
-    private var updateWalletsViewClosure: VoidAction? = nil
+    private var updateWalletsViewClosure: VoidAction?
     
     deinit {
         print("\(Self.self) deinit")
@@ -96,7 +96,7 @@ extension WalletsFlowCoordinator: WalletsRouterOutput {
 // MARK: - CreateWalletsRouterOutput
 
 extension WalletsFlowCoordinator: CreateWalletRouterOutput {
-    func closeButtonDidPressed() {
+    func createWalletcloseButtonDidPressed() {
         closeCreateWalletScreen()
     }
     
