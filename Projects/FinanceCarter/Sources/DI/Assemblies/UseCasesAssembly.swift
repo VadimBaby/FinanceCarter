@@ -25,5 +25,9 @@ final class UseCasesAssembly: Assembly {
         container.register(CategoriesUseCase.self) { resolver in
             CategoriesService(repository: resolver.resolve(CategoriesRepository.self)!)
         }
+        
+        container.register(TransactionsUseCase.self) { resolver in
+            TransactionsService(repostitory: resolver.resolve(TransactionsRepository.self)!)
+        }
     }
 }

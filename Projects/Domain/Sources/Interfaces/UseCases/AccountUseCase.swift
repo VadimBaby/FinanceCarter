@@ -12,5 +12,5 @@ public protocol AccountUseCase: AnyObject {
     func getUserName() -> String
     
     @discardableResult
-    func setName(_ name: String) -> OperationResult
+    func setName(_ name: String) -> OperationResult<AccountUseCaseError>
 }

@@ -46,6 +46,10 @@ public enum Strings {
       public static let title = Strings.tr("Localizable", "createCategory.textfield.title", fallback: "Название категории")
     }
   }
+  public enum CreateTransaction {
+    /// Создать транзакцию
+    public static let systemTitle = Strings.tr("Localizable", "createTransaction.systemTitle", fallback: "Создать транзакцию")
+  }
   public enum CreateWallet {
     /// Создать кошелек
     public static let systemTitle = Strings.tr("Localizable", "createWallet.systemTitle", fallback: "Создать кошелек")
@@ -129,6 +133,10 @@ public enum Strings {
     public static let transactions = Strings.tr("Localizable", "tabBar.transactions", fallback: "Транзакции")
     /// Кошельки
     public static let wallets = Strings.tr("Localizable", "tabBar.wallets", fallback: "Кошельки")
+  }
+  public enum Transactions {
+    /// Транзакции
+    public static let systemTitle = Strings.tr("Localizable", "transactions.systemTitle", fallback: "Транзакции")
   }
   public enum Wallets {
     /// Кошельки

@@ -9,7 +9,7 @@
 // swiftlint:disable:next foundation_using
 import Foundation
 
-public enum AccountUseCaseError: Error, LocalizedError {
+public enum AccountUseCaseError: LocalizedError {
     case invalidName
     
     public var errorDescription: String? {

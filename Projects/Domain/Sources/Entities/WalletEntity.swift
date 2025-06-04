@@ -26,3 +26,7 @@ public struct WalletEntity: Identifiable, CreatedAtContainable {
         self.init(id: .init(), title: title, balance: balance, createdAt: .now)
     }
 }
+
+extension WalletEntity {
+    static let mock = WalletEntity(title: "Тинькофф", balance: 13999)
+}

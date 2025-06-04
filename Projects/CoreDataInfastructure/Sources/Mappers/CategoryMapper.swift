@@ -16,6 +16,7 @@ struct CategoryMapper {
         return CategoryEntity(
             id: entity.id.orRandom,
             title: entity.title.orEmpty,
+            emoji: entity.emoji.orEmpty,
             type: type,
             createdAt: entity.createdAt.orNow
         )

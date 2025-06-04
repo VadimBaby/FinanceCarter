@@ -6,7 +6,7 @@
 //  Copyright © 2025 Vadim Martynenko. All rights reserved.
 //
 
-public enum OperationResult {
+public enum OperationResult<T: Error> {
     case success
-    case failure(Error)
+    case failure(T)
 }

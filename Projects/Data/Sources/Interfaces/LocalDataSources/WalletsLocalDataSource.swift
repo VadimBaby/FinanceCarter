@@ -13,6 +13,6 @@ import Common
 
 public protocol WalletsLocalDataSource: AnyObject {
     func fetchWallets() -> Result<[WalletEntity], Error>
-    func addWallet(_ wallet: WalletEntity) -> OperationResult
-    func removeWallet(by id: UUID) -> OperationResult
+    func addWallet(_ wallet: WalletEntity) -> OperationResult<Error>
+    func removeWallet(by id: UUID) -> OperationResult<Error>
 }

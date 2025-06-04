@@ -13,6 +13,7 @@ import Common
 public typealias WalletsUseCaseCompletionManyEntities = (_ result: Result<[WalletEntity], Error>) -> Void
 public typealias WalletsUseCaseCompletionOneEntity = (_ result: Result<WalletEntity, Error>) -> Void
 
+// TODO: - Мейби назвать как то получше, чем просто WalletsUseCase?
 public protocol WalletsUseCase: AnyObject {
     func fetchWallets(completion: @escaping WalletsUseCaseCompletionManyEntities)
     func addWallet(title: String, balance: Double, completion: @escaping WalletsUseCaseCompletionOneEntity)

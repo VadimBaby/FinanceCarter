@@ -23,7 +23,7 @@ public final class WalletsCoreDataSource: CoreDataStore, WalletsLocalDataSource 
         }
     }
     
-    public func addWallet(_ wallet: WalletEntity) -> OperationResult {
+    public func addWallet(_ wallet: WalletEntity) -> OperationResult<Error> {
         let newWallet = DBWallet(context: store.viewContext)
         
         newWallet.id = wallet.id
@@ -39,7 +39,7 @@ public final class WalletsCoreDataSource: CoreDataStore, WalletsLocalDataSource 
         }
     }
     
-    public func removeWallet(by id: UUID) -> OperationResult {
+    public func removeWallet(by id: UUID) -> OperationResult<Error> {
         do {
             let entities = try fetch(type: DBWallet.self)
             guard let entity = entities.first(where: { $0.id == id }) else { return .success }

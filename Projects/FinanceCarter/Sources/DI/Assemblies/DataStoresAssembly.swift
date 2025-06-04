@@ -14,5 +14,6 @@ final class DataSourcesAssembly: Assembly {
     func assemble(container: Container) {
         container.register(WalletsLocalDataSource.self, factory: WalletsCoreDataSource.init)
         container.register(CategoriesLocalDataSource.self, factory: CategoriesCoreDataSource.init)
+        container.register(TransactionsLocalDataSource.self, factory: TransactionsCoreDataSource.init)
     }
 }

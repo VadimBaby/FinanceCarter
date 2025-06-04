@@ -18,8 +18,9 @@ private struct Constants {
 }
 
 final class CategoryTitleCellView: UITableViewCell, Reusable {
-    private lazy var categoryTitle = UILabel()
-    private lazy var categoryType = UILabel()
+    private var categoryTitle = UILabel()
+    private var categoryType = UILabel()
+    private var categoryEmoji = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -33,6 +34,7 @@ final class CategoryTitleCellView: UITableViewCell, Reusable {
     
     func configure(with category: CategoryEntity) {
         categoryTitle.text = category.title
+        categoryEmoji.text = category.emoji
         categoryType.text = category.type.rawValue
     }
 }
@@ -41,12 +43,17 @@ final class CategoryTitleCellView: UITableViewCell, Reusable {
 
 private extension CategoryTitleCellView {
     func setupViews() {
-        contentView.addSubviews(categoryTitle, categoryType)
+        contentView.addSubviews(categoryEmoji, categoryTitle, categoryType)
     }
     
     func setupConstraints() {
-        categoryTitle.snp.makeConstraints { make in
+        categoryEmoji.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(Constants.padding)
+            make.centerY.equalToSuperview()
+        }
+        
+        categoryTitle.snp.makeConstraints { make in
+            make.leading.equalTo(categoryEmoji.snp.trailing).offset(Constants.padding)
             make.centerY.equalToSuperview()
         }
         

@@ -22,5 +22,11 @@ final class RepositoriesAssembly: Assembly {
                 localDataSource: resolver.resolve(CategoriesLocalDataSource.self)!
             )
         }
+        
+        container.register(TransactionsRepository.self) { resolver in
+            TransactionsStorageManager(
+                localDataSource: resolver.resolve(TransactionsLocalDataSource.self)!
+            )
+        }
     }
 }

@@ -23,10 +23,11 @@ public final class CategoriesCoreDataSource: CoreDataStore, CategoriesLocalDataS
         }
     }
     
-    public func addCategory(_ category: CategoryEntity) -> OperationResult {
+    public func addCategory(_ category: CategoryEntity) -> OperationResult<Error> {
         let newCategory = DBCategory(context: store.viewContext)
         newCategory.id = category.id
         newCategory.title = category.title
+        newCategory.emoji = category.emoji
         newCategory.type = category.type.rawValue
         newCategory.createdAt = category.createdAt
         
@@ -38,7 +39,7 @@ public final class CategoriesCoreDataSource: CoreDataStore, CategoriesLocalDataS
         }
     }
     
-    public func removeCategory(by id: UUID) -> OperationResult {
+    public func removeCategory(by id: UUID) -> OperationResult<Error> {
         do {
             let entities = try fetch(type: DBCategory.self)
             guard let entity = entities.first(where: { $0.id == id }) else { return .success }

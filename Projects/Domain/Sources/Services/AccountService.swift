@@ -22,7 +22,7 @@ public final class AccountService: AccountUseCase {
     }
     
     @discardableResult
-    public func setName(_ name: String) -> OperationResult {
+    public func setName(_ name: String) -> OperationResult<AccountUseCaseError> {
         let clearName = name.trimmingCharacters(in: .whitespacesAndNewlines)
         
         guard clearName.isNotEmpty else { return .failure(AccountUseCaseError.invalidName) }
@@ -31,3 +31,14 @@ public final class AccountService: AccountUseCase {
         return .success
     }
 }
+
+// TODO: - Сделать норм ошибки
+/*
+enum RepositoryError: LocalizedError {
+    case first, second, third
+}
+
+enum UseCaseError: LocalizedError {
+    case repository(error: RepositoryError), first, second, third
+}
+*/

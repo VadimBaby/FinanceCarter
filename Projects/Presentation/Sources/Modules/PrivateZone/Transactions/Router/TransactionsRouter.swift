@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import Common
 
 protocol TransactionsRouterOutput: AnyObject {
-    
+    func transactionsAddButtonDidTap(updateTransactionsViewClosure: @escaping VoidAction)
 }
 
 protocol TransactionsRouterInput: Router {
@@ -54,5 +55,7 @@ final class TransactionsRouter: TransactionsRouterInput {
 }
 
 extension TransactionsRouter: TransactionsPresenterOutput {
-    
+    func addButtonDidTap(updateTransactionsViewClosure: @escaping VoidAction) {
+        delegate?.transactionsAddButtonDidTap(updateTransactionsViewClosure: updateTransactionsViewClosure)
+    }
 }

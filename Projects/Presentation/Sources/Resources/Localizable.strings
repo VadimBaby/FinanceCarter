@@ -45,3 +45,6 @@
 "createCategory.textfield.title" = "Название категории";
 "createCategory.error.segmentOrTextFieldIsIncorrect" = "Введите корректные данные";
 "createWallet.error.balanceLessThanZero" = "Баланс должен быть больше нуля";
+
+"transactions.systemTitle" = "Транзакции";
+"createTransaction.systemTitle" = "Создать транзакцию";

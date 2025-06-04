@@ -7,9 +7,7 @@
 //
 
 public final class MockCategoriesService: CategoriesUseCase {
-    private var categories: [CategoryEntity] = [
-        .init(id: .init(), title: "Транспорт", type: .spending, createdAt: .now)
-    ]
+    private var categories: [CategoryEntity] = [.mock]
     
     public init() {}
     
@@ -17,8 +15,8 @@ public final class MockCategoriesService: CategoriesUseCase {
         completion(.success(categories))
     }
     
-    public func addCategory(title: String, type: CategoryType, completion: @escaping CategoriesUseCaseCompletionOneEntity) {
-        let category = CategoryEntity(title: title, type: type)
+    public func addCategory(title: String, emoji: String, type: CategoryType, completion: @escaping CategoriesUseCaseCompletionOneEntity) {
+        let category = CategoryEntity(title: title, emoji: emoji, type: type)
         self.categories.append(category)
         completion(.success(category))
     }

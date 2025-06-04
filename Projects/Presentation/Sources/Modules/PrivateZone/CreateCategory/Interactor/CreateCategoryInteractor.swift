@@ -17,12 +17,15 @@ protocol CreateCategoryInteractorInput: AnyObject {
     var output: CreateCategoryInteractorOutput? { get set }
     
     func addCategory(type: TypeSegmentedControlItem, title: String)
+    func setEmoji(_ emoji: String)
 }
 
 final class CreateCategoryInteractor: CreateCategoryInteractorInput {
     weak var output: CreateCategoryInteractorOutput?
     
     private let useCase: CategoriesUseCase
+    
+    private var emoji: String?
     
     init(useCase: CategoriesUseCase) {
         self.useCase = useCase
@@ -38,8 +41,9 @@ final class CreateCategoryInteractor: CreateCategoryInteractorInput {
         let categoryType = categoryType(from: type)
         
         guard title.count > 2 else { output?.throwError(.segmentOrTextFieldIsIncorrect); return }
+        guard let emoji else { output?.throwError(.emojiInvalid); return }
         
-        useCase.addCategory(title: title, type: categoryType) { [weak self] result in
+        useCase.addCategory(title: title, emoji: emoji, type: categoryType) { [weak self] result in
             switch result {
             case .success:
                 self?.output?.categoryDidAdded()
@@ -48,6 +52,10 @@ final class CreateCategoryInteractor: CreateCategoryInteractorInput {
                 self?.output?.throwError(.backend)
             }
         }
+    }
+    
+    func setEmoji(_ emoji: String) {
+        self.emoji = emoji
     }
 }
 

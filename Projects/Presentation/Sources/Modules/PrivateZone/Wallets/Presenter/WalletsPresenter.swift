@@ -38,7 +38,7 @@ final class WalletsPresenter: WalletsPresenterInput {
 }
 
 extension WalletsPresenter: WalletsViewOutput {
-    func viewDidLoad() {
+    func viewDidAppear() {
         interactor.getWallets()
     }
     

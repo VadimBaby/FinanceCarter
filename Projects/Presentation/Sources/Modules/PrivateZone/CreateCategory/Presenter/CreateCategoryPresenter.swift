@@ -46,6 +46,10 @@ extension CreateCategoryPresenter: CreateCategoryViewOutput {
         output?.closeButtonDidPressed()
     }
     
+    func emojiDidPicked(_ emoji: String) {
+        interactor.setEmoji(emoji)
+    }
+    
     func addButtonDidPressed(type: TypeSegmentedControlItem, title: String) {
         interactor.addCategory(type: type, title: title)
     }

@@ -9,7 +9,8 @@ import Domain
 import Common
 
 protocol CredentialInteractorOutput: AnyObject {
-    func nameDidSet(result: OperationResult)
+    func nameDidSet()
+    func throwError(_ error: AccountUseCaseError)
 }
 
 protocol CredentialInteractorInput: AnyObject {
@@ -36,6 +37,12 @@ final class CredentialInteractor: CredentialInteractorInput {
     func setName(_ name: String) {
         guard name.isNotEmpty else { return }
         let result = useCase.setName(name)
-        output?.nameDidSet(result: result)
+        
+        switch result {
+        case .success:
+            output?.nameDidSet()
+        case .failure(let error):
+            output?.throwError(error)
+        }
     }
 }

@@ -6,8 +6,11 @@
 //  Copyright © 2025 Vadim Martynenko. All rights reserved.
 //
 
+import Domain
+import Common
+
 protocol TransactionsPresenterOutput: AnyObject {
-    
+    func addButtonDidTap(updateTransactionsViewClosure: @escaping VoidAction)
 }
 
 protocol TransactionsPresenterInput: AnyObject {
@@ -33,9 +36,23 @@ final class TransactionsPresenter: TransactionsPresenterInput {
 }
 
 extension TransactionsPresenter: TransactionsViewOutput {
+    func viewDidLoad() {
+        interactor.getTransactionSections()
+    }
     
+    func addButtonDidPressed() {
+        output?.addButtonDidTap(updateTransactionsViewClosure: { [weak self] in
+            self?.interactor.getTransactionSections()
+        })
+    }
 }
 
 extension TransactionsPresenter: TransactionsInteractorOutput {
+    func transactionSectionsDidGet(_ sections: [TransactionSectionEntity]) {
+        view.setTransactionSections(sections)
+    }
     
+    func throwError(_ error: TransactionsViewError) {
+        view.showError(error)
+    }
 }

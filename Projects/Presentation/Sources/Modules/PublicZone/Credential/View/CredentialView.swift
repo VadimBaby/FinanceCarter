@@ -138,11 +138,12 @@ private extension CredentialView {
 // MARK: - Errors
 
 enum CredentialViewError: LocalizedError {
-    case emptyName
+    case emptyName, invalidName
     
     var errorDescription: String? {
         switch self {
         case .emptyName: Strings.Credential.Error.emptyName
+        case .invalidName: "Name is invalid"
         }
     }
 }

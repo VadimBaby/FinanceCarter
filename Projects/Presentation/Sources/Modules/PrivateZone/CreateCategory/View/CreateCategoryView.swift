@@ -9,14 +9,17 @@
 import UIKit
 import Common
 import SnapKit
+import ElegantEmojiPicker
 
 // MARK: - Constants
 
+// TODO: - Сделать общие констатны (AppConstants)
 private struct Constants {
     static let padding = 20
     static let textFieldHeight = 50
     static let verticalSpacingSmall = 10
     static let verticalSpacingMedium = 20
+    static let pickEmojiButtonSize = 150
 }
 
 // MARK: - Contracts
@@ -24,6 +27,7 @@ private struct Constants {
 protocol CreateCategoryViewOutput: AnyObject {
     func closeButtonDidPressed()
     func addButtonDidPressed(type: TypeSegmentedControlItem, title: String)
+    func emojiDidPicked(_ emoji: String)
 }
 
 protocol CreateCategoryViewInput: AnyObject {
@@ -57,6 +61,13 @@ final class CreateCategoryView: UIViewController, CreateCategoryViewInput {
     private let segmentedControlItems = TypeSegmentedControlItem.items()
     private lazy var typeSegmentedControl = UISegmentedControl(items: segmentedControlItems) &> {
         $0.selectedSegmentIndex = .zero
+    }
+    
+    private lazy var pickEmojiButton = UIButton(type: .system) &> {
+        $0.setTitle("Выбрать эмодзи", for: .normal)
+        $0.addTarget(self, action: #selector(pickEmojiButtonPressed), for: .touchUpInside)
+        $0.backgroundColor = .systemGroupedBackground
+        $0.layer.cornerRadius = CGFloat(Constants.pickEmojiButtonSize / 2)
     }
     
     private lazy var titleLabel: UILabel = .textfield(text: Strings.CreateCategory.Label.title)
@@ -94,7 +105,7 @@ final class CreateCategoryView: UIViewController, CreateCategoryViewInput {
 private extension CreateCategoryView {
     func setupViews() {
         view.backgroundColor = .systemBackground
-        view.addSubviews(titleLabel, titleTextField, typeSegmentedControl)
+        view.addSubviews(pickEmojiButton, titleLabel, titleTextField, typeSegmentedControl)
     }
     
     func setupConstraints() {
@@ -103,8 +114,14 @@ private extension CreateCategoryView {
             make.horizontalEdges.equalToSuperview().inset(Constants.padding)
         }
         
-        titleLabel.snp.makeConstraints { make in
+        pickEmojiButton.snp.makeConstraints { make in
             make.top.equalTo(typeSegmentedControl.snp.bottom).offset(Constants.verticalSpacingMedium)
+            make.centerX.equalToSuperview()
+            make.size.equalTo(Constants.pickEmojiButtonSize)
+        }
+        
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(pickEmojiButton.snp.bottom).offset(Constants.verticalSpacingMedium)
             make.horizontalEdges.equalToSuperview().inset(Constants.padding)
         }
         
@@ -157,18 +174,40 @@ private extension CreateCategoryView {
     func mainViewTapped() {
         view.endEditing(true)
     }
+    
+    @objc
+    func pickEmojiButtonPressed() {
+        let configuration = ElegantConfiguration(showRandom: false)
+        let picker = ElegantEmojiPicker(delegate: self, configuration: configuration)
+        present(picker, animated: true)
+    }
 }
 
 // MARK: - Errors
 
 enum CreateCategoryViewError: LocalizedError {
-    case segmentOrTextFieldIsIncorrect, backend
+    case segmentOrTextFieldIsIncorrect, backend, emojiInvalid
     
     var errorDescription: String? {
         switch self {
         case .segmentOrTextFieldIsIncorrect: Strings.CreateCategory.Error.segmentOrTextFieldIsIncorrect
         case .backend: Strings.Error.backend
+        case .emojiInvalid: "Выбери эмодзи"
         }
+    }
+}
+
+// MARK: - ElegantEmojiPickerDelegate
+
+extension CreateCategoryView: ElegantEmojiPickerDelegate {
+    func emojiPicker(_ picker: ElegantEmojiPicker, didSelectEmoji emoji: Emoji?) {
+        guard let emoji else { return }
+        
+        let font = UIFont.systemFont(ofSize: CGFloat(Constants.pickEmojiButtonSize / 2))
+        let attributedString = NSAttributedString(string: emoji.emoji, attributes: [.font: font])
+        pickEmojiButton.setAttributedTitle(attributedString, for: .normal)
+        // TODO: - Мейби стоит вызывать функция типа textFieldDidChanged (куда передаем текущее состояние тексвифлда и его сохраняем в переменную уже в интеракторе) каждый раз когда мы что то написали в текстфилд
+        output?.emojiDidPicked(emoji.emoji)
     }
 }
 

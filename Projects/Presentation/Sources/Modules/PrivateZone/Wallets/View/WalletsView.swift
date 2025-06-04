@@ -11,7 +11,7 @@ import Domain
 import Common
 
 protocol WalletsViewOutput: AnyObject {
-    func viewDidLoad()
+    func viewDidAppear()
     func addButtonDidPressed()
     func walletDidRemoved(_ wallet: WalletEntity)
 }
@@ -51,9 +51,13 @@ final class WalletsView: UIViewController, WalletsViewInput {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        output?.viewDidLoad()
         setupViews()
         setupNavigationBar()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        output?.viewDidAppear()
     }
     
     func setWallets(_ wallets: [WalletEntity]) {

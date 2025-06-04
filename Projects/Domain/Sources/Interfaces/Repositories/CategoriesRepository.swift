@@ -12,6 +12,6 @@ import Common
 
 public protocol CategoriesRepository: AnyObject {
     func fetchCategories(completion: @escaping (_ result: Result<[CategoryEntity], Error>) -> Void)
-    func addCategory(_ category: CategoryEntity, completion: @escaping  OperationResultCompletion)
-    func removeCategory(by id: UUID, completion: @escaping  OperationResultCompletion)
+    func addCategory(_ category: CategoryEntity, completion: @escaping OperationResultCompletion)
+    func removeCategory(by id: UUID, completion: @escaping OperationResultCompletion)
 }

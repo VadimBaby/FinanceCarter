@@ -12,7 +12,8 @@ final class TransactionsFlowCoordinatorFactory {
     static func create(resolver: Resolver) -> TransactionsFlowCoordinatorInput {
         TransactionsFlowCoordinator(
             resolver: resolver,
-            transactionsRouterAssembly: TransactionsAssembly.router
+            transactionsRouterAssembly: TransactionsAssembly.router,
+            createTransactionsRouterAssembly: CreateTransactionAssembly.router
         )
     }
 }

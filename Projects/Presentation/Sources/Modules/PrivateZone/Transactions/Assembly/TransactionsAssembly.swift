@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import Domain
 
 final class TransactionsAssembly {
     private init() {}
     
     static func create(router: TransactionsPresenterOutput, resolver: Resolver) -> TransactionsViewInput & UIViewController {
         let view = TransactionsView()
-        let interactor = TransactionsInteractor()
+        let interactor = TransactionsInteractor(useCase: resolver.resolve(TransactionsUseCase.self)!)
         
         let presenter = TransactionsPresenter(interactor: interactor, view: view)
         presenter.output = router
@@ -33,3 +34,21 @@ final class TransactionsAssembly {
         return router
     }
 }
+
+// MARK: - Mock
+
+#if DEBUG
+extension TransactionsAssembly {
+    static func createMock() -> TransactionsViewInput & UIViewController {
+        let view = TransactionsView()
+        let interactor = TransactionsInteractor(useCase: MockTransactionsService())
+        
+        let presenter = TransactionsPresenter(interactor: interactor, view: view)
+        
+        view.output = presenter
+        interactor.output = presenter
+        
+        return view
+    }
+}
+#endif

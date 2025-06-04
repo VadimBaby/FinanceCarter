@@ -13,6 +13,6 @@ import Common
 
 public protocol CategoriesLocalDataSource: AnyObject {
     func fetchCategories() -> Result<[CategoryEntity], Error>
-    func addCategory(_ category: CategoryEntity) -> OperationResult
-    func removeCategory(by id: UUID) -> OperationResult
+    func addCategory(_ category: CategoryEntity) -> OperationResult<Error>
+    func removeCategory(by id: UUID) -> OperationResult<Error>
 }

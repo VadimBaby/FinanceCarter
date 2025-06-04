@@ -25,8 +25,8 @@ public final class CategoriesService: CategoriesUseCase {
         }
     }
     
-    public func addCategory(title: String, type: CategoryType, completion: @escaping CategoriesUseCaseCompletionOneEntity) {
-        let category = CategoryEntity(title: title, type: type)
+    public func addCategory(title: String, emoji: String, type: CategoryType, completion: @escaping CategoriesUseCaseCompletionOneEntity) {
+        let category = CategoryEntity(title: title, emoji: emoji, type: type)
         
         repository.addCategory(category) { result in
             switch result {

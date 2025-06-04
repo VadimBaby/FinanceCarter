@@ -15,6 +15,6 @@ public typealias CategoriesUseCaseCompletionOneEntity = (_ result: Result<Catego
 
 public protocol CategoriesUseCase: AnyObject {
     func fetchCategories(completion: @escaping CategoriesUseCaseCompletionManyEntities)
-    func addCategory(title: String, type: CategoryType, completion: @escaping CategoriesUseCaseCompletionOneEntity)
+    func addCategory(title: String, emoji: String, type: CategoryType, completion: @escaping CategoriesUseCaseCompletionOneEntity)
     func removeCategory(_ category: CategoryEntity, completion: @escaping CategoriesUseCaseCompletionOneEntity)
 }

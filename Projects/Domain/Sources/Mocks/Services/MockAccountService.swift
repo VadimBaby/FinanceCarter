@@ -18,7 +18,7 @@ public final class MockAccountService: AccountUseCase {
     }
     
     @discardableResult
-    public func setName(_ name: String) -> OperationResult {
+    public func setName(_ name: String) -> OperationResult<AccountUseCaseError> {
         let clearName = name.trimmingCharacters(in: .whitespacesAndNewlines)
         
         guard clearName.isNotEmpty else { return .failure(AccountUseCaseError.invalidName) }
