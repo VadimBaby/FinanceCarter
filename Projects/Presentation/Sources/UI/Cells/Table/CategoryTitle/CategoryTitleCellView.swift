@@ -63,3 +63,14 @@ private extension CategoryTitleCellView {
         }
     }
 }
+
+// MARK: - Private Methods
+
+private extension CategoryTitleCellView {
+    func string(from type: CategoryType) -> String {
+        switch type {
+        case .income: Strings.CategoryTitleCell.CategoryType.income
+        case .spending: Strings.CategoryTitleCell.CategoryType.spending
+        }
+    }
+}

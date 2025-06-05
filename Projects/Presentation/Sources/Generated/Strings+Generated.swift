@@ -24,6 +24,14 @@ public enum Strings {
     /// Категории
     public static let systemTitle = Strings.tr("Localizable", "categories.systemTitle", fallback: "Категории")
   }
+  public enum CategoryTitleCell {
+    public enum CategoryType {
+      /// Доход
+      public static let income = Strings.tr("Localizable", "categoryTitleCell.categoryType.income", fallback: "Доход")
+      /// Расход
+      public static let spending = Strings.tr("Localizable", "categoryTitleCell.categoryType.spending", fallback: "Расход")
+    }
+  }
   public enum CreateCategory {
     /// Создать категорию
     public static let systemTitle = Strings.tr("Localizable", "createCategory.systemTitle", fallback: "Создать категорию")
@@ -100,22 +108,22 @@ public enum Strings {
       public static let ready = Strings.tr("Localizable", "onboarding.button.ready", fallback: "Готово")
     }
     public enum First {
-      /// Get an overview of how you are performing and motivate yourself to achieve even more.
-      public static let description = Strings.tr("Localizable", "onboarding.first.description", fallback: "Get an overview of how you are performing and motivate yourself to achieve even more.")
-      /// You ought to know where your money goes
-      public static let title = Strings.tr("Localizable", "onboarding.first.title", fallback: "You ought to know where your money goes")
+      /// Отслеживай свои результаты и мотивируй себя достигать ещё большего
+      public static let description = Strings.tr("Localizable", "onboarding.first.description", fallback: "Отслеживай свои результаты и мотивируй себя достигать ещё большего")
+      /// Вы должны знать, на что уходят ваши деньги
+      public static let title = Strings.tr("Localizable", "onboarding.first.title", fallback: "Вы должны знать, на что уходят ваши деньги")
     }
     public enum Second {
-      /// Track your transaction easily, with categories and financial report
-      public static let description = Strings.tr("Localizable", "onboarding.second.description", fallback: "Track your transaction easily, with categories and financial report")
-      /// Gain total control of your money
-      public static let title = Strings.tr("Localizable", "onboarding.second.title", fallback: "Gain total control of your money")
+      /// Легко отслеживайте свои транзакции с помощью категорий
+      public static let description = Strings.tr("Localizable", "onboarding.second.description", fallback: "Легко отслеживайте свои транзакции с помощью категорий")
+      /// Контролируйте свои траты
+      public static let title = Strings.tr("Localizable", "onboarding.second.title", fallback: "Контролируйте свои траты")
     }
     public enum Third {
-      /// Setup your budget for each category so you in control. Track categories you spend the most money on
-      public static let description = Strings.tr("Localizable", "onboarding.third.description", fallback: "Setup your budget for each category so you in control. Track categories you spend the most money on")
-      /// Plan ahead and manage your money better
-      public static let title = Strings.tr("Localizable", "onboarding.third.title", fallback: "Plan ahead and manage your money better")
+      /// Определите свой бюджет для каждой категории, чтобы контролировать его
+      public static let description = Strings.tr("Localizable", "onboarding.third.description", fallback: "Определите свой бюджет для каждой категории, чтобы контролировать его")
+      /// Лучше распоряжайтесь своими деньгами
+      public static let title = Strings.tr("Localizable", "onboarding.third.title", fallback: "Лучше распоряжайтесь своими деньгами")
     }
   }
   public enum Profile {

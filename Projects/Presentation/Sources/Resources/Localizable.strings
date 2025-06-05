@@ -4,12 +4,12 @@
 
 "alert.unknown.title" = "Ошибка";
 
-"onboarding.first.title" = "You ought to know where your money goes";
-"onboarding.first.description" = "Get an overview of how you are performing and motivate yourself to achieve even more.";
-"onboarding.second.title" = "Gain total control of your money";
-"onboarding.second.description" = "Track your transaction easily, with categories and financial report";
-"onboarding.third.title" = "Plan ahead and manage your money better";
-"onboarding.third.description" = "Setup your budget for each category so you in control. Track categories you spend the most money on";
+"onboarding.first.title" = "Вы должны знать, на что уходят ваши деньги";
+"onboarding.first.description" = "Отслеживай свои результаты и мотивируй себя достигать ещё большего";
+"onboarding.second.title" = "Контролируйте свои траты";
+"onboarding.second.description" = "Легко отслеживайте свои транзакции с помощью категорий";
+"onboarding.third.title" = "Лучше распоряжайтесь своими деньгами";
+"onboarding.third.description" = "Определите свой бюджет для каждой категории, чтобы контролировать его";
 
 "onboarding.button.next" = "Далее";
 "onboarding.button.ready" = "Готово";
@@ -37,6 +37,9 @@
 "createWallet.textfield.balance" = "Баланс кошелька";
 
 "categories.systemTitle" = "Категории";
+
+"categoryTitleCell.categoryType.spending" = "Расход";
+"categoryTitleCell.categoryType.income" = "Доход";
 
 "createCategory.systemTitle" = "Создать категорию";
 "createCategory.segment.income" = "Доход";

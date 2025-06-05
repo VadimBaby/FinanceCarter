@@ -55,6 +55,7 @@ final class WalletsView: UIViewController, WalletsViewInput {
         setupNavigationBar()
     }
     
+    // TODO: - Подумать над этим, вызывается во viewDidAppear чтобы каждый раз получать актуальные данные, подумать над тем, чтобы запрашивать актуальные данные только тогда, когда это необходимо
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         output?.viewDidAppear()
