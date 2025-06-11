@@ -7,12 +7,13 @@
 //
 
 import Domain
+import Foundation
 
 protocol CreateTransactionInteractorOutput: AnyObject {
     func walletsDidGet(_ wallets: [WalletEntity])
     func categoriesDidGet(_ categories: [CategoryEntity])
-    func throwError(_ error: CreateTransactionError)
-    func walletDidAdded()
+    func throwError(_ error: Error)
+    func transactionDidAdded()
 }
 
 protocol CreateTransactionInteractorInput: AnyObject {
@@ -28,22 +29,21 @@ protocol CreateTransactionInteractorInput: AnyObject {
 final class CreateTransactionInteractor: CreateTransactionInteractorInput {
     weak var output: CreateTransactionInteractorOutput?
     
-    private let transactionsUseCase: TransactionsUseCase
-    private let walletsUseCase: WalletsUseCase
-    private let categoryUseCase: CategoriesUseCase
+    private let transactionManager: TransactionManaging
+    private let walletsUseCase: WalletManagmentUseCase
+    private let categoriesUseCase: CategoryManagmentUseCase
     
-    var selectedWallet: WalletEntity?
-    var selectedCategory: CategoryEntity?
+    private var selectedWallet: WalletEntity?
+    private var selectedCategory: CategoryEntity?
 
-    // TODO: - Юзай фасад https://codeswift.ru/facade-design-pattern-in-swift/
     init(
-        transactionsUseCase: TransactionsUseCase,
-        walletsUseCase: WalletsUseCase,
-        categoryUseCase: CategoriesUseCase
+        transactionManager: TransactionManaging,
+        walletsUseCase: WalletManagmentUseCase,
+        categoriesUseCase: CategoryManagmentUseCase
     ) {
-        self.transactionsUseCase = transactionsUseCase
+        self.transactionManager = transactionManager
         self.walletsUseCase = walletsUseCase
-        self.categoryUseCase = categoryUseCase
+        self.categoriesUseCase = categoriesUseCase
         
         print("init \(self)")
     }
@@ -52,40 +52,48 @@ final class CreateTransactionInteractor: CreateTransactionInteractorInput {
         print("deinit \(self)")
     }
     
+    private enum Error: LocalizedError {
+        case invalidWalletOrCategory
+        
+        var errorDescription: String? {
+            switch self {
+            case .invalidWalletOrCategory: Strings.CreateTransaction.Error.invalidWalletOrCategory
+            }
+        }
+    }
+    
     func fetchWallets() {
-        walletsUseCase.fetchWallets { [weak self] result in
+        walletsUseCase.fetch { [weak self] result in
             switch result {
             case .success(let entities):
                 self?.output?.walletsDidGet(entities)
             case .failure(let error):
-                debugPrint(error)
-                self?.output?.throwError(.backend)
+                self?.output?.throwError(error)
             }
         }
     }
     
     func fetchCategories() {
-        categoryUseCase.fetchCategories { [weak self] result in
+        categoriesUseCase.fetch { [weak self] result in
             switch result {
             case .success(let entities):
                 self?.output?.categoriesDidGet(entities)
             case .failure(let error):
-                debugPrint(error)
-                self?.output?.throwError(.backend)
+                self?.output?.throwError(error)
             }
         }
     }
     
     func addTransaction(amount: Double) {
         guard let category = selectedCategory,
-              let wallet = selectedWallet else { output?.throwError(.backend); return }
+              let wallet = selectedWallet else { output?.throwError(Error.invalidWalletOrCategory); return }
         
-        transactionsUseCase.addTransactions(category: category, wallet: wallet, amount: amount) { [weak self] result in
+        transactionManager.create(category: category, wallet: wallet, amount: amount) { [weak self] result in
             switch result {
-            case let .success(entity):
-                self?.output?.walletDidAdded()
+            case .success:
+                self?.output?.transactionDidAdded()
             case let .failure(error):
-                self?.output?.throwError(.backend)
+                self?.output?.throwError(error)
             }
         }
     }

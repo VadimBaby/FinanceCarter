@@ -9,7 +9,7 @@
 // swiftlint:disable:next foundation_using
 import Foundation
 import Domain
-import Common
+import MyCommon
 
 public final class TransactionsStorageManager: TransactionsRepository {
     private let localDataSource: TransactionsLocalDataSource
@@ -18,18 +18,27 @@ public final class TransactionsStorageManager: TransactionsRepository {
         self.localDataSource = localDataSource
     }
     
-    public func fetchTransactions(completion: @escaping (Result<[TransactionEntity], any Error>) -> Void) {
-        let result = localDataSource.fetchTransactions()
-        completion(result)
+    public func fetch(completion: @escaping (Result<[TransactionEntity], DataError>) -> Void) {
+        let result = localDataSource.fetch()
+        switch result {
+        case let .success(entities): completion(.success(entities))
+        case let .failure(error): completion(.failure(error.toDataError()))
+        }
     }
     
-    public func addTransaction(_ transaction: TransactionEntity, completion: @escaping OperationResultCompletion) {
-        let result = localDataSource.addTransaction(transaction)
-        completion(result)
+    public func create(_ transaction: TransactionEntity, completion: @escaping OperationResultCompletionWithDataError) {
+        let result = localDataSource.create(transaction)
+        switch result {
+        case .success: completion(.success)
+        case let .failure(error): completion(.failure(error.toDataError()))
+        }
     }
     
-    public func removeTransaction(by id: UUID, completion: @escaping OperationResultCompletion) {
-        let result = localDataSource.removeTransaction(by: id)
-        completion(result)
+    public func remove(by id: UUID, completion: @escaping OperationResultCompletionWithDataError) {
+        let result = localDataSource.remove(by: id)
+        switch result {
+        case .success: completion(.success)
+        case let .failure(error): completion(.failure(error.toDataError()))
+        }
     }
 }

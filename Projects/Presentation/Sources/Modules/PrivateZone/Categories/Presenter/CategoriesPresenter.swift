@@ -7,7 +7,7 @@
 //
 
 import Domain
-import Common
+import MyCommon
 
 protocol CategoriesPresenterOutput: AnyObject {
     func addButtonDidPressed(updateCategoriesViewClosure: @escaping VoidAction)
@@ -50,7 +50,7 @@ extension CategoriesPresenter: CategoriesInteractorOutput {
         view.setCategories(categories)
     }
     
-    func throwError(_ error: CategoriesViewError) {
+    func throwError(_ error: Error) {
         view.showError(error)
     }
     

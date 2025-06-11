@@ -7,11 +7,7 @@
 
 import UIKit
 import SnapKit
-import Common
-
-private enum Constants {
-    static let padding: CGFloat = 10
-}
+import MyCommon
 
 protocol HomeViewOutput: AnyObject {
     
@@ -147,10 +143,10 @@ private extension HomeView {
         
         let section: NSCollectionLayoutSection = .init(group: group)
         section.contentInsets = .init(
-            top: Constants.padding,
-            leading: Constants.padding,
+            top: AppConstants.padding,
+            leading: AppConstants.padding,
             bottom: .zero,
-            trailing: Constants.padding
+            trailing: AppConstants.padding
         )
         return section
     }

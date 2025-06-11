@@ -34,7 +34,7 @@ extension CreateCategoryPresenter: CreateCategoryInteractorOutput {
         output?.categoryDidAdded()
     }
     
-    func throwError(_ error: CreateCategoryViewError) {
+    func throwError(_ error: Error) {
         view.showError(error)
     }
 }

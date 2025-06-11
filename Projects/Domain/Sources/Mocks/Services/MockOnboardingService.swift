@@ -5,7 +5,7 @@
 //  Created by Вадим Мартыненко on 22.03.2025.
 //
 
-import Common
+import MyCommon
 
 public final class MockOnboardingService: OnboardingUseCase {
     private let items: [OnboardingItem]

@@ -14,7 +14,7 @@ final class TransactionsAssembly {
     
     static func create(router: TransactionsPresenterOutput, resolver: Resolver) -> TransactionsViewInput & UIViewController {
         let view = TransactionsView()
-        let interactor = TransactionsInteractor(useCase: resolver.resolve(TransactionsUseCase.self)!)
+        let interactor = TransactionsInteractor(useCase: resolver.resolve(TransactionSectionManagmentUseCase.self)!)
         
         let presenter = TransactionsPresenter(interactor: interactor, view: view)
         presenter.output = router
@@ -41,7 +41,7 @@ final class TransactionsAssembly {
 extension TransactionsAssembly {
     static func createMock() -> TransactionsViewInput & UIViewController {
         let view = TransactionsView()
-        let interactor = TransactionsInteractor(useCase: MockTransactionsService())
+        let interactor = TransactionsInteractor(useCase: MockTransactionSectionManagmentService())
         
         let presenter = TransactionsPresenter(interactor: interactor, view: view)
         

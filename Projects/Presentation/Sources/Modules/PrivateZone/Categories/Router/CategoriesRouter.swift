@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Common
+import MyCommon
 
 protocol CategoriesRouterOutput: AnyObject {
     func categoriesAddButtonDidPressed(updateCategoriesViewClosure: @escaping VoidAction)

@@ -7,7 +7,7 @@
 //
 
 import Domain
-import Common
+import MyCommon
 
 protocol TransactionsPresenterOutput: AnyObject {
     func addButtonDidTap(updateTransactionsViewClosure: @escaping VoidAction)
@@ -41,9 +41,9 @@ extension TransactionsPresenter: TransactionsViewOutput {
     }
     
     func addButtonDidPressed() {
-        output?.addButtonDidTap(updateTransactionsViewClosure: { [weak self] in
+        output?.addButtonDidTap { [weak self] in
             self?.interactor.getTransactionSections()
-        })
+        }
     }
 }
 
@@ -52,7 +52,7 @@ extension TransactionsPresenter: TransactionsInteractorOutput {
         view.setTransactionSections(sections)
     }
     
-    func throwError(_ error: TransactionsViewError) {
+    func throwError(_ error: Error) {
         view.showError(error)
     }
 }

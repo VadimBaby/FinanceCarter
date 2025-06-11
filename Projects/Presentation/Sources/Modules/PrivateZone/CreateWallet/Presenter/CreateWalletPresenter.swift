@@ -6,7 +6,7 @@
 //  Copyright © 2025 Vadim Martynenko. All rights reserved.
 //
 
-import Common
+import MyCommon
 import Domain
 
 protocol CreateWalletPresenterOutput: AnyObject {
@@ -55,7 +55,7 @@ extension CreateWalletPresenter: CreateWalletInteractorOutput {
         output?.walletDidAdded()
     }
     
-    func throwError(_ error: CreateWalletError) {
+    func throwError(_ error: Error) {
         view.showError(error)
     }
 }

@@ -8,6 +8,7 @@
 
 import Domain
 import CoreData
+import MyCommon
 
 struct CategoryMapper {
     static func toDomain(from entity: DBCategory) -> CategoryEntity? {
@@ -23,6 +24,6 @@ struct CategoryMapper {
     }
     
     static func toDomain(from entities: [DBCategory]) -> [CategoryEntity] {
-        entities.compactMap{ toDomain(from: $0) }.sorted(by: { $0.createdAt > $1.createdAt })
+        entities.compactMap{ toDomain(from: $0) }.sortedByCreatedAt()
     }
 }

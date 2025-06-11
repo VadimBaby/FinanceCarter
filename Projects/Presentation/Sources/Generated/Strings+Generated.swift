@@ -24,6 +24,14 @@ public enum Strings {
     /// Категории
     public static let systemTitle = Strings.tr("Localizable", "categories.systemTitle", fallback: "Категории")
   }
+  public enum CategoryCell {
+    public enum CategoryType {
+      /// Доход
+      public static let income = Strings.tr("Localizable", "categoryCell.categoryType.income", fallback: "Доход")
+      /// Расход
+      public static let spending = Strings.tr("Localizable", "categoryCell.categoryType.spending", fallback: "Расход")
+    }
+  }
   public enum CategoryTitleCell {
     public enum CategoryType {
       /// Доход
@@ -35,7 +43,13 @@ public enum Strings {
   public enum CreateCategory {
     /// Создать категорию
     public static let systemTitle = Strings.tr("Localizable", "createCategory.systemTitle", fallback: "Создать категорию")
+    public enum Button {
+      /// Выберите эмодзи
+      public static let pickEmojiButton = Strings.tr("Localizable", "createCategory.button.pickEmojiButton", fallback: "Выберите эмодзи")
+    }
     public enum Error {
+      /// Выберите эмодзи
+      public static let emojiInvalid = Strings.tr("Localizable", "createCategory.error.emojiInvalid", fallback: "Выберите эмодзи")
       /// Введите корректные данные
       public static let segmentOrTextFieldIsIncorrect = Strings.tr("Localizable", "createCategory.error.segmentOrTextFieldIsIncorrect", fallback: "Введите корректные данные")
     }
@@ -57,6 +71,28 @@ public enum Strings {
   public enum CreateTransaction {
     /// Создать транзакцию
     public static let systemTitle = Strings.tr("Localizable", "createTransaction.systemTitle", fallback: "Создать транзакцию")
+    public enum Error {
+      /// Выберите кошелек и категорию
+      public static let invalidWalletOrCategory = Strings.tr("Localizable", "createTransaction.error.invalidWalletOrCategory", fallback: "Выберите кошелек и категорию")
+    }
+    public enum Label {
+      /// Сумма
+      public static let amount = Strings.tr("Localizable", "createTransaction.label.amount", fallback: "Сумма")
+      /// Категория
+      public static let category = Strings.tr("Localizable", "createTransaction.label.category", fallback: "Категория")
+      /// Кошелек
+      public static let wallet = Strings.tr("Localizable", "createTransaction.label.wallet", fallback: "Кошелек")
+    }
+    public enum Menu {
+      /// Выберите категорию
+      public static let category = Strings.tr("Localizable", "createTransaction.menu.category", fallback: "Выберите категорию")
+      /// Выберите кошелек
+      public static let wallet = Strings.tr("Localizable", "createTransaction.menu.wallet", fallback: "Выберите кошелек")
+    }
+    public enum Textfield {
+      /// Введите сумму
+      public static let amount = Strings.tr("Localizable", "createTransaction.textfield.amount", fallback: "Введите сумму")
+    }
   }
   public enum CreateWallet {
     /// Создать кошелек
@@ -91,10 +127,6 @@ public enum Strings {
         public static let placeholder = Strings.tr("Localizable", "credential.textfield.name.placeholder", fallback: "Имя")
       }
     }
-  }
-  public enum Error {
-    /// Проверьте соединение с Интернетом или поробуйте позже
-    public static let backend = Strings.tr("Localizable", "error.backend", fallback: "Проверьте соединение с Интернетом или поробуйте позже")
   }
   public enum Home {
     /// Главная

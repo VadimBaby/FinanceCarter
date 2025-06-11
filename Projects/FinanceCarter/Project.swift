@@ -7,19 +7,20 @@ let project = Project(
     name: NAME_PROJECT,
     organizationName: Constants.ORGANIZATION_NAME,
     packages: [
-        .remote(url: "https://github.com/Swinject/Swinject.git", requirement: .upToNextMajor(from: "2.9.1"))
+        Constants.Packages.MyCommon.package,
+        Constants.Packages.Swinject.package
     ],
     targets: [
         .createTarget(
             type: .app,
             name: NAME_PROJECT,
             dependencies: [
-                Constants.Modules.Common.dependency,
+                Constants.Packages.MyCommon.dependency,
                 Constants.Modules.Domain.dependency,
                 Constants.Modules.Data.dependency,
                 Constants.Modules.Presentation.dependency,
                 Constants.Modules.CoreDataInfastructure.dependency,
-                .package(product: "Swinject")
+                Constants.Packages.Swinject.dependency
             ],
             resources: Constants.DEFAULT_LOCATE_RESOURCES
         )

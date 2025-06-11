@@ -67,11 +67,11 @@ extension CreateTransactionPresenter: CreateTransactionInteractorOutput {
         view.setCategories(categories)
     }
     
-    func throwError(_ error: CreateTransactionError) {
+    func throwError(_ error: Error) {
         view.showError(error)
     }
-    
-    func walletDidAdded() {
+
+    func transactionDidAdded() {
         output?.transactionDidAdded()
     }
 }

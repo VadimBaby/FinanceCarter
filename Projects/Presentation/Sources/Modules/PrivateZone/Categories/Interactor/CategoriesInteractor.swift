@@ -7,11 +7,12 @@
 //
 
 import Domain
+// swiftlint:disable:next foundation_using
 import Foundation
 
 protocol CategoriesInteractorOutput: AnyObject {
     func categoriesDidGet(_ categories: [CategoryEntity])
-    func throwError(_ error: CategoriesViewError)
+    func throwError(_ error: Error)
     func removeCategoryDidFall(_ category: CategoryEntity)
 }
 
@@ -25,9 +26,9 @@ protocol CategoriesInteractorInput: AnyObject {
 final class CategoriesInteractor: CategoriesInteractorInput {
     weak var output: CategoriesInteractorOutput?
     
-    private let useCase: CategoriesUseCase
+    private let useCase: CategoryManagmentUseCase
     
-    init(useCase: CategoriesUseCase) {
+    init(useCase: CategoryManagmentUseCase) {
         self.useCase = useCase
         print("\(Self.self) init")
     }
@@ -37,22 +38,20 @@ final class CategoriesInteractor: CategoriesInteractorInput {
     }
     
     func getCategories() {
-        useCase.fetchCategories { [weak self] result in
+        useCase.fetch { [weak self] result in
             switch result {
             case .success(let categories):
                 self?.output?.categoriesDidGet(categories)
             case .failure(let error):
-                debugPrint(error)
-                self?.output?.throwError(.backend)
+                self?.output?.throwError(error)
             }
         }
     }
     
     func removeCategory(_ category: CategoryEntity) {
-        useCase.removeCategory(category) { [weak self] result in
+        useCase.remove(category) { [weak self] result in
             guard case let .failure(error) = result else { return }
-            debugPrint(error)
-            self?.output?.throwError(.backend)
+            self?.output?.throwError(error)
             self?.output?.removeCategoryDidFall(category)
         }
     }

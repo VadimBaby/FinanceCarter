@@ -6,12 +6,13 @@
 //  Copyright © 2025 Vadim Martynenko. All rights reserved.
 //
 
+import Foundation
 import Domain
-import Common
+import MyCommon
 
 protocol CreateWalletInteractorOutput: AnyObject {
     func walletDidAdded()
-    func throwError(_ error: CreateWalletError)
+    func throwError(_ error: Error)
 }
 
 protocol CreateWalletInteractorInput: AnyObject {
@@ -23,11 +24,21 @@ protocol CreateWalletInteractorInput: AnyObject {
 final class CreateWalletInteractor: CreateWalletInteractorInput {
     weak var output: CreateWalletInteractorOutput?
     
-    private let useCase: WalletsUseCase
+    private let useCase: WalletManagmentUseCase
     
-    init(useCase: WalletsUseCase) {
+    init(useCase: WalletManagmentUseCase) {
         self.useCase = useCase
         print("\(Self.self) init")
+    }
+    
+    private enum Error: LocalizedError {
+        case balanceLessThanZero
+        
+        var errorDescription: String? {
+            switch self {
+            case .balanceLessThanZero: Strings.CreateWallet.Error.balanceLessThanZero
+            }
+        }
     }
     
     deinit {
@@ -36,15 +47,14 @@ final class CreateWalletInteractor: CreateWalletInteractorInput {
     
     func addWallet(title: String, balance: String) {
         guard let doubleBalance = Double(balance),
-              doubleBalance >= .zero else { output?.throwError(.balanceLessThanZero); return }
+              doubleBalance >= .zero else { output?.throwError(Error.balanceLessThanZero); return }
         
-        useCase.addWallet(title: title, balance: doubleBalance) { [weak self] result in
+        useCase.create(title: title, balance: doubleBalance) { [weak self] result in
             switch result {
             case .success:
                 self?.output?.walletDidAdded()
             case .failure(let error):
-                debugPrint(error)
-                self?.output?.throwError(.backend)
+                self?.output?.throwError(error)
             }
         }
     }

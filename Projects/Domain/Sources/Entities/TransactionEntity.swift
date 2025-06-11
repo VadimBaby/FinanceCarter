@@ -6,6 +6,7 @@
 //  Copyright © 2025 Vadim Martynenko. All rights reserved.
 //
 
+// swiftlint:disable:next foundation_using
 import Foundation
 
 public struct TransactionEntity: Identifiable, CreatedAtContainable {
@@ -39,13 +40,7 @@ extension TransactionEntity: Equatable, Hashable {
         lhs.id == rhs.id
     }
     
-    
-    // TODO: - Насколько правильно?
     public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
-        hasher.combine(category.id)
-        hasher.combine(wallet.id)
-        hasher.combine(amount)
-        hasher.combine(createdAt)
     }
 }

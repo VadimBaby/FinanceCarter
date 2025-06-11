@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CreateWalletRouterOutput: AnyObject {
-    func createWalletcloseButtonDidPressed()
+    func createWalletCloseButtonDidPressed()
     func walletDidAdded()
 }
 
@@ -60,7 +60,7 @@ final class CreateWalletRouter: CreateWalletRouterInput {
 
 extension CreateWalletRouter: CreateWalletPresenterOutput {
     func closeButtonDidPressed() {
-        delegate?.createWalletcloseButtonDidPressed()
+        delegate?.createWalletCloseButtonDidPressed()
     }
     
     func walletDidAdded() {

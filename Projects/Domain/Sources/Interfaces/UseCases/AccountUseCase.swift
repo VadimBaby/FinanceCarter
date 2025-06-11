@@ -6,11 +6,11 @@
 //  Copyright © 2025 Vadim Martynenko. All rights reserved.
 //
 
-import Common
+import MyCommon
 
 public protocol AccountUseCase: AnyObject {
     func getUserName() -> String
     
     @discardableResult
-    func setName(_ name: String) -> OperationResult<AccountUseCaseError>
+    func setName(_ name: String) -> OperationResult<DomainError>
 }

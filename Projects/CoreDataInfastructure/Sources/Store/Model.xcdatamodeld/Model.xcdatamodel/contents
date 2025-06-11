@@ -13,7 +13,15 @@
         <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DBCategory" inverseName="transaction" inverseEntity="DBCategory"/>
+        <relationship name="section" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DBTransactionSection" inverseName="transactions" inverseEntity="DBTransactionSection"/>
         <relationship name="wallet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DBWallet" inverseName="transaction" inverseEntity="DBWallet"/>
+    </entity>
+    <entity name="DBTransactionSection" representedClassName="DBTransactionSection" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="spendingAmount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="totalAmount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="transactions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DBTransaction" inverseName="section" inverseEntity="DBTransaction"/>
     </entity>
     <entity name="DBWallet" representedClassName=".DBWallet" syncable="YES" codeGenerationType="class">
         <attribute name="balance" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>

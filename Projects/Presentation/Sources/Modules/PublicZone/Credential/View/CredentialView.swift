@@ -7,13 +7,7 @@
 
 import UIKit
 import SnapKit
-import Common
-
-private struct Constants {
-    static let padding = 10
-    static let nextButtonHeight = 50
-    static let nameTextFieldHeight = 50
-}
+import MyCommon
 
 protocol CredentialViewOutput: AnyObject {
     func didTapNextButton(name: String)
@@ -22,7 +16,7 @@ protocol CredentialViewOutput: AnyObject {
 protocol CredentialViewInput: AnyObject {
     var output: CredentialViewOutput? { get set }
     
-    func throwError(_ error: CredentialViewError)
+    func throwError(_ error: Error)
 }
 
 final class CredentialView: UIViewController, CredentialViewInput {
@@ -60,7 +54,7 @@ final class CredentialView: UIViewController, CredentialViewInput {
         nameTextField.becomeFirstResponder()
     }
     
-    func throwError(_ error: CredentialViewError) {
+    func throwError(_ error: Error) {
         showAlert(type: .error(error))
     }
 }
@@ -85,15 +79,15 @@ private extension CredentialView {
     
     func setupConstaints() {
         nameTextField.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(Constants.padding)
-            make.horizontalEdges.equalToSuperview().inset(Constants.padding)
-            make.height.equalTo(Constants.nameTextFieldHeight)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(AppConstants.padding)
+            make.horizontalEdges.equalToSuperview().inset(AppConstants.padding)
+            make.height.equalTo(AppConstants.textFieldHeight)
         }
         
         nextButton.snp.makeConstraints { make in
-            nextButtonBottomConstraint = make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(Constants.nextButtonHeight).constraint
-            make.horizontalEdges.equalToSuperview().inset(Constants.padding)
-            make.height.equalTo(Constants.nextButtonHeight)
+            nextButtonBottomConstraint = make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(AppConstants.buttonHeight).constraint
+            make.horizontalEdges.equalToSuperview().inset(AppConstants.padding)
+            make.height.equalTo(AppConstants.buttonHeight)
         }
     }
     
@@ -119,7 +113,7 @@ private extension CredentialView {
     
     @objc
     func keyboardWillHide(_ notification: NSNotification) {
-        self.nextButtonBottomConstraint?.update(inset: Constants.padding)
+        self.nextButtonBottomConstraint?.update(inset: AppConstants.padding)
         self.view.layoutIfNeeded()
     }
     
@@ -132,19 +126,6 @@ private extension CredentialView {
     @objc
     func mainViewTapped() {
         view.endEditing(true)
-    }
-}
-
-// MARK: - Errors
-
-enum CredentialViewError: LocalizedError {
-    case emptyName, invalidName
-    
-    var errorDescription: String? {
-        switch self {
-        case .emptyName: Strings.Credential.Error.emptyName
-        case .invalidName: "Name is invalid"
-        }
     }
 }
 

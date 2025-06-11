@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Common
+import MyCommon
 
 extension UITextField {
     static func primary(placeholder: String, backgroundColor: UIColor = .secondarySystemBackground) -> UITextField {

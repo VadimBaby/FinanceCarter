@@ -8,7 +8,7 @@
 
 // swiftlint:disable:next foundation_using
 import Foundation
-import Common
+import MyCommon
 
 public enum CategoryType: String {
     case income, spending

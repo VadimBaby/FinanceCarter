@@ -7,10 +7,11 @@
 //
 
 import Domain
+import Foundation
 
 protocol CreateCategoryInteractorOutput: AnyObject {
     func categoryDidAdded()
-    func throwError(_ error: CreateCategoryViewError)
+    func throwError(_ error: Error)
 }
 
 protocol CreateCategoryInteractorInput: AnyObject {
@@ -23,11 +24,11 @@ protocol CreateCategoryInteractorInput: AnyObject {
 final class CreateCategoryInteractor: CreateCategoryInteractorInput {
     weak var output: CreateCategoryInteractorOutput?
     
-    private let useCase: CategoriesUseCase
+    private let useCase: CategoryManagmentUseCase
     
     private var emoji: String?
     
-    init(useCase: CategoriesUseCase) {
+    init(useCase: CategoryManagmentUseCase) {
         self.useCase = useCase
         
         print("\(self) init")
@@ -37,19 +38,29 @@ final class CreateCategoryInteractor: CreateCategoryInteractorInput {
         print("\(self) deinit")
     }
     
+    private enum Error: LocalizedError {
+        case segmentOrTextFieldIsIncorrect, emojiInvalid
+        
+        var errorDescription: String? {
+            switch self {
+            case .segmentOrTextFieldIsIncorrect: Strings.CreateCategory.Error.segmentOrTextFieldIsIncorrect
+            case .emojiInvalid: Strings.CreateCategory.Error.emojiInvalid
+            }
+        }
+    }
+    
     func addCategory(type: TypeSegmentedControlItem, title: String) {
         let categoryType = categoryType(from: type)
         
-        guard title.count > 2 else { output?.throwError(.segmentOrTextFieldIsIncorrect); return }
-        guard let emoji else { output?.throwError(.emojiInvalid); return }
+        guard title.count > 2 else { output?.throwError(Error.segmentOrTextFieldIsIncorrect); return }
+        guard let emoji else { output?.throwError(Error.emojiInvalid); return }
         
-        useCase.addCategory(title: title, emoji: emoji, type: categoryType) { [weak self] result in
+        useCase.create(title: title, emoji: emoji, type: categoryType) { [weak self] result in
             switch result {
             case .success:
                 self?.output?.categoryDidAdded()
             case let .failure(error):
-                debugPrint(error)
-                self?.output?.throwError(.backend)
+                self?.output?.throwError(error)
             }
         }
     }

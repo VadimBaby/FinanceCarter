@@ -9,7 +9,7 @@
 // swiftlint:disable:next foundation_using
 import Foundation
 import Domain
-import Common
+import MyCommon
 
 public final class WalletsStorageManager: WalletsRepository {
     private let localDataSource: WalletsLocalDataSource
@@ -18,18 +18,45 @@ public final class WalletsStorageManager: WalletsRepository {
         self.localDataSource = localDataSource
     }
     
-    public func fetchWallets(completion: @escaping (_ result: Result<[WalletEntity], Error>) -> Void) {
-        let result = localDataSource.fetchWallets()
-        completion(result)
+    public func fetch(completion: @escaping (_ result: Result<[WalletEntity], DataError>) -> Void) {
+        let result = localDataSource.fetch()
+        switch result {
+        case let .success(entities): completion(.success(entities))
+        case let .failure(error): completion(.failure(error.toDataError()))
+        }
     }
     
-    public func addWallet(_ wallet: WalletEntity, completion: @escaping OperationResultCompletion) {
-        let result = localDataSource.addWallet(wallet)
-        completion(result)
+    public func create(
+        _ wallet: WalletEntity,
+        completion: @escaping OperationResultCompletionWithDataError
+    ) {
+        let result = localDataSource.create(wallet)
+        switch result {
+        case .success: completion(.success)
+        case let .failure(error): completion(.failure(error.toDataError()))
+        }
     }
     
-    public func removeWallet(by id: UUID, completion: @escaping  OperationResultCompletion) {
-        let result = localDataSource.removeWallet(by: id)
-        completion(result)
+    public func remove(
+        by id: UUID,
+        completion: @escaping OperationResultCompletionWithDataError
+    ) {
+        let result = localDataSource.remove(by: id)
+        switch result {
+        case .success: completion(.success)
+        case let .failure(error): completion(.failure(error.toDataError()))
+        }
+    }
+    
+    public func set(
+        balance: Double,
+        for wallet: WalletEntity,
+        completion: @escaping OperationResultCompletionWithDataError
+    ) {
+        let result = localDataSource.set(balance: balance, for: wallet)
+        switch result {
+        case .success: completion(.success)
+        case let .failure(error): completion(.failure(error.toDataError()))
+        }
     }
 }

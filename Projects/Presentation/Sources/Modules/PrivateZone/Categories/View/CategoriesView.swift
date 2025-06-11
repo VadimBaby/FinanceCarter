@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Common
+import MyCommon
 import Domain
 
 protocol CategoriesViewOutput: AnyObject {
@@ -20,7 +20,7 @@ protocol CategoriesViewInput: AnyObject {
     var output: CategoriesViewOutput? { get set }
     
     func setCategories(_ categories: [CategoryEntity])
-    func showError(_ error: CategoriesViewError)
+    func showError(_ error: Error)
     func insertCategory(_ category: CategoryEntity)
 }
 
@@ -28,7 +28,7 @@ final class CategoriesView: UIViewController, CategoriesViewInput {
     var output: CategoriesViewOutput?
     
     private lazy var tableView = UITableView(frame: view.frame) &> {
-        $0.register(cellType: CategoryTitleCellView.self)
+        $0.register(cellType: CategoryCellView.self)
         $0.dataSource = self
         $0.delegate = self
     }
@@ -61,7 +61,7 @@ final class CategoriesView: UIViewController, CategoriesViewInput {
         self.categories = categories
     }
     
-    func showError(_ error: CategoriesViewError) {
+    func showError(_ error: Error) {
         showAlert(type: .error(error))
     }
     
@@ -102,18 +102,6 @@ private extension CategoriesView {
     }
 }
 
-// MARK: - Errors
-
-enum CategoriesViewError: LocalizedError {
-    case backend
-    
-    var errorDescription: String? {
-        switch self {
-        case .backend: Strings.Error.backend
-        }
-    }
-}
-
 // MARK: - UITableViewDataSource
 
 extension CategoriesView: UITableViewDataSource {
@@ -122,7 +110,7 @@ extension CategoriesView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: CategoryTitleCellView.self)
+        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: CategoryCellView.self)
         let category = self.categories[indexPath.row]
         cell.configure(with: category)
         return cell

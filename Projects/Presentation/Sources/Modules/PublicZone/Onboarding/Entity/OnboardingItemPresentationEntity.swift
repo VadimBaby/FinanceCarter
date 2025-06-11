@@ -14,12 +14,6 @@ struct OnboardingItemPresentationEntity: Equatable {
     let title: String
     let description: String
     
-    init(image: UIImage, title: String, description: String) {
-        self.image = image
-        self.title = title
-        self.description = description
-    }
-    
     static let mock = OnboardingItemPresentationEntity(
         image: Asset.Images.Onboarding.firstOnboardingImage.image,
         title: "Title",

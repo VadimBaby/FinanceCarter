@@ -9,10 +9,10 @@
 // swiftlint:disable:next foundation_using
 import Foundation
 import Domain
-import Common
+import MyCommon
 
 public protocol CategoriesLocalDataSource: AnyObject {
-    func fetchCategories() -> Result<[CategoryEntity], Error>
-    func addCategory(_ category: CategoryEntity) -> OperationResult<Error>
-    func removeCategory(by id: UUID) -> OperationResult<Error>
+    func fetch() -> Result<[CategoryEntity], DataSourceError>
+    func create(_ category: CategoryEntity) -> OperationResult<DataSourceError>
+    func remove(by id: UUID) -> OperationResult<DataSourceError>
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 import SnapKit
-import Common
+import MyCommon
 import Domain
 
 // MARK: - Delegate

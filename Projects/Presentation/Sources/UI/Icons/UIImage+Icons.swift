@@ -14,4 +14,3 @@ extension UIImage {
     static let menucardIcon: UIImage? = UIImage(systemName: "menucard.fill")
     static let documentIcon: UIImage? = UIImage(systemName: "newspaper.fill") // text.document.fill
 }
-

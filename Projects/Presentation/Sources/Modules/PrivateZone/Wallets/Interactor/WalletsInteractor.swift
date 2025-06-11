@@ -11,7 +11,7 @@ import Domain
 
 protocol WalletsInteractorOutput: AnyObject {
     func walletsDidGet(_ wallets: [WalletEntity])
-    func throwError(_ error: WalletsViewError)
+    func throwError(_ error: Error)
     func removeWalletDidFall(_ wallet: WalletEntity)
 }
 
@@ -25,9 +25,9 @@ protocol WalletsInteractorInput: AnyObject {
 final class WalletsInteractor: WalletsInteractorInput {
     weak var output: WalletsInteractorOutput?
     
-    private let useCase: WalletsUseCase
+    private let useCase: WalletManagmentUseCase
     
-    init(useCase: WalletsUseCase) {
+    init(useCase: WalletManagmentUseCase) {
         self.useCase = useCase
         print("\(Self.self) init")
     }
@@ -37,22 +37,20 @@ final class WalletsInteractor: WalletsInteractorInput {
     }
     
     func getWallets() {
-        useCase.fetchWallets { [weak self] result in
+        useCase.fetch { [weak self] result in
             switch result {
             case .success(let wallets):
                 self?.output?.walletsDidGet(wallets)
             case .failure(let error):
-                debugPrint(error)
-                self?.output?.throwError(.backend)
+                self?.output?.throwError(error)
             }
         }
     }
     
     func removeWallet(_ wallet: WalletEntity) {
-        useCase.removeWallet(wallet) { [weak self] result in
+        useCase.remove(wallet) { [weak self] result in
             guard case let .failure(error) = result else { return }
-            debugPrint(error)
-            self?.output?.throwError(.backend)
+            self?.output?.throwError(error)
             self?.output?.removeWalletDidFall(wallet)
         }
     }

@@ -6,6 +6,7 @@
 //  Copyright © 2025 Vadim Martynenko. All rights reserved.
 //
 
+// swiftlint:disable:next foundation_using
 import Foundation
 
 public protocol CreatedAtContainable {

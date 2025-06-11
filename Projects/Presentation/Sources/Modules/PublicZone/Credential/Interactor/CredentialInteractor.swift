@@ -6,11 +6,11 @@
 //
 
 import Domain
-import Common
+import MyCommon
 
 protocol CredentialInteractorOutput: AnyObject {
     func nameDidSet()
-    func throwError(_ error: AccountUseCaseError)
+    func throwError(_ error: Error)
 }
 
 protocol CredentialInteractorInput: AnyObject {

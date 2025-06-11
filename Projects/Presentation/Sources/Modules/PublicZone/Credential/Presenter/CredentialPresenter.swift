@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Common
+import MyCommon
 import Domain
 
 protocol CredentialPresenterOutput: AnyObject {
@@ -46,11 +46,8 @@ extension CredentialPresenter: CredentialInteractorOutput {
         output?.credentialsDidTapNext()
     }
     
-    func throwError(_ error: AccountUseCaseError) {
-        switch error {
-        case .invalidName:
-            view.throwError(.invalidName)
-        }
+    func throwError(_ error: Error) {
+        view.throwError(error)
     }
 }
 

@@ -19,7 +19,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         
         let resolver = DIConfigurator.configure(
-            with: [DataSourcesAssembly(), StoragesAssembly(), RepositoriesAssembly(), UseCasesAssembly()]
+            with: [CoreDataInfastructureAssembly(), DataAssembly(), DomainAssembly()]
         )
         
         appCoordinator = AppCoordinatorFactory.create(window: window!, resolver: resolver)

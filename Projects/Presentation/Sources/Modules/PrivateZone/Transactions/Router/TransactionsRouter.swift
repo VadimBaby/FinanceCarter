@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import Common
+import MyCommon
+import Domain
 
 protocol TransactionsRouterOutput: AnyObject {
     func transactionsAddButtonDidTap(updateTransactionsViewClosure: @escaping VoidAction)

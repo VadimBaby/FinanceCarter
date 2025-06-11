@@ -8,6 +8,7 @@
 
 import Domain
 import CoreData
+import MyCommon
 
 struct WalletMapper {
     static func toDomain(from entity: DBWallet) -> WalletEntity {
@@ -20,6 +21,6 @@ struct WalletMapper {
     }
     
     static func toDomain(from entities: [DBWallet]) -> [WalletEntity] {
-        entities.map{ toDomain(from: $0) }.sorted(by: { $0.createdAt > $1.createdAt })
+        entities.map{ toDomain(from: $0) }.sortedByCreatedAt()
     }
 }

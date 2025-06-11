@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import MyCommon
 
 extension UILabel {
-    static func textfield(text: String) -> UILabel {
-        let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .headline)
-        label.text = text
-        return label
+    static func placeholder(text: String) -> UILabel {
+        UILabel() &> {
+            $0.font = .preferredFont(forTextStyle: .headline)
+            $0.text = text
+        }
     }
 }

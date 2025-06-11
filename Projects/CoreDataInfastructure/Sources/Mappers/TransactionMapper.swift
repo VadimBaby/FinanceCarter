@@ -8,6 +8,7 @@
 
 import Domain
 import CoreData
+import MyCommon
 
 struct TransactionMapper {
     static func toDomain(from entity: DBTransaction) -> TransactionEntity? {
@@ -25,6 +26,6 @@ struct TransactionMapper {
     }
     
     static func toDomain(from entities: [DBTransaction]) -> [TransactionEntity] {
-        entities.compactMap{ toDomain(from: $0) }.sorted(by: { $0.createdAt > $1.createdAt })
+        entities.compactMap{ toDomain(from: $0) }.sortedByCreatedAt()
     }
 }

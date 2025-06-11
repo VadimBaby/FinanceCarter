@@ -116,7 +116,7 @@ private extension PrivateZoneCoordinator {
 
 extension PrivateZoneCoordinator: HomeFlowCoordinatorOutput {
     func homeFlowCoordinatorDidStart(with viewController: UIViewController) {
-        tabBarController.setTab(viewController: viewController, for: .home)
+       // tabBarController.setTab(viewController: viewController, for: .home)
     }
 }
 
@@ -124,7 +124,7 @@ extension PrivateZoneCoordinator: HomeFlowCoordinatorOutput {
 
 extension PrivateZoneCoordinator: ProfileFlowCoordinatorOutput {
     func profileFlowCoordinatorDidStart(with viewController: UIViewController) {
-        tabBarController.setTab(viewController: viewController, for: .profile)
+       // tabBarController.setTab(viewController: viewController, for: .profile)
     }
 }
 
@@ -141,6 +141,10 @@ extension PrivateZoneCoordinator: WalletsFlowCoordinatorOutput {
 extension PrivateZoneCoordinator: TransactionsFlowCoordinatorOutput {
     func transactionsFlowCoordinatorDidStart(with viewController: UIViewController) {
         tabBarController.setTab(viewController: viewController, for: .transactions)
+    }
+    
+    func transactionsFlowCoordinatorTransactionDidAdded() {
+        walletsFlowCoordinator?.updateWalletsView()
     }
 }
 

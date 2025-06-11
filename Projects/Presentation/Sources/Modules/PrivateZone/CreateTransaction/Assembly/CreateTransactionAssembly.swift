@@ -15,9 +15,9 @@ final class CreateTransactionAssembly {
     static func create(router: CreateTransactionPresenterOutput, resolver: Resolver) -> CreateTransactionViewInput & UIViewController {
         let view = CreateTransactionView()
         let interactor = CreateTransactionInteractor(
-            transactionsUseCase: resolver.resolve(TransactionsUseCase.self)!,
-            walletsUseCase: resolver.resolve(WalletsUseCase.self)!,
-            categoryUseCase: resolver.resolve(CategoriesUseCase.self)!
+            transactionManager: resolver.resolve(TransactionManaging.self)!,
+            walletsUseCase: resolver.resolve(WalletManagmentUseCase.self)!,
+            categoriesUseCase: resolver.resolve(CategoryManagmentUseCase.self)!
         )
         
         let presenter = CreateTransactionPresenter(interactor: interactor, view: view)
@@ -46,9 +46,9 @@ extension CreateTransactionAssembly {
     static func createMock() -> CreateTransactionViewInput & UIViewController {
         let view = CreateTransactionView()
         let interactor = CreateTransactionInteractor(
-            transactionsUseCase: MockTransactionsService(),
-            walletsUseCase: MockWalletsService(),
-            categoryUseCase: MockCategoriesService()
+            transactionManager: MockTransactionManagmentService(),
+            walletsUseCase: MockWalletManagmentService(),
+            categoriesUseCase: MockCategoryManagmentService()
         )
         
         let presenter = CreateTransactionPresenter(interactor: interactor, view: view)

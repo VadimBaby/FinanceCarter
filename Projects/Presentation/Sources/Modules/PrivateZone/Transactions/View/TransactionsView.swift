@@ -8,7 +8,7 @@
 
 import UIKit
 import SnapKit
-import Common
+import MyCommon
 import Domain
 import Reusable
 
@@ -20,7 +20,7 @@ protocol TransactionsViewOutput: AnyObject {
 protocol TransactionsViewInput: AnyObject {
     var output: TransactionsViewOutput? { get set }
     
-    func showError(_ error: TransactionsViewError)
+    func showError(_ error: Error)
     func setTransactionSections(_ sections: [TransactionSectionEntity])
 }
 
@@ -30,7 +30,7 @@ final class TransactionsView: UIViewController, TransactionsViewInput {
     private lazy var tableView = UITableView(frame: view.bounds) &> {
         $0.dataSource = self
         $0.delegate = self
-        $0.register(cellType: TransactionTitleCellView.self)
+        $0.register(cellType: TransactionCellView.self)
         $0.rowHeight = UITableView.automaticDimension
     }
     
@@ -56,7 +56,7 @@ final class TransactionsView: UIViewController, TransactionsViewInput {
         setupNavigationBar()
     }
     
-    func showError(_ error: TransactionsViewError) {
+    func showError(_ error: Error) {
         showAlert(type: .error(error))
     }
     
@@ -103,15 +103,10 @@ extension TransactionsView: UITableViewDataSource {
         sections.count
     }
     
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        let currentSection = sections[section]
-//        return DateFomatter.toMonthAndDayString(from: currentSection.date)
-//    }
-    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let currentSection = sections[section]
-        let view = DateAndAmountHeaderView()
-        view.configure(date: currentSection.date, amount: currentSection.amount)
+        let view = TransactionTableHeaderView()
+        view.configure(with: currentSection)
         return view
     }
     
@@ -120,7 +115,7 @@ extension TransactionsView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: TransactionTitleCellView.self)
+        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: TransactionCellView.self)
         let section = sections[indexPath.section]
         let transaction = section.transactions[indexPath.row]
         cell.configure(with: transaction)
@@ -133,18 +128,6 @@ extension TransactionsView: UITableViewDataSource {
 extension TransactionsView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         false
-    }
-}
-
-// MARK: - Errors
-
-enum TransactionsViewError: LocalizedError {
-    case backend
-    
-    var errorDescription: String? {
-        switch self {
-        case .backend: Strings.Error.backend
-        }
     }
 }
 

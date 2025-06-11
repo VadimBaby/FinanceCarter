@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Common
+import MyCommon
 
 protocol WalletsFlowCoordinatorOutput: AnyObject {
     func walletsFlowCoordinatorDidStart(with viewController: UIViewController)
@@ -15,6 +15,8 @@ protocol WalletsFlowCoordinatorOutput: AnyObject {
 
 protocol WalletsFlowCoordinatorInput: NavigationCoordinator {
     var delegate: WalletsFlowCoordinatorOutput? { get set }
+    
+    func updateWalletsView()
 }
 
 final class WalletsFlowCoordinator: WalletsFlowCoordinatorInput {
@@ -50,8 +52,6 @@ final class WalletsFlowCoordinator: WalletsFlowCoordinatorInput {
         print("\(Self.self) init")
     }
     
-    private var updateWalletsViewClosure: VoidAction?
-    
     deinit {
         print("\(Self.self) deinit")
     }
@@ -59,6 +59,10 @@ final class WalletsFlowCoordinator: WalletsFlowCoordinatorInput {
     func start() {
         defer { delegate?.walletsFlowCoordinatorDidStart(with: navigationController) }
         openWalletsScreen()
+    }
+    
+    func updateWalletsView() {
+        walletsRouter?.update()
     }
 }
 
@@ -80,15 +84,13 @@ private extension WalletsFlowCoordinator {
     func closeCreateWalletScreen() {
         createWalletRouter?.close()
         createWalletRouter = nil
-        updateWalletsViewClosure = nil
     }
 }
 
 // MARK: - WalletsRouterOutput
 
 extension WalletsFlowCoordinator: WalletsRouterOutput {
-    func walletsAddButtonDidTap(updateWalletsViewClosure: @escaping VoidAction) {
-        self.updateWalletsViewClosure = updateWalletsViewClosure
+    func walletsAddButtonDidTap() {
         openCreateWalletScreen()
     }
 }
@@ -96,12 +98,12 @@ extension WalletsFlowCoordinator: WalletsRouterOutput {
 // MARK: - CreateWalletsRouterOutput
 
 extension WalletsFlowCoordinator: CreateWalletRouterOutput {
-    func createWalletcloseButtonDidPressed() {
+    func createWalletCloseButtonDidPressed() {
         closeCreateWalletScreen()
     }
     
     func walletDidAdded() {
-        self.updateWalletsViewClosure?()
+        walletsRouter?.update()
         closeCreateWalletScreen()
     }
 }

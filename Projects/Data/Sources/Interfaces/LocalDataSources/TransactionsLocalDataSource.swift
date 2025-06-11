@@ -6,12 +6,13 @@
 //  Copyright © 2025 Vadim Martynenko. All rights reserved.
 //
 
+// swiftlint:disable:next foundation_using
 import Foundation
 import Domain
-import Common
+import MyCommon
 
 public protocol TransactionsLocalDataSource: AnyObject {
-    func fetchTransactions() -> Result<[TransactionEntity], Error>
-    func addTransaction(_ transaction: TransactionEntity) -> OperationResult<Error>
-    func removeTransaction(by id: UUID) -> OperationResult<Error>
+    func fetch() -> Result<[TransactionEntity], DataSourceError>
+    func create(_ transaction: TransactionEntity) -> OperationResult<DataSourceError>
+    func remove(by id: UUID) -> OperationResult<DataSourceError>
 }

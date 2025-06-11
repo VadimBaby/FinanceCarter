@@ -7,10 +7,11 @@
 //
 
 import Domain
+import MyCommon
 
 protocol TransactionsInteractorOutput: AnyObject {
     func transactionSectionsDidGet(_ sections: [TransactionSectionEntity])
-    func throwError(_ error: TransactionsViewError)
+    func throwError(_ error: Error)
 }
 
 protocol TransactionsInteractorInput: AnyObject {
@@ -22,9 +23,11 @@ protocol TransactionsInteractorInput: AnyObject {
 final class TransactionsInteractor: TransactionsInteractorInput {
     weak var output: TransactionsInteractorOutput?
     
-    private let useCase: TransactionsUseCase
+    private let useCase: TransactionSectionManagmentUseCase
     
-    init(useCase: TransactionsUseCase) {
+    private var currentSectionTransactions: [TransactionSectionEntity] = []
+    
+    init(useCase: TransactionSectionManagmentUseCase) {
         self.useCase = useCase
         
         print("\(Self.self) init")
@@ -35,13 +38,13 @@ final class TransactionsInteractor: TransactionsInteractorInput {
     }
     
     func getTransactionSections() {
-        useCase.fetchSectionTransactions { [weak self] result in
+        useCase.fetch { [weak self] result in
             switch result {
             case let .success(sections):
+                self?.currentSectionTransactions = sections
                 self?.output?.transactionSectionsDidGet(sections)
             case let .failure(error):
-                debugPrint(error)
-                self?.output?.throwError(.backend)
+                self?.output?.throwError(error)
             }
         }
     }

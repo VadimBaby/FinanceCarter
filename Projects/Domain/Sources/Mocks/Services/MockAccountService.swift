@@ -6,7 +6,7 @@
 //  Copyright © 2025 Vadim Martynenko. All rights reserved.
 //
 
-import Common
+import MyCommon
 
 public final class MockAccountService: AccountUseCase {
     private var name: String = .empty
@@ -18,10 +18,10 @@ public final class MockAccountService: AccountUseCase {
     }
     
     @discardableResult
-    public func setName(_ name: String) -> OperationResult<AccountUseCaseError> {
+    public func setName(_ name: String) -> OperationResult<DomainError> {
         let clearName = name.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        guard clearName.isNotEmpty else { return .failure(AccountUseCaseError.invalidName) }
+        guard clearName.isNotEmpty else { return .failure(.invalidName) }
         
         self.name = clearName
         return .success

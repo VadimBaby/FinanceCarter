@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Common
+import MyCommon
 
 protocol CategoriesFlowCoordinatorOutput: AnyObject {
     func categoriesFlowCoordinatorDidStart(with viewController: UIViewController)

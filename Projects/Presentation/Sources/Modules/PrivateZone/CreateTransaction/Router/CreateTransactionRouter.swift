@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import Domain
 
 protocol CreateTransactionRouterOutput: AnyObject {
     func createTransactionCloseButtonDidPressed()
-    func transactionDidAdded()
+    func createTransactionTransactionDidAdded()
 }
 
 protocol CreateTransactionRouterInput: Router {
@@ -59,11 +60,11 @@ final class CreateTransactionRouter: CreateTransactionRouterInput {
 }
 
 extension CreateTransactionRouter: CreateTransactionPresenterOutput {
-    func closeButtonDidPressed() {
-        delegate?.createTransactionCloseButtonDidPressed()
+    func transactionDidAdded() {
+        delegate?.createTransactionTransactionDidAdded()
     }
     
-    func transactionDidAdded() {
-        delegate?.transactionDidAdded()
+    func closeButtonDidPressed() {
+        delegate?.createTransactionCloseButtonDidPressed()
     }
 }

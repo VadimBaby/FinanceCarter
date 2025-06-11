@@ -9,7 +9,7 @@
 // swiftlint:disable:next foundation_using
 import Foundation
 import Domain
-import Common
+import MyCommon
 
 public final class CategoriesStorageManager: CategoriesRepository {
     private let localDataSource: CategoriesLocalDataSource
@@ -18,18 +18,30 @@ public final class CategoriesStorageManager: CategoriesRepository {
         self.localDataSource = localDataSource
     }
     
-    public func fetchCategories(completion: @escaping (_ result: Result<[CategoryEntity], Error>) -> Void) {
-        let result = localDataSource.fetchCategories()
-        completion(result)
+    public func fetch(completion: @escaping (_ result: Result<[CategoryEntity], DataError>) -> Void) {
+        let result = localDataSource.fetch()
+        switch result {
+        case let .success(entities): completion(.success(entities))
+        case let .failure(error): completion(.failure(error.toDataError()))
+        }
     }
     
-    public func addCategory(_ category: CategoryEntity, completion: @escaping OperationResultCompletion) {
-        let result = localDataSource.addCategory(category)
-        completion(result)
+    public func create(
+        _ category: CategoryEntity,
+        completion: @escaping OperationResultCompletionWithDataError
+    ) {
+        let result = localDataSource.create(category)
+        switch result {
+        case .success: completion(.success)
+        case .failure(let error): completion(.failure(error.toDataError()))
+        }
     }
     
-    public func removeCategory(by id: UUID, completion: @escaping OperationResultCompletion) {
-        let result = localDataSource.removeCategory(by: id)
-        completion(result)
+    public func remove(by id: UUID, completion: @escaping OperationResultCompletionWithDataError) {
+        let result = localDataSource.remove(by: id)
+        switch result {
+        case .success: completion(.success)
+        case .failure(let error): completion(.failure(error.toDataError()))
+        }
     }
 }

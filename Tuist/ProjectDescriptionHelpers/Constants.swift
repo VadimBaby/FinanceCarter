@@ -9,7 +9,7 @@ public enum Constants {
     public static let DEFAULT_LOCATE_RESOURCES: ResourceFileElements = ["Sources/Resources/**"]
     
     public enum Modules: String, CaseIterable {
-        case Common, CoreDataInfastructure, Domain, Data, Presentation, FinanceCarter
+        case CoreDataInfastructure, Domain, Data, Presentation, FinanceCarter
         
         public var title: String { rawValue }
         
@@ -34,6 +34,38 @@ public enum Constants {
         
         public var path: Path {
             "../../Scripts/\(self.rawValue).sh"
+        }
+    }
+    
+    public enum Packages {
+        case MyCommon, Reusable, SnapKit, ElegantEmojiPicker, Swinject, MyCoreDataWrapper
+        
+        public var package: Package {
+            switch self {
+            case .Reusable:
+                .remote(url: "https://github.com/AliSoftware/Reusable.git", requirement: .upToNextMajor(from: "4.1.2"))
+            case .SnapKit:
+                .remote(url: "https://github.com/SnapKit/SnapKit.git", requirement: .upToNextMajor(from: "5.7.1"))
+            case .ElegantEmojiPicker:
+                .remote(url: "https://github.com/Finalet/Elegant-Emoji-Picker.git", requirement: .branch("main"))
+            case .MyCommon:
+                .remote(url: "https://github.com/VadimBaby/MyCommon.git", requirement: .branch("master"))
+            case .Swinject:
+                .remote(url: "https://github.com/Swinject/Swinject.git", requirement: .upToNextMajor(from: "2.9.1"))
+            case .MyCoreDataWrapper:
+                .remote(url: "https://github.com/VadimBaby/MyCoreDataWrapped.git", requirement: .branch("master"))
+            }
+        }
+        
+        public var dependency: TargetDependency {
+            switch self {
+            case .MyCommon: .package(product: "MyCommon")
+            case .Reusable: .package(product: "Reusable")
+            case .SnapKit: .package(product: "SnapKit")
+            case .ElegantEmojiPicker: .package(product: "ElegantEmojiPicker")
+            case .Swinject: .package(product: "Swinject")
+            case .MyCoreDataWrapper: .package(product: "MyCoreDataWrapper")
+            }
         }
     }
 }

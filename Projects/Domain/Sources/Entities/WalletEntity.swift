@@ -27,6 +27,26 @@ public struct WalletEntity: Identifiable, CreatedAtContainable {
     }
 }
 
+// MARK: - Copy With
+
+public extension WalletEntity {
+    func copyWith(
+        id: UUID? = nil,
+        title: String? = nil,
+        balance: Double? = nil,
+        createdAt: Date? = nil
+    ) -> WalletEntity {
+        WalletEntity(
+            id: id ?? self.id,
+            title: title ?? self.title,
+            balance: balance ?? self.balance,
+            createdAt: createdAt ?? self.createdAt
+        )
+    }
+}
+
+// MARK: - Mock
+
 extension WalletEntity {
     static let mock = WalletEntity(title: "Тинькофф", balance: 13999)
 }

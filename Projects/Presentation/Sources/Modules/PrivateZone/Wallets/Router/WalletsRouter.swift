@@ -7,10 +7,10 @@
 //
 
 import UIKit
-import Common
+import MyCommon
 
 protocol WalletsRouterOutput: AnyObject {
-    func walletsAddButtonDidTap(updateWalletsViewClosure: @escaping VoidAction)
+    func walletsAddButtonDidTap()
 }
 
 protocol WalletsRouterInput: Router {
@@ -21,6 +21,7 @@ protocol WalletsRouterInput: Router {
     var moduleAssembly: ModuleAssembly? { get set }
     
     func open()
+    func update()
 }
 
 final class WalletsRouter: WalletsRouterInput {
@@ -46,16 +47,26 @@ final class WalletsRouter: WalletsRouterInput {
         print("\(Self.self) deinit")
     }
     
+    private var updateWalletsViewClosure: VoidAction?
+    
     func open() {
         guard let module = moduleAssembly?(self, resolver) else { fatalError("moduleAssembly is nil in \(self)") }
         navigationController.pushViewController(module, animated: true)
+    }
+    
+    func update() {
+        updateWalletsViewClosure?()
     }
 }
 
 // MARK: - WalletsPresenterOutput
 
 extension WalletsRouter: WalletsPresenterOutput {
-    func addButtonDidTap(updateWalletsViewClosure: @escaping VoidAction) {
-        delegate?.walletsAddButtonDidTap(updateWalletsViewClosure: updateWalletsViewClosure)
+    func addButtonDidTap() {
+        delegate?.walletsAddButtonDidTap()
+    }
+    
+    func viewDidLoad(updateWalletsViewClosure: @escaping VoidAction) {
+        self.updateWalletsViewClosure = updateWalletsViewClosure
     }
 }

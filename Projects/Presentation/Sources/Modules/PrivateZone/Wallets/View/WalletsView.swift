@@ -8,10 +8,10 @@
 
 import UIKit
 import Domain
-import Common
+import MyCommon
 
 protocol WalletsViewOutput: AnyObject {
-    func viewDidAppear()
+    func viewDidLoad()
     func addButtonDidPressed()
     func walletDidRemoved(_ wallet: WalletEntity)
 }
@@ -20,7 +20,7 @@ protocol WalletsViewInput: AnyObject {
     var output: WalletsViewOutput? { get set }
     
     func setWallets(_ wallets: [WalletEntity])
-    func showError(_ error: WalletsViewError)
+    func showError(_ error: Error)
     func insertWallet(_ wallet: WalletEntity)
 }
 
@@ -30,7 +30,7 @@ final class WalletsView: UIViewController, WalletsViewInput {
     private lazy var tableView = UITableView(frame: view.bounds) &> {
         $0.dataSource = self
         $0.delegate = self
-        $0.register(cellType: WalletTitleCellView.self)
+        $0.register(cellType: WalletCellView.self)
     }
     
     private var wallets: [WalletEntity] = []
@@ -51,14 +51,9 @@ final class WalletsView: UIViewController, WalletsViewInput {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        output?.viewDidLoad()
         setupViews()
         setupNavigationBar()
-    }
-    
-    // TODO: - Подумать над этим, вызывается во viewDidAppear чтобы каждый раз получать актуальные данные, подумать над тем, чтобы запрашивать актуальные данные только тогда, когда это необходимо
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        output?.viewDidAppear()
     }
     
     func setWallets(_ wallets: [WalletEntity]) {
@@ -66,7 +61,7 @@ final class WalletsView: UIViewController, WalletsViewInput {
         self.wallets = wallets
     }
     
-    func showError(_ error: WalletsViewError) {
+    func showError(_ error: Error) {
         showAlert(type: .error(error))
     }
     
@@ -107,18 +102,6 @@ private extension WalletsView {
     }
 }
 
-// MARK: - Errors
-
-enum WalletsViewError: LocalizedError {
-    case backend
-    
-    var errorDescription: String? {
-        switch self {
-        case .backend: Strings.Error.backend
-        }
-    }
-}
-
 // MARK: - UITableViewDataSource
 
 extension WalletsView: UITableViewDataSource {
@@ -127,7 +110,7 @@ extension WalletsView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: WalletTitleCellView.self)
+        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: WalletCellView.self)
         let wallet = wallets[indexPath.row]
         cell.configure(with: wallet)
         return cell

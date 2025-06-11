@@ -8,11 +8,15 @@
 
 // swiftlint:disable:next foundation_using
 import Foundation
-import Common
+import MyCommon
 
 public protocol TransactionsRepository: AnyObject {
-    func fetchTransactions(completion: @escaping (_ result: Result<[TransactionEntity], Error>) -> Void)
-    func addTransaction(_ transaction: TransactionEntity, completion: @escaping  OperationResultCompletion)
-    func removeTransaction(by id: UUID, completion: @escaping OperationResultCompletion)
+    func fetch(completion: @escaping (_ result: Result<[TransactionEntity], DataError>) -> Void)
+    
+    func create(
+        _ transaction: TransactionEntity,
+        completion: @escaping OperationResultCompletionWithDataError
+    )
+    
+    func remove(by id: UUID, completion: @escaping OperationResultCompletionWithDataError)
 }
-

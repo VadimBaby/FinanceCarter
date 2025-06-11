@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 import Reusable
-import Common
+import MyCommon
 
 protocol GreetingCellViewInput: AnyObject {
     var output: GreetingCellViewOutput? { get set }

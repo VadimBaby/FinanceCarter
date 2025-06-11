@@ -8,7 +8,7 @@
 
 import UIKit
 import Domain
-import Common
+import MyCommon
 import SnapKit
 
 protocol CreateTransactionViewOutput: AnyObject {
@@ -22,38 +22,29 @@ protocol CreateTransactionViewOutput: AnyObject {
 protocol CreateTransactionViewInput: AnyObject {
     var output: CreateTransactionViewOutput? { get set }
     
-    func showError(_ error: CreateTransactionError)
+    func showError(_ error: Error)
     func setWallets(_ wallets: [WalletEntity])
     func setCategories(_ categories: [CategoryEntity])
-}
-
-private struct Constants {
-    static let padding = 20
-    static let textFieldHeight = 50
-    static let verticalSpacingSmall = 10
-    static let verticalSpacingMedium = 20
 }
 
 final class CreateTransactionView: UIViewController, CreateTransactionViewInput {
     var output: CreateTransactionViewOutput?
     
-    // TODO: - Локализовать
-    private lazy var amountLabel: UILabel = .textfield(text: "Сумма")
-    private lazy var amountTextField: UITextField = .primary(placeholder: "Сумма") &> {
+    private lazy var amountLabel: UILabel = .placeholder(text: Strings.CreateTransaction.Label.amount)
+    private lazy var amountTextField: UITextField = .primary(placeholder: Strings.CreateTransaction.Textfield.amount) &> {
         $0.keyboardType = .numberPad
     }
     
-    // TODO: - Почему у лейбла именно .textfield
-    private lazy var walletLabel: UILabel = .textfield(text: "Кошелек")
+    private lazy var walletLabel: UILabel = .placeholder(text: Strings.CreateTransaction.Label.wallet)
     private lazy var showWalletMenuButton = UIButton(type: .system) &> {
         $0.showsMenuAsPrimaryAction = true
-        $0.setTitle("Выберите кошелек", for: .normal)
+        $0.setTitle(Strings.CreateTransaction.Menu.wallet, for: .normal)
     }
     
-    private lazy var categoryLabel: UILabel = .textfield(text: "Категория")
+    private lazy var categoryLabel: UILabel = .placeholder(text: Strings.CreateTransaction.Label.category)
     private lazy var showCategoryMenuButton = UIButton(type: .system) &> {
         $0.showsMenuAsPrimaryAction = true
-        $0.setTitle("Выберите категорию", for: .normal)
+        $0.setTitle(Strings.CreateTransaction.Menu.category, for: .normal)
     }
 
     init() {
@@ -78,7 +69,7 @@ final class CreateTransactionView: UIViewController, CreateTransactionViewInput 
         setupNavigationBar()
     }
     
-    func showError(_ error: CreateTransactionError) {
+    func showError(_ error: Error) {
         showAlert(type: .error(error))
     }
     
@@ -111,34 +102,34 @@ private extension CreateTransactionView {
     
     func setupConstraints() {
         amountLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(Constants.verticalSpacingMedium)
-            make.leading.equalToSuperview().inset(Constants.padding)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(AppConstants.verticalSpacingMedium)
+            make.leading.equalToSuperview().inset(AppConstants.padding)
         }
         
         amountTextField.snp.makeConstraints { make in
-            make.horizontalEdges.equalToSuperview().inset(Constants.padding)
-            make.top.equalTo(amountLabel.snp.bottom).offset(Constants.verticalSpacingSmall)
-            make.height.equalTo(Constants.textFieldHeight)
+            make.horizontalEdges.equalToSuperview().inset(AppConstants.padding)
+            make.top.equalTo(amountLabel.snp.bottom).offset(AppConstants.verticalSpacingSmall)
+            make.height.equalTo(AppConstants.textFieldHeight)
         }
         
         walletLabel.snp.makeConstraints { make in
-            make.top.equalTo(amountTextField.snp.bottom).offset(Constants.verticalSpacingMedium)
-            make.leading.equalToSuperview().inset(Constants.padding)
+            make.top.equalTo(amountTextField.snp.bottom).offset(AppConstants.verticalSpacingMedium)
+            make.leading.equalToSuperview().inset(AppConstants.padding)
         }
         
         showWalletMenuButton.snp.makeConstraints { make in
-            make.top.equalTo(amountTextField.snp.bottom).offset(Constants.verticalSpacingMedium)
-            make.trailing.equalToSuperview().inset(Constants.padding)
+            make.top.equalTo(amountTextField.snp.bottom).offset(AppConstants.verticalSpacingMedium)
+            make.trailing.equalToSuperview().inset(AppConstants.padding)
         }
         
         categoryLabel.snp.makeConstraints { make in
-            make.top.equalTo(showWalletMenuButton.snp.bottom).offset(Constants.verticalSpacingMedium)
-            make.leading.equalToSuperview().inset(Constants.padding)
+            make.top.equalTo(showWalletMenuButton.snp.bottom).offset(AppConstants.verticalSpacingMedium)
+            make.leading.equalToSuperview().inset(AppConstants.padding)
         }
         
         showCategoryMenuButton.snp.makeConstraints { make in
-            make.top.equalTo(showWalletMenuButton.snp.bottom).offset(Constants.verticalSpacingMedium)
-            make.trailing.equalToSuperview().inset(Constants.padding)
+            make.top.equalTo(showWalletMenuButton.snp.bottom).offset(AppConstants.verticalSpacingMedium)
+            make.trailing.equalToSuperview().inset(AppConstants.padding)
         }
     }
     
@@ -180,18 +171,6 @@ private extension CreateTransactionView {
         let title = category.emoji + .space + category.title
         showCategoryMenuButton.setTitle(title, for: .normal)
         output?.categoryDidSelect(category)
-    }
-}
-
-// MARK: - Errors
-
-enum CreateTransactionError: LocalizedError {
-    case backend
-    
-    var errorDescription: String? {
-        switch self {
-        case .backend: Strings.Error.backend
-        }
     }
 }
 

@@ -7,18 +7,13 @@
 //
 
 import UIKit
-import Common
+import MyCommon
 import SnapKit
 import ElegantEmojiPicker
 
 // MARK: - Constants
 
-// TODO: - Сделать общие констатны (AppConstants)
 private struct Constants {
-    static let padding = 20
-    static let textFieldHeight = 50
-    static let verticalSpacingSmall = 10
-    static let verticalSpacingMedium = 20
     static let pickEmojiButtonSize = 150
 }
 
@@ -33,7 +28,7 @@ protocol CreateCategoryViewOutput: AnyObject {
 protocol CreateCategoryViewInput: AnyObject {
     var output: CreateCategoryViewOutput? { get set }
     
-    func showError(_ error: CreateCategoryViewError)
+    func showError(_ error: Error)
 }
 
 // MARK: - TypeSegmentedControlItems
@@ -64,13 +59,13 @@ final class CreateCategoryView: UIViewController, CreateCategoryViewInput {
     }
     
     private lazy var pickEmojiButton = UIButton(type: .system) &> {
-        $0.setTitle("Выбрать эмодзи", for: .normal)
+        $0.setTitle(Strings.CreateCategory.Button.pickEmojiButton, for: .normal)
         $0.addTarget(self, action: #selector(pickEmojiButtonPressed), for: .touchUpInside)
         $0.backgroundColor = .systemGroupedBackground
         $0.layer.cornerRadius = CGFloat(Constants.pickEmojiButtonSize / 2)
     }
     
-    private lazy var titleLabel: UILabel = .textfield(text: Strings.CreateCategory.Label.title)
+    private lazy var titleLabel: UILabel = .placeholder(text: Strings.CreateCategory.Label.title)
     
     private lazy var titleTextField: UITextField = .primary(placeholder: Strings.CreateCategory.Textfield.title)
     
@@ -95,7 +90,7 @@ final class CreateCategoryView: UIViewController, CreateCategoryViewInput {
         setupGestures()
     }
     
-    func showError(_ error: CreateCategoryViewError) {
+    func showError(_ error: Error) {
         showAlert(type: .error(error))
     }
 }
@@ -110,25 +105,25 @@ private extension CreateCategoryView {
     
     func setupConstraints() {
         typeSegmentedControl.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(Constants.verticalSpacingMedium)
-            make.horizontalEdges.equalToSuperview().inset(Constants.padding)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(AppConstants.verticalSpacingMedium)
+            make.horizontalEdges.equalToSuperview().inset(AppConstants.padding)
         }
         
         pickEmojiButton.snp.makeConstraints { make in
-            make.top.equalTo(typeSegmentedControl.snp.bottom).offset(Constants.verticalSpacingMedium)
+            make.top.equalTo(typeSegmentedControl.snp.bottom).offset(AppConstants.verticalSpacingMedium)
             make.centerX.equalToSuperview()
             make.size.equalTo(Constants.pickEmojiButtonSize)
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(pickEmojiButton.snp.bottom).offset(Constants.verticalSpacingMedium)
-            make.horizontalEdges.equalToSuperview().inset(Constants.padding)
+            make.top.equalTo(pickEmojiButton.snp.bottom).offset(AppConstants.verticalSpacingMedium)
+            make.horizontalEdges.equalToSuperview().inset(AppConstants.padding)
         }
         
         titleTextField.snp.makeConstraints { make in
-            make.horizontalEdges.equalToSuperview().inset(Constants.padding)
-            make.top.equalTo(titleLabel.snp.bottom).offset(Constants.verticalSpacingSmall)
-            make.height.equalTo(Constants.textFieldHeight)
+            make.horizontalEdges.equalToSuperview().inset(AppConstants.padding)
+            make.top.equalTo(titleLabel.snp.bottom).offset(AppConstants.verticalSpacingSmall)
+            make.height.equalTo(AppConstants.textFieldHeight)
         }
     }
     
@@ -165,8 +160,6 @@ private extension CreateCategoryView {
         if let segmentedItem = TypeSegmentedControlItem(rawValue: currentIndex),
            let textFieldValue = titleTextField.text {
             output?.addButtonDidPressed(type: segmentedItem, title: textFieldValue)
-        } else {
-            showError(.segmentOrTextFieldIsIncorrect)
         }
     }
     
@@ -183,20 +176,6 @@ private extension CreateCategoryView {
     }
 }
 
-// MARK: - Errors
-
-enum CreateCategoryViewError: LocalizedError {
-    case segmentOrTextFieldIsIncorrect, backend, emojiInvalid
-    
-    var errorDescription: String? {
-        switch self {
-        case .segmentOrTextFieldIsIncorrect: Strings.CreateCategory.Error.segmentOrTextFieldIsIncorrect
-        case .backend: Strings.Error.backend
-        case .emojiInvalid: "Выбери эмодзи"
-        }
-    }
-}
-
 // MARK: - ElegantEmojiPickerDelegate
 
 extension CreateCategoryView: ElegantEmojiPickerDelegate {
@@ -206,7 +185,6 @@ extension CreateCategoryView: ElegantEmojiPickerDelegate {
         let font = UIFont.systemFont(ofSize: CGFloat(Constants.pickEmojiButtonSize / 2))
         let attributedString = NSAttributedString(string: emoji.emoji, attributes: [.font: font])
         pickEmojiButton.setAttributedTitle(attributedString, for: .normal)
-        // TODO: - Мейби стоит вызывать функция типа textFieldDidChanged (куда передаем текущее состояние тексвифлда и его сохраняем в переменную уже в интеракторе) каждый раз когда мы что то написали в текстфилд
         output?.emojiDidPicked(emoji.emoji)
     }
 }

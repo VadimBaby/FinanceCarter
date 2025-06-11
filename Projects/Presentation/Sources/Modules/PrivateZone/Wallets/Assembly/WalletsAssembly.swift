@@ -14,7 +14,7 @@ final class WalletsAssembly {
     
     static func create(coordinator: WalletsPresenterOutput, resolver: Resolver) -> WalletsViewInput & UIViewController {
         let view = WalletsView()
-        let interactor = WalletsInteractor(useCase: resolver.resolve(WalletsUseCase.self)!)
+        let interactor = WalletsInteractor(useCase: resolver.resolve(WalletManagmentUseCase.self)!)
         
         let presenter = WalletsPresenter(interactor: interactor, view: view)
         presenter.output = coordinator
@@ -42,7 +42,7 @@ final class WalletsAssembly {
 extension WalletsAssembly {
     static func createMock() -> WalletsViewInput & UIViewController {
         let view = WalletsView()
-        let interactor = WalletsInteractor(useCase: MockWalletsService())
+        let interactor = WalletsInteractor(useCase: MockWalletManagmentService())
         
         let presenter = WalletsPresenter(interactor: interactor, view: view)
         

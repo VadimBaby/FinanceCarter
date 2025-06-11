@@ -13,7 +13,7 @@ enum MyFont {
     func font() -> UIFont {
         switch self {
         case .title:
-            return .systemFont(ofSize: 28, weight: .bold)
+            return .systemFont(ofSize: 24, weight: .bold)
         case .description:
             return .systemFont(ofSize: 20, weight: .regular)
         case .buttonTitle:

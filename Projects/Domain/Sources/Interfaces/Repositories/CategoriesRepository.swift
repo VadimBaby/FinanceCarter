@@ -8,10 +8,10 @@
 
 // swiftlint:disable:next foundation_using
 import Foundation
-import Common
+import MyCommon
 
 public protocol CategoriesRepository: AnyObject {
-    func fetchCategories(completion: @escaping (_ result: Result<[CategoryEntity], Error>) -> Void)
-    func addCategory(_ category: CategoryEntity, completion: @escaping OperationResultCompletion)
-    func removeCategory(by id: UUID, completion: @escaping OperationResultCompletion)
+    func fetch(completion: @escaping (_ result: Result<[CategoryEntity], DataError>) -> Void)
+    func create(_ category: CategoryEntity, completion: @escaping OperationResultCompletionWithDataError)
+    func remove(by id: UUID, completion: @escaping OperationResultCompletionWithDataError)
 }

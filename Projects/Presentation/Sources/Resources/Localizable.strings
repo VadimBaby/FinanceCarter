@@ -1,7 +1,5 @@
 "app.next" = "Далее";
 
-"error.backend" = "Проверьте соединение с Интернетом или поробуйте позже";
-
 "alert.unknown.title" = "Ошибка";
 
 "onboarding.first.title" = "Вы должны знать, на что уходят ваши деньги";
@@ -46,8 +44,22 @@
 "createCategory.segment.spending" = "Расход";
 "createCategory.label.title" = "Название категории";
 "createCategory.textfield.title" = "Название категории";
+"createCategory.button.pickEmojiButton" = "Выберите эмодзи";
 "createCategory.error.segmentOrTextFieldIsIncorrect" = "Введите корректные данные";
+"createCategory.error.emojiInvalid" = "Выберите эмодзи";
+
 "createWallet.error.balanceLessThanZero" = "Баланс должен быть больше нуля";
 
 "transactions.systemTitle" = "Транзакции";
+
 "createTransaction.systemTitle" = "Создать транзакцию";
+"createTransaction.label.amount" = "Сумма";
+"createTransaction.textfield.amount" = "Введите сумму";
+"createTransaction.label.wallet" = "Кошелек";
+"createTransaction.menu.wallet" = "Выберите кошелек";
+"createTransaction.label.category" = "Категория";
+"createTransaction.menu.category" = "Выберите категорию";
+"createTransaction.error.invalidWalletOrCategory" = "Выберите кошелек и категорию";
+
+"categoryCell.categoryType.income" = "Доход";
+"categoryCell.categoryType.spending" = "Расход";

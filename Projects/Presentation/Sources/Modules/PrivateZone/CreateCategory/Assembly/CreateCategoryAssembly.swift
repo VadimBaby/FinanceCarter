@@ -14,7 +14,7 @@ final class CreateCategoryAssembly {
     
     static func create(router: CreateCategoryPresenterOutput, resolver: Resolver) -> UIViewController & CreateCategoryViewInput {
         let view = CreateCategoryView()
-        let interactor = CreateCategoryInteractor(useCase: resolver.resolve(CategoriesUseCase.self)!)
+        let interactor = CreateCategoryInteractor(useCase: resolver.resolve(CategoryManagmentUseCase.self)!)
         let presenter = CreateCategoryPresenter(interactor: interactor, view: view)
         
         view.output = presenter
@@ -36,7 +36,7 @@ final class CreateCategoryAssembly {
 extension CreateCategoryAssembly {
     static func createMock() -> UIViewController & CreateCategoryViewInput {
         let view = CreateCategoryView()
-        let interactor = CreateCategoryInteractor(useCase: MockCategoriesService())
+        let interactor = CreateCategoryInteractor(useCase: MockCategoryManagmentService())
         let presenter = CreateCategoryPresenter(interactor: interactor, view: view)
         
         view.output = presenter

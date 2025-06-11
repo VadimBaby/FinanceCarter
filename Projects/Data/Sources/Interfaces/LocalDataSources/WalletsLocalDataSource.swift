@@ -9,10 +9,11 @@
 // swiftlint:disable:next foundation_using
 import Foundation
 import Domain
-import Common
+import MyCommon
 
 public protocol WalletsLocalDataSource: AnyObject {
-    func fetchWallets() -> Result<[WalletEntity], Error>
-    func addWallet(_ wallet: WalletEntity) -> OperationResult<Error>
-    func removeWallet(by id: UUID) -> OperationResult<Error>
+    func fetch() -> Result<[WalletEntity], DataSourceError>
+    func create(_ wallet: WalletEntity) -> OperationResult<DataSourceError>
+    func remove(by id: UUID) -> OperationResult<DataSourceError>
+    func set(balance: Double, for wallet: WalletEntity) -> OperationResult<DataSourceError>
 }

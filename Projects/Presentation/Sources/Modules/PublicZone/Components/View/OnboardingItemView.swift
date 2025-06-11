@@ -7,12 +7,11 @@
 
 import UIKit
 import SnapKit
-import Common
+import MyCommon
 
 // MARK: - Constants
 
 private protocol ConstantsProtocol {
-    static var padding: Int { get }
     static var pageControlHeight: Int { get }
     static var descriptionLabelTopPadding: Int { get }
     static var holderViewTopPadding: Int { get }
@@ -22,7 +21,6 @@ private protocol ConstantsProtocol {
 
 private enum Constants {
     enum Vertical: ConstantsProtocol {
-        static let padding = 20
         static let pageControlHeight = 10
         static let descriptionLabelTopPadding = 10
         static let holderViewTopPadding = 50
@@ -31,7 +29,6 @@ private enum Constants {
     }
     
     enum Horizontal: ConstantsProtocol {
-        static let padding = 20
         static let pageControlHeight = 10
         static let descriptionLabelTopPadding = 10
         static let holderViewTopPadding = 20
@@ -168,7 +165,7 @@ private extension OnboardingItemView {
         mainImage.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide.snp.top)
             make.centerX.equalToSuperview()
-            make.width.equalToSuperview().inset(constants.padding)
+            make.width.equalToSuperview().inset(AppConstants.padding)
             make.height.equalTo(safeAreaLayoutGuide).multipliedBy(constants.multipliedBy)
         }
         
@@ -176,19 +173,19 @@ private extension OnboardingItemView {
             make.top.equalTo(mainImage.snp.bottom).offset(constants.holderViewTopPadding)
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)
             make.centerX.equalToSuperview()
-            make.width.equalToSuperview().inset(constants.padding)
+            make.width.equalToSuperview().inset(AppConstants.padding)
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(constants.padding)
+            make.top.equalToSuperview().offset(AppConstants.padding)
             make.centerX.equalToSuperview()
-            make.width.equalToSuperview().inset(constants.padding)
+            make.width.equalToSuperview().inset(AppConstants.padding)
         }
         
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(constants.descriptionLabelTopPadding)
             make.centerX.equalToSuperview()
-            make.width.equalToSuperview().inset(constants.padding)
+            make.width.equalToSuperview().inset(AppConstants.padding)
         }
         
         pageControl.snp.makeConstraints { make in
@@ -199,9 +196,9 @@ private extension OnboardingItemView {
         }
         
         nextButton.snp.makeConstraints { make in
-            make.bottom.equalTo(contentHolderView.snp.bottom).inset(constants.padding)
+            make.bottom.equalTo(contentHolderView.snp.bottom).inset(AppConstants.padding)
             make.height.equalTo(constants.nextButtonHeight)
-            make.width.equalToSuperview().inset(constants.padding)
+            make.width.equalToSuperview().inset(AppConstants.padding)
             make.centerX.equalToSuperview()
         }
     }

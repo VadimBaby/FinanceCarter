@@ -7,10 +7,12 @@
 //
 
 import UIKit
-import Common
+import MyCommon
+import Domain
 
 protocol TransactionsFlowCoordinatorOutput: AnyObject {
     func transactionsFlowCoordinatorDidStart(with viewController: UIViewController)
+    func transactionsFlowCoordinatorTransactionDidAdded()
 }
 
 protocol TransactionsFlowCoordinatorInput: NavigationCoordinator {
@@ -100,8 +102,9 @@ extension TransactionsFlowCoordinator: CreateTransactionRouterOutput {
         self.closeCreateTransactionScreen()
     }
     
-    func transactionDidAdded() {
+    func createTransactionTransactionDidAdded() {
         self.updateTransactionsViewClosure?()
+        self.delegate?.transactionsFlowCoordinatorTransactionDidAdded()
         self.closeCreateTransactionScreen()
     }
 }
