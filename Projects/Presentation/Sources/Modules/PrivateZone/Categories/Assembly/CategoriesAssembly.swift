@@ -14,7 +14,10 @@ final class CategoriesAssembly {
     
     static func create(router: CategoriesPresenterOutput, resolver: Resolver) -> CategoriesViewInput & UIViewController {
         let view = CategoriesView()
-        let interactor = CategoriesInteractor(useCase: resolver.resolve(CategoryManagmentUseCase.self)!)
+        let interactor = CategoriesInteractor(
+            fetchUseCase: resolver.resolve(FetchCategoriesUseCaseProtocol.self)!,
+            removeUseCase: resolver.resolve(RemoveCategoryUseCaseProtocol.self)!
+        )
         
         let presenter = CategoriesPresenter(interactor: interactor, view: view)
         presenter.output = router
@@ -39,7 +42,10 @@ final class CategoriesAssembly {
 extension CategoriesAssembly {
     static func createMock() -> CategoriesViewInput & UIViewController {
         let view = CategoriesView()
-        let interactor = CategoriesInteractor(useCase: MockCategoryManagmentService())
+        let interactor = CategoriesInteractor(
+            fetchUseCase: MockFetchCategoriesUseCase(),
+            removeUseCase: MockRemoveCategoryUseCase()
+        )
         
         let presenter = CategoriesPresenter(interactor: interactor, view: view)
         

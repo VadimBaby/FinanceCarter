@@ -18,30 +18,30 @@ final class DomainAssembly: Assembly {
             AccountService(settingsStorage: resolver.resolve(SettingsStorageProtocol.self)!)
         }
         
-        container.register(WalletManagmentUseCase.self) { resolver in
-            WalletManagmentService(repository: resolver.resolve(WalletsRepository.self)!)
-        }
-        
-        container.register(CategoryManagmentUseCase.self) { resolver in
-            CategoryManagmentService(repository: resolver.resolve(CategoriesRepository.self)!)
-        }
-        
-        container.register(TransactionManagmentUseCase.self) { resolver in
-            TransactionManagmentService(repository: resolver.resolve(TransactionsRepository.self)!)
-        } // .implements(TransactionManaging.self)
-        
-        container.register(TransactionSectionManagmentUseCase.self) { resolver in
-            TransactionSectionManagmentService(
-                repository: resolver.resolve(TransactionSectionsRepository.self)!
-            )
-        }
-        
-        container.register(TransactionManaging.self) { resolver in
-            TransactionManager(
-                transactionsUseCase: resolver.resolve(TransactionManagmentUseCase.self)!,
-                transactionSectionsUseCase: resolver.resolve(TransactionSectionManagmentUseCase.self)!,
-                walletsUseCase: resolver.resolve(WalletManagmentUseCase.self)!
-            )
-        }
+//        container.register(WalletManagmentUseCase.self) { resolver in
+//            WalletManagmentService(repository: resolver.resolve(WalletsRepository.self)!)
+//        }
+//        
+//        container.register(CategoryManagmentUseCase.self) { resolver in
+//            CategoryManagmentService(repository: resolver.resolve(CategoriesRepository.self)!)
+//        }
+//        
+//        container.register(TransactionManagmentUseCase.self) { resolver in
+//            TransactionManagmentService(repository: resolver.resolve(TransactionsRepository.self)!)
+//        } // .implements(TransactionManaging.self)
+//        
+//        container.register(TransactionSectionManagmentUseCase.self) { resolver in
+//            TransactionSectionManagmentService(
+//                repository: resolver.resolve(TransactionSectionsRepository.self)!
+//            )
+//        }
+//        
+//        container.register(TransactionManaging.self) { resolver in
+//            TransactionManager(
+//                transactionsUseCase: resolver.resolve(TransactionManagmentUseCase.self)!,
+//                transactionSectionsUseCase: resolver.resolve(TransactionSectionManagmentUseCase.self)!,
+//                walletsUseCase: resolver.resolve(WalletManagmentUseCase.self)!
+//            )
+//        }
     }
 }

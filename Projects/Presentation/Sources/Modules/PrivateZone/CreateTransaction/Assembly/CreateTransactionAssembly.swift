@@ -15,11 +15,10 @@ final class CreateTransactionAssembly {
     static func create(router: CreateTransactionPresenterOutput, resolver: Resolver) -> CreateTransactionViewInput & UIViewController {
         let view = CreateTransactionView()
         let interactor = CreateTransactionInteractor(
-            transactionManager: resolver.resolve(TransactionManaging.self)!,
-            walletsUseCase: resolver.resolve(WalletManagmentUseCase.self)!,
-            categoriesUseCase: resolver.resolve(CategoryManagmentUseCase.self)!
+            createTransactionUseCase: resolver.resolve(CreateTransactionUseCaseProtocol.self)!,
+            fetchWalletUseCase: resolver.resolve(FetchWalletsUseCaseProtocol.self)!,
+            fetchCategoriesUseCase: resolver.resolve(FetchCategoriesUseCaseProtocol.self)!
         )
-        
         let presenter = CreateTransactionPresenter(interactor: interactor, view: view)
         presenter.output = router
         
@@ -46,10 +45,9 @@ extension CreateTransactionAssembly {
     static func createMock() -> CreateTransactionViewInput & UIViewController {
         let view = CreateTransactionView()
         let interactor = CreateTransactionInteractor(
-            transactionManager: MockTransactionManagmentService(),
-            walletsUseCase: MockWalletManagmentService(),
-            categoriesUseCase: MockCategoryManagmentService()
-        )
+            createTransactionUseCase: MockCreateTransactionUseCase(),
+            fetchWalletUseCase: MockFetchWalletsUseCase(),
+            fetchCategoriesUseCase: MockFetchCategoriesUseCase())
         
         let presenter = CreateTransactionPresenter(interactor: interactor, view: view)
         

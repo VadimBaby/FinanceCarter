@@ -29,21 +29,21 @@ protocol CreateTransactionInteractorInput: AnyObject {
 final class CreateTransactionInteractor: CreateTransactionInteractorInput {
     weak var output: CreateTransactionInteractorOutput?
     
-    private let transactionManager: TransactionManaging
-    private let walletsUseCase: WalletManagmentUseCase
-    private let categoriesUseCase: CategoryManagmentUseCase
+    private let createTransactionUseCase: CreateTransactionUseCaseProtocol
+    private let fetchWalletUseCase: FetchWalletsUseCaseProtocol
+    private let fetchCategoriesUseCase: FetchCategoriesUseCaseProtocol
     
     private var selectedWallet: WalletEntity?
     private var selectedCategory: CategoryEntity?
 
     init(
-        transactionManager: TransactionManaging,
-        walletsUseCase: WalletManagmentUseCase,
-        categoriesUseCase: CategoryManagmentUseCase
+        createTransactionUseCase: CreateTransactionUseCaseProtocol,
+        fetchWalletUseCase: FetchWalletsUseCaseProtocol,
+        fetchCategoriesUseCase: FetchCategoriesUseCaseProtocol
     ) {
-        self.transactionManager = transactionManager
-        self.walletsUseCase = walletsUseCase
-        self.categoriesUseCase = categoriesUseCase
+        self.createTransactionUseCase = createTransactionUseCase
+        self.fetchWalletUseCase = fetchWalletUseCase
+        self.fetchCategoriesUseCase = fetchCategoriesUseCase
         
         print("init \(self)")
     }
@@ -63,7 +63,7 @@ final class CreateTransactionInteractor: CreateTransactionInteractorInput {
     }
     
     func fetchWallets() {
-        walletsUseCase.fetch { [weak self] result in
+        fetchWalletUseCase.execute { [weak self] result in
             switch result {
             case .success(let entities):
                 self?.output?.walletsDidGet(entities)
@@ -74,7 +74,7 @@ final class CreateTransactionInteractor: CreateTransactionInteractorInput {
     }
     
     func fetchCategories() {
-        categoriesUseCase.fetch { [weak self] result in
+        fetchCategoriesUseCase.execute { [weak self] result in
             switch result {
             case .success(let entities):
                 self?.output?.categoriesDidGet(entities)
@@ -88,7 +88,7 @@ final class CreateTransactionInteractor: CreateTransactionInteractorInput {
         guard let category = selectedCategory,
               let wallet = selectedWallet else { output?.throwError(Error.invalidWalletOrCategory); return }
         
-        transactionManager.create(category: category, wallet: wallet, amount: amount) { [weak self] result in
+        createTransactionUseCase.execute(category: category, wallet: wallet, amount: amount) { [weak self] result in
             switch result {
             case .success:
                 self?.output?.transactionDidAdded()

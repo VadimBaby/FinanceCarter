@@ -23,11 +23,11 @@ protocol TransactionsInteractorInput: AnyObject {
 final class TransactionsInteractor: TransactionsInteractorInput {
     weak var output: TransactionsInteractorOutput?
     
-    private let useCase: TransactionSectionManagmentUseCase
+    private let useCase: FetchTransactionSectionsUseCaseProtocol
     
     private var currentSectionTransactions: [TransactionSectionEntity] = []
     
-    init(useCase: TransactionSectionManagmentUseCase) {
+    init(useCase: FetchTransactionSectionsUseCaseProtocol) {
         self.useCase = useCase
         
         print("\(Self.self) init")
@@ -38,7 +38,7 @@ final class TransactionsInteractor: TransactionsInteractorInput {
     }
     
     func getTransactionSections() {
-        useCase.fetch { [weak self] result in
+        useCase.execute { [weak self] result in
             switch result {
             case let .success(sections):
                 self?.currentSectionTransactions = sections

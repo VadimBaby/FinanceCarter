@@ -26,10 +26,15 @@ protocol CategoriesInteractorInput: AnyObject {
 final class CategoriesInteractor: CategoriesInteractorInput {
     weak var output: CategoriesInteractorOutput?
     
-    private let useCase: CategoryManagmentUseCase
+    private let fetchUseCase: FetchCategoriesUseCaseProtocol
+    private let removeUseCase: RemoveCategoryUseCaseProtocol
     
-    init(useCase: CategoryManagmentUseCase) {
-        self.useCase = useCase
+    init(
+        fetchUseCase: FetchCategoriesUseCaseProtocol,
+        removeUseCase: RemoveCategoryUseCaseProtocol
+    ) {
+        self.fetchUseCase = fetchUseCase
+        self.removeUseCase = removeUseCase
         print("\(Self.self) init")
     }
     
@@ -38,7 +43,7 @@ final class CategoriesInteractor: CategoriesInteractorInput {
     }
     
     func getCategories() {
-        useCase.fetch { [weak self] result in
+        fetchUseCase.execute { [weak self] result in
             switch result {
             case .success(let categories):
                 self?.output?.categoriesDidGet(categories)
@@ -49,7 +54,7 @@ final class CategoriesInteractor: CategoriesInteractorInput {
     }
     
     func removeCategory(_ category: CategoryEntity) {
-        useCase.remove(category) { [weak self] result in
+        removeUseCase.execute(category: category) { [weak self] result in
             guard case let .failure(error) = result else { return }
             self?.output?.throwError(error)
             self?.output?.removeCategoryDidFall(category)

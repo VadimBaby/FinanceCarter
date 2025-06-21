@@ -25,10 +25,12 @@ protocol WalletsInteractorInput: AnyObject {
 final class WalletsInteractor: WalletsInteractorInput {
     weak var output: WalletsInteractorOutput?
     
-    private let useCase: WalletManagmentUseCase
+    private let fetchUseCase: FetchWalletsUseCaseProtocol
+    private let removeUseCase: RemoveWalletUseCaseProtocol
     
-    init(useCase: WalletManagmentUseCase) {
-        self.useCase = useCase
+    init(fetchUseCase: FetchWalletsUseCaseProtocol, removeUseCase: RemoveWalletUseCaseProtocol) {
+        self.fetchUseCase = fetchUseCase
+        self.removeUseCase = removeUseCase
         print("\(Self.self) init")
     }
     
@@ -37,7 +39,7 @@ final class WalletsInteractor: WalletsInteractorInput {
     }
     
     func getWallets() {
-        useCase.fetch { [weak self] result in
+        fetchUseCase.execute { [weak self] result in
             switch result {
             case .success(let wallets):
                 self?.output?.walletsDidGet(wallets)
@@ -48,7 +50,7 @@ final class WalletsInteractor: WalletsInteractorInput {
     }
     
     func removeWallet(_ wallet: WalletEntity) {
-        useCase.remove(wallet) { [weak self] result in
+        removeUseCase.execute(wallet: wallet) { [weak self] result in
             guard case let .failure(error) = result else { return }
             self?.output?.throwError(error)
             self?.output?.removeWalletDidFall(wallet)

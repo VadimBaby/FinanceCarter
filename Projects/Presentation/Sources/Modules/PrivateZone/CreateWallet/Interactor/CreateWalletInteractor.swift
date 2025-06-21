@@ -24,9 +24,9 @@ protocol CreateWalletInteractorInput: AnyObject {
 final class CreateWalletInteractor: CreateWalletInteractorInput {
     weak var output: CreateWalletInteractorOutput?
     
-    private let useCase: WalletManagmentUseCase
+    private let useCase: CreateWalletUseCaseProtocol
     
-    init(useCase: WalletManagmentUseCase) {
+    init(useCase: CreateWalletUseCaseProtocol) {
         self.useCase = useCase
         print("\(Self.self) init")
     }
@@ -49,7 +49,7 @@ final class CreateWalletInteractor: CreateWalletInteractorInput {
         guard let doubleBalance = Double(balance),
               doubleBalance >= .zero else { output?.throwError(Error.balanceLessThanZero); return }
         
-        useCase.create(title: title, balance: doubleBalance) { [weak self] result in
+        useCase.execute(title: title, balance: doubleBalance) { [weak self] result in
             switch result {
             case .success:
                 self?.output?.walletDidAdded()

@@ -24,11 +24,11 @@ protocol CreateCategoryInteractorInput: AnyObject {
 final class CreateCategoryInteractor: CreateCategoryInteractorInput {
     weak var output: CreateCategoryInteractorOutput?
     
-    private let useCase: CategoryManagmentUseCase
+    private let useCase: CreateCategoryUseCaseProtocol
     
     private var emoji: String?
     
-    init(useCase: CategoryManagmentUseCase) {
+    init(useCase: CreateCategoryUseCaseProtocol) {
         self.useCase = useCase
         
         print("\(self) init")
@@ -55,7 +55,7 @@ final class CreateCategoryInteractor: CreateCategoryInteractorInput {
         guard title.count > 2 else { output?.throwError(Error.segmentOrTextFieldIsIncorrect); return }
         guard let emoji else { output?.throwError(Error.emojiInvalid); return }
         
-        useCase.create(title: title, emoji: emoji, type: categoryType) { [weak self] result in
+        useCase.execute(title: title, emoji: emoji, type: categoryType) { [weak self] result in
             switch result {
             case .success:
                 self?.output?.categoryDidAdded()
