@@ -11,9 +11,9 @@ public protocol RemoveTransactionUseCaseProtocol: AnyObject {
 }
 
 public final class RemoveTransactionUseCase: RemoveTransactionUseCaseProtocol {
-    private let repository: TransactionsRepository
+    private let repository: TransactionsRepositoryProtocol
     
-    init(repository: TransactionsRepository) {
+    init(repository: TransactionsRepositoryProtocol) {
         self.repository = repository
     }
     

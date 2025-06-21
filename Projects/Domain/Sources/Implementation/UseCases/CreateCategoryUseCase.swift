@@ -16,9 +16,9 @@ public protocol CreateCategoryUseCaseProtocol: AnyObject {
 }
 
 public final class CreateCategoryUseCase: CreateCategoryUseCaseProtocol {
-    private let repository: CategoriesRepository
+    private let repository: CategoriesRepositoryProtocol
     
-    public init(repository: CategoriesRepository) {
+    public init(repository: CategoriesRepositoryProtocol) {
         self.repository = repository
     }
     

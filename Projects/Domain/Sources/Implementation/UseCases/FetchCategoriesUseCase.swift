@@ -11,9 +11,9 @@ public protocol FetchCategoriesUseCaseProtocol: AnyObject {
 }
 
 public final class FetchCategoriesUseCase: FetchCategoriesUseCaseProtocol {
-    private let repository: CategoriesRepository
+    private let repository: CategoriesRepositoryProtocol
     
-    public init(repository: CategoriesRepository) {
+    public init(repository: CategoriesRepositoryProtocol) {
         self.repository = repository
     }
     

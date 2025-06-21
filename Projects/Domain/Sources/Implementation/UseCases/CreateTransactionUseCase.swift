@@ -16,7 +16,7 @@ public protocol CreateTransactionUseCaseProtocol: AnyObject {
 }
 
 public final class CreateTransactionUseCase: CreateTransactionUseCaseProtocol {
-    private let repository: TransactionsRepository
+    private let repository: TransactionsRepositoryProtocol
     
     private let increaseWalletBalanceUseCase: IncreaseWalletBalanceUseCaseProtocol
     private let fetchOneTransactionSectionUseCase: FetchOneTransactionSectionUseCase
@@ -28,7 +28,7 @@ public final class CreateTransactionUseCase: CreateTransactionUseCaseProtocol {
         fetchOneTransactionSectionUseCase: FetchOneTransactionSectionUseCase,
         createTransactionSectionUseCase: CreateTransactionSectionUseCaseProtocol,
         addTransactionsToSectionUseCase: AddTransactionsToSectionUseCaseProtocol,
-        repository: TransactionsRepository
+        repository: TransactionsRepositoryProtocol
     ) {
         self.increaseWalletBalanceUseCase = increaseWalletBalanceUseCase
         self.fetchOneTransactionSectionUseCase = fetchOneTransactionSectionUseCase

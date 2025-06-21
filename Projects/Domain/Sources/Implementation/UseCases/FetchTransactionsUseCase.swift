@@ -11,9 +11,9 @@ public protocol FetchTransactionsUseCaseProtocol: AnyObject {
 }
 
 public final class FetchTransactionsUseCase: FetchTransactionsUseCaseProtocol {
-    private let repository: TransactionsRepository
+    private let repository: TransactionsRepositoryProtocol
     
-    init(repository: TransactionsRepository) {
+    init(repository: TransactionsRepositoryProtocol) {
         self.repository = repository
     }
     

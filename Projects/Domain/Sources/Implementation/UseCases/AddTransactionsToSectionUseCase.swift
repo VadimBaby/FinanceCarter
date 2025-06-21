@@ -15,9 +15,9 @@ public protocol AddTransactionsToSectionUseCaseProtocol: AnyObject {
 }
 
 public final class AddTransactionsToSectionUseCase: AddTransactionsToSectionUseCaseProtocol {
-    private let repository: TransactionSectionsRepository
+    private let repository: TransactionSectionsRepositoryProtocol
     
-    public init(repository: TransactionSectionsRepository) {
+    public init(repository: TransactionSectionsRepositoryProtocol) {
         self.repository = repository
     }
     

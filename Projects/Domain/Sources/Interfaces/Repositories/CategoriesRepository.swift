@@ -10,7 +10,7 @@
 import Foundation
 import MyCommon
 
-public protocol CategoriesRepository: AnyObject {
+public protocol CategoriesRepositoryProtocol: AnyObject {
     func fetch(completion: @escaping (_ result: Result<[CategoryEntity], DataError>) -> Void)
     func create(_ category: CategoryEntity, completion: @escaping OperationResultCompletionWithDataError)
     func remove(by id: UUID, completion: @escaping OperationResultCompletionWithDataError)

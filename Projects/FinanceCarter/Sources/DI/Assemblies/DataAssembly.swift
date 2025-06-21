@@ -12,25 +12,25 @@ import Data
 final class DataAssembly: Assembly {
     func assemble(container: Container) {
         container.register(WalletsRepository.self) { resolver in
-            WalletsStorageManager(
+            WalletsRepository(
                 localDataSource: resolver.resolve(WalletsLocalDataSource.self)!
             )
         }
         
         container.register(CategoriesRepository.self) { resolver in
-            CategoriesStorageManager(
+            CategoriesRepository(
                 localDataSource: resolver.resolve(CategoriesLocalDataSource.self)!
             )
         }
         
         container.register(TransactionsRepository.self) { resolver in
-            TransactionsStorageManager(
+            TransactionsRepository(
                 localDataSource: resolver.resolve(TransactionsLocalDataSource.self)!
             )
         }
         
         container.register(TransactionSectionsRepository.self) { resolver in
-            TransactionSectionsStorageManager(
+            TransactionSectionsRepository(
                 localDataSource: resolver.resolve(TransactionSectionsLocalDataSource.self)!
             )
         }

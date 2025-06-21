@@ -11,9 +11,9 @@ public protocol RemoveWalletUseCaseProtocol: AnyObject {
 }
 
 public final class RemoveWalletUseCase: RemoveWalletUseCaseProtocol {
-    private let repository: WalletsRepository
+    private let repository: WalletsRepositoryProtocol
     
-    public init(repository: WalletsRepository) {
+    public init(repository: WalletsRepositoryProtocol) {
         self.repository = repository
     }
     

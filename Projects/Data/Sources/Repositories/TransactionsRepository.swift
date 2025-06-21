@@ -1,8 +1,8 @@
 //
-//  CategoriesStorageManager.swift
+//  TransactionsStorageManager.swift
 //  Data
 //
-//  Created by Вадим Мартыненко on 17.05.2025.
+//  Created by Вадим Мартыненко on 29.05.2025.
 //  Copyright © 2025 Vadim Martynenko. All rights reserved.
 //
 
@@ -11,14 +11,14 @@ import Foundation
 import Domain
 import MyCommon
 
-public final class CategoriesStorageManager: CategoriesRepository {
-    private let localDataSource: CategoriesLocalDataSource
+public final class TransactionsRepository: TransactionsRepositoryProtocol {
+    private let localDataSource: TransactionsLocalDataSource
     
-    public init(localDataSource: CategoriesLocalDataSource) {
+    public init(localDataSource: TransactionsLocalDataSource) {
         self.localDataSource = localDataSource
     }
     
-    public func fetch(completion: @escaping (_ result: Result<[CategoryEntity], DataError>) -> Void) {
+    public func fetch(completion: @escaping (Result<[TransactionEntity], DataError>) -> Void) {
         let result = localDataSource.fetch()
         switch result {
         case let .success(entities): completion(.success(entities))
@@ -26,14 +26,11 @@ public final class CategoriesStorageManager: CategoriesRepository {
         }
     }
     
-    public func create(
-        _ category: CategoryEntity,
-        completion: @escaping OperationResultCompletionWithDataError
-    ) {
-        let result = localDataSource.create(category)
+    public func create(_ transaction: TransactionEntity, completion: @escaping OperationResultCompletionWithDataError) {
+        let result = localDataSource.create(transaction)
         switch result {
         case .success: completion(.success)
-        case .failure(let error): completion(.failure(error.toDataError()))
+        case let .failure(error): completion(.failure(error.toDataError()))
         }
     }
     
@@ -41,7 +38,7 @@ public final class CategoriesStorageManager: CategoriesRepository {
         let result = localDataSource.remove(by: id)
         switch result {
         case .success: completion(.success)
-        case .failure(let error): completion(.failure(error.toDataError()))
+        case let .failure(error): completion(.failure(error.toDataError()))
         }
     }
 }

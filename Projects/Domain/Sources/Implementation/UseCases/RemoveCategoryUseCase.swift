@@ -11,9 +11,9 @@ public protocol RemoveCategoryUseCaseProtocol: AnyObject {
 }
 
 public final class RemoveCategoryUseCase: RemoveCategoryUseCaseProtocol {
-    private let repository: CategoriesRepository
+    private let repository: CategoriesRepositoryProtocol
     
-    public init(repository: CategoriesRepository) {
+    public init(repository: CategoriesRepositoryProtocol) {
         self.repository = repository
     }
     

@@ -10,7 +10,7 @@
 import Foundation
 import MyCommon
 
-public protocol WalletsRepository: AnyObject {
+public protocol WalletsRepositoryProtocol: AnyObject {
     func fetch(completion: @escaping (_ result: Result<[WalletEntity], DataError>) -> Void)
     
     func create(_ wallet: WalletEntity, completion: @escaping OperationResultCompletionWithDataError)

@@ -11,7 +11,7 @@ import Foundation
 import Domain
 import MyCommon
 
-public final class WalletsStorageManager: WalletsRepository {
+public final class WalletsRepository: WalletsRepositoryProtocol {
     private let localDataSource: WalletsLocalDataSource
     
     public init(localDataSource: WalletsLocalDataSource) {

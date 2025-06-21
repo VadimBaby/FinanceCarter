@@ -11,9 +11,9 @@ public protocol CreateWalletUseCaseProtocol: AnyObject {
 }
 
 public final class CreateWalletUseCase: CreateWalletUseCaseProtocol {
-    private let repository: WalletsRepository
+    private let repository: WalletsRepositoryProtocol
     
-    public init(repository: WalletsRepository) {
+    public init(repository: WalletsRepositoryProtocol) {
         self.repository = repository
     }
     

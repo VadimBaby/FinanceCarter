@@ -11,9 +11,9 @@ public protocol FetchWalletsUseCaseProtocol: AnyObject {
 }
 
 public final class FetchWalletsUseCase: FetchWalletsUseCaseProtocol {
-    private let repository: WalletsRepository
+    private let repository: WalletsRepositoryProtocol
     
-    public init(repository: WalletsRepository) {
+    public init(repository: WalletsRepositoryProtocol) {
         self.repository = repository
     }
     

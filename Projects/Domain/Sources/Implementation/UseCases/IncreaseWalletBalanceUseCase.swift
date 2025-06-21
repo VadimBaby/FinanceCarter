@@ -15,9 +15,9 @@ public protocol IncreaseWalletBalanceUseCaseProtocol: AnyObject {
 }
 
 public final class IncreaseWalletBalanceUseCase: IncreaseWalletBalanceUseCaseProtocol {
-    private let repository: WalletsRepository
+    private let repository: WalletsRepositoryProtocol
     
-    public init(repository: WalletsRepository) {
+    public init(repository: WalletsRepositoryProtocol) {
         self.repository = repository
     }
     

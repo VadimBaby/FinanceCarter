@@ -10,7 +10,7 @@ import Domain
 import MyCommon
 import Foundation
 
-public final class TransactionSectionsStorageManager: TransactionSectionsRepository {
+public final class TransactionSectionsRepository: TransactionSectionsRepositoryProtocol {
     private let localDataSource: TransactionSectionsLocalDataSource
     
     public init(localDataSource: TransactionSectionsLocalDataSource) {

@@ -10,7 +10,7 @@
 import Foundation
 import MyCommon
 
-public protocol TransactionSectionsRepository: AnyObject {
+public protocol TransactionSectionsRepositoryProtocol: AnyObject {
     func fetch(completion: @escaping (_ result: Result<[TransactionSectionEntity], DataError>) -> Void)
     
     func fetch(by date: Date, completion: @escaping (_ result: Result<TransactionSectionEntity, DataError>) -> Void)
