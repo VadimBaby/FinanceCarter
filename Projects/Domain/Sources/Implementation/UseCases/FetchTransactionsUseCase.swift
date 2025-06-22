@@ -13,7 +13,7 @@ public protocol FetchTransactionsUseCaseProtocol: AnyObject {
 public final class FetchTransactionsUseCase: FetchTransactionsUseCaseProtocol {
     private let repository: TransactionsRepositoryProtocol
     
-    init(repository: TransactionsRepositoryProtocol) {
+    public init(repository: TransactionsRepositoryProtocol) {
         self.repository = repository
     }
     

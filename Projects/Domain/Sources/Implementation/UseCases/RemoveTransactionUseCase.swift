@@ -13,7 +13,7 @@ public protocol RemoveTransactionUseCaseProtocol: AnyObject {
 public final class RemoveTransactionUseCase: RemoveTransactionUseCaseProtocol {
     private let repository: TransactionsRepositoryProtocol
     
-    init(repository: TransactionsRepositoryProtocol) {
+    public init(repository: TransactionsRepositoryProtocol) {
         self.repository = repository
     }
     

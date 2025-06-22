@@ -15,15 +15,16 @@ public struct WalletEntity: Identifiable, CreatedAtContainable {
     public let balance: Double
     public let createdAt: Date
     
-    public init(id: UUID, title: String, balance: Double, createdAt: Date) {
+    public init(
+        id: UUID = .init(),
+        title: String,
+        balance: Double,
+        createdAt: Date = .now
+    ) {
         self.id = id
         self.title = title
         self.balance = balance
         self.createdAt = createdAt
-    }
-    
-    public init(title: String, balance: Double) {
-        self.init(id: .init(), title: title, balance: balance, createdAt: .now)
     }
 }
 

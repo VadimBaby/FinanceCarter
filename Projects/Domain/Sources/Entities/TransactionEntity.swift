@@ -16,20 +16,18 @@ public struct TransactionEntity: Identifiable, CreatedAtContainable {
     public let amount: Double
     public let createdAt: Date
     
-    public init(id: UUID, category: CategoryEntity, wallet: WalletEntity, amount: Double, createdAt: Date) {
+    public init(
+        id: UUID = .init(),
+        category: CategoryEntity,
+        wallet: WalletEntity,
+        amount: Double,
+        createdAt: Date = .now
+    ) {
         self.id = id
         self.category = category
         self.wallet = wallet
         self.amount = amount
         self.createdAt = createdAt
-    }
-    
-    public init(category: CategoryEntity, wallet: WalletEntity, amount: Double) {
-        self.id = .init()
-        self.category = category
-        self.wallet = wallet
-        self.amount = amount
-        self.createdAt = .now
     }
 }
 

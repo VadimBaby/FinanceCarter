@@ -11,25 +11,25 @@ import Data
 
 final class DataAssembly: Assembly {
     func assemble(container: Container) {
-        container.register(WalletsRepository.self) { resolver in
+        container.register(WalletsRepositoryProtocol.self) { resolver in
             WalletsRepository(
                 localDataSource: resolver.resolve(WalletsLocalDataSource.self)!
             )
         }
         
-        container.register(CategoriesRepository.self) { resolver in
+        container.register(CategoriesRepositoryProtocol.self) { resolver in
             CategoriesRepository(
                 localDataSource: resolver.resolve(CategoriesLocalDataSource.self)!
             )
         }
         
-        container.register(TransactionsRepository.self) { resolver in
+        container.register(TransactionsRepositoryProtocol.self) { resolver in
             TransactionsRepository(
                 localDataSource: resolver.resolve(TransactionsLocalDataSource.self)!
             )
         }
         
-        container.register(TransactionSectionsRepository.self) { resolver in
+        container.register(TransactionSectionsRepositoryProtocol.self) { resolver in
             TransactionSectionsRepository(
                 localDataSource: resolver.resolve(TransactionSectionsLocalDataSource.self)!
             )

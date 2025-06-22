@@ -19,13 +19,13 @@ public final class CreateTransactionUseCase: CreateTransactionUseCaseProtocol {
     private let repository: TransactionsRepositoryProtocol
     
     private let increaseWalletBalanceUseCase: IncreaseWalletBalanceUseCaseProtocol
-    private let fetchOneTransactionSectionUseCase: FetchOneTransactionSectionUseCase
+    private let fetchOneTransactionSectionUseCase: FetchOneTransactionSectionUseCaseProtocol
     private let createTransactionSectionUseCase: CreateTransactionSectionUseCaseProtocol
     private let addTransactionsToSectionUseCase: AddTransactionsToSectionUseCaseProtocol
     
-    init(
+    public init(
         increaseWalletBalanceUseCase: IncreaseWalletBalanceUseCaseProtocol,
-        fetchOneTransactionSectionUseCase: FetchOneTransactionSectionUseCase,
+        fetchOneTransactionSectionUseCase: FetchOneTransactionSectionUseCaseProtocol,
         createTransactionSectionUseCase: CreateTransactionSectionUseCaseProtocol,
         addTransactionsToSectionUseCase: AddTransactionsToSectionUseCaseProtocol,
         repository: TransactionsRepositoryProtocol

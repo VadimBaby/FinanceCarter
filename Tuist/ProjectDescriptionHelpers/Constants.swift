@@ -53,7 +53,7 @@ public enum Constants {
             case .Swinject:
                 .remote(url: "https://github.com/Swinject/Swinject.git", requirement: .upToNextMajor(from: "2.9.1"))
             case .MyCoreDataWrapper:
-                .remote(url: "https://github.com/VadimBaby/MyCoreDataWrapped.git", requirement: .branch("master"))
+                .remote(url: "https://github.com/VadimBaby/MyCoreDataWrapped.git", requirement: .upToNextMajor(from: "1.0.1"))
             }
         }
         
