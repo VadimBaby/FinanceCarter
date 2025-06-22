@@ -49,11 +49,11 @@ public enum Constants {
             case .ElegantEmojiPicker:
                 .remote(url: "https://github.com/Finalet/Elegant-Emoji-Picker.git", requirement: .branch("main"))
             case .MyCommon:
-                .remote(url: "https://github.com/VadimBaby/MyCommon.git", requirement: .branch("master"))
+                    .remote(url: "https://github.com/VadimBaby/MyCommon.git", requirement: .upToNextMajor(from: "1.0.0"))
             case .Swinject:
                 .remote(url: "https://github.com/Swinject/Swinject.git", requirement: .upToNextMajor(from: "2.9.1"))
             case .MyCoreDataWrapper:
-                .remote(url: "https://github.com/VadimBaby/MyCoreDataWrapped.git", requirement: .upToNextMajor(from: "1.0.1"))
+                .remote(url: "https://github.com/VadimBaby/MyCoreDataWrapped.git", requirement: .upToNextMajor(from: "1.0.3"))
             }
         }
         

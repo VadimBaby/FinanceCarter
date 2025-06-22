@@ -7,32 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0218239CE6FA5648E8AAD2CD /* TransactionsCoreDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F343A64CC5FD3A45B1D5E48 /* TransactionsCoreDataSource.swift */; };
+		00DC5B0DA1B8F013E8800DD1 /* CoreDataInfastructureConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C482786BB7BA0C584934294 /* CoreDataInfastructureConstants.swift */; };
+		157DE2AA8D3A4D2BB2D8CFD6 /* TransactionSectionsCoreDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9529ECF7749A05169B7758 /* TransactionSectionsCoreDataSource.swift */; };
 		18389B0243E0DDA11A601528 /* TuistBundle+CoreDataInfastructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CC8C5D4C65CAD9CCBCCE50 /* TuistBundle+CoreDataInfastructure.swift */; };
 		19F4E4BC5A8EEB989E0FF052 /* MyCoreDataWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 68E3104D2304ADE3FCF4923D /* MyCoreDataWrapper */; };
-		1BD9101D87389931FA09029C /* CoreDataStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2746EFF8CE02D1F7E8011241 /* CoreDataStorageManager.swift */; };
-		1DCE12F958B71A07D35B9CD6 /* TransactionCoreDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DBA03A91153B9E7282DBC0 /* TransactionCoreDataFetcher.swift */; };
-		1EA9EC297B0BEEFE221B34DE /* WalletCoreDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53569E13EA5C54ED2193D142 /* WalletCoreDataFetcher.swift */; };
-		21FE233980694352515C844B /* CoreDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7574B011579A432B509A112 /* CoreDataStore.swift */; };
-		29F613EE430FB58B25BDE20E /* AppSpecificCoreDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6A7F33C84C12777A8EB720 /* AppSpecificCoreDataFetcher.swift */; };
 		33B29900D9737174A81E945C /* WalletMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39DC7F644CEC45C5DAB20A2 /* WalletMapper.swift */; };
-		372CAC58CB62DF0C82A26D9A /* TransactionSectionsCoreDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57756FCC6DC323E8E039F1A6 /* TransactionSectionsCoreDataSource.swift */; };
 		3A05829BF366371BD5007D81 /* CategoryMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EA5170D8A9EA72C3687C7A /* CategoryMapper.swift */; };
-		461F366E1C5E61597C394D5F /* WalletsCoreDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDF8301BA9A1CBF8A8178D9 /* WalletsCoreDataSource.swift */; };
 		5E74C23C8A3BA2DC0EE9BD3C /* TransactionMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2512B90992648EF3D9A01F /* TransactionMapper.swift */; };
 		6866AA0C83780B0A2D5D8334 /* TransactionSectionMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B4EFE8947307E49E69D45 /* TransactionSectionMapper.swift */; };
+		729E7C92C490647693FBAA09 /* TransactionsCoreDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624F50362FD8A01CF93A2CD1 /* TransactionsCoreDataSource.swift */; };
 		8C343E745557A876390A591D /* MyCommon in Frameworks */ = {isa = PBXBuildFile; productRef = FDC55DB2040A248954227CB7 /* MyCommon */; };
-		8CBBC2B829D5A1D5DD2FC46B /* WalletRawDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C7B3D21921E5138299D6FB /* WalletRawDataFetcher.swift */; };
-		9EFC798AC23D751EC816F65E /* CoreDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C546F9D8B60D3A5F852B75 /* CoreDataFetcher.swift */; };
-		ABDD5E086D527A80B74F4BA8 /* TransactionRawDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0270F45E629906CEE02EC4 /* TransactionRawDataFetcher.swift */; };
-		B1A6F39A370DD5C49A4CF62A /* CategoryRawDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDA6F785A6B2CC69349CEDD /* CategoryRawDataFetcher.swift */; };
-		B58C8B90CA50C112FF6243F4 /* CategoryCoreDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1637764EC45DE9E914616C9 /* CategoryCoreDataFetcher.swift */; };
-		CEF4D43920C63E64BE03FCCE /* CategoriesCoreDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FCB2FFF3CC22D0319258DA /* CategoriesCoreDataSource.swift */; };
+		8F8718373C8EFBDD801B9070 /* WalletsCoreDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3072E196CA5024DF7997CA /* WalletsCoreDataSource.swift */; };
 		D4DC94C8DDB3BD6C0FAE1357 /* Data.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 982B88D520625D7EABACA5A5 /* Data.framework */; };
-		DB55C8B98C233904374B6383 /* TransactionSectionCoreDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C957657E2A9AB9B5445C55D1 /* TransactionSectionCoreDataFetcher.swift */; };
+		D626C714704A2573C31A8495 /* CategoriesCoreDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA9B7DA0593BE0953A18FC4 /* CategoriesCoreDataSource.swift */; };
 		DD16D3BC90EB4FE3382E539C /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9BB41621C7F22D784DAD2558 /* Model.xcdatamodeld */; };
 		F14A573EBD135CC4409236A6 /* Domain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 186247F9B377E33A460B852C /* Domain.framework */; };
-		F7A111FE76DC026A2BA2664D /* TransactionSectionRawDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC0E1E69CE308C309B7D38 /* TransactionSectionRawDataFetcher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,31 +38,20 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0F0270F45E629906CEE02EC4 /* TransactionRawDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionRawDataFetcher.swift; sourceTree = "<group>"; };
-		15FCB2FFF3CC22D0319258DA /* CategoriesCoreDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCoreDataSource.swift; sourceTree = "<group>"; };
 		186247F9B377E33A460B852C /* Domain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Domain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		25C546F9D8B60D3A5F852B75 /* CoreDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFetcher.swift; sourceTree = "<group>"; };
 		26CC8C5D4C65CAD9CCBCCE50 /* TuistBundle+CoreDataInfastructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+CoreDataInfastructure.swift"; sourceTree = "<group>"; };
 		26EA5170D8A9EA72C3687C7A /* CategoryMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryMapper.swift; sourceTree = "<group>"; };
-		2746EFF8CE02D1F7E8011241 /* CoreDataStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorageManager.swift; sourceTree = "<group>"; };
-		39DBA03A91153B9E7282DBC0 /* TransactionCoreDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCoreDataFetcher.swift; sourceTree = "<group>"; };
-		4BDF8301BA9A1CBF8A8178D9 /* WalletsCoreDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsCoreDataSource.swift; sourceTree = "<group>"; };
-		53569E13EA5C54ED2193D142 /* WalletCoreDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCoreDataFetcher.swift; sourceTree = "<group>"; };
-		57756FCC6DC323E8E039F1A6 /* TransactionSectionsCoreDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSectionsCoreDataSource.swift; sourceTree = "<group>"; };
-		6EDA6F785A6B2CC69349CEDD /* CategoryRawDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRawDataFetcher.swift; sourceTree = "<group>"; };
-		6F343A64CC5FD3A45B1D5E48 /* TransactionsCoreDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsCoreDataSource.swift; sourceTree = "<group>"; };
-		7CBC0E1E69CE308C309B7D38 /* TransactionSectionRawDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSectionRawDataFetcher.swift; sourceTree = "<group>"; };
+		3C3072E196CA5024DF7997CA /* WalletsCoreDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsCoreDataSource.swift; sourceTree = "<group>"; };
+		624F50362FD8A01CF93A2CD1 /* TransactionsCoreDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsCoreDataSource.swift; sourceTree = "<group>"; };
+		6C482786BB7BA0C584934294 /* CoreDataInfastructureConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataInfastructureConstants.swift; sourceTree = "<group>"; };
 		982B88D520625D7EABACA5A5 /* Data.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Data.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AD2B7B1AB945B511146CFDF /* CoreDataInfastructure.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreDataInfastructure.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9B6A7F33C84C12777A8EB720 /* AppSpecificCoreDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSpecificCoreDataFetcher.swift; sourceTree = "<group>"; };
 		A7A5B95736B3D10E5801278C /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		AAA9B7DA0593BE0953A18FC4 /* CategoriesCoreDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCoreDataSource.swift; sourceTree = "<group>"; };
 		AE4B0C80C9B62649D1431046 /* CoreDataInfastructure-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "CoreDataInfastructure-Info.plist"; sourceTree = "<group>"; };
+		AF9529ECF7749A05169B7758 /* TransactionSectionsCoreDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSectionsCoreDataSource.swift; sourceTree = "<group>"; };
 		B39DC7F644CEC45C5DAB20A2 /* WalletMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletMapper.swift; sourceTree = "<group>"; };
 		B40B4EFE8947307E49E69D45 /* TransactionSectionMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSectionMapper.swift; sourceTree = "<group>"; };
-		B6C7B3D21921E5138299D6FB /* WalletRawDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletRawDataFetcher.swift; sourceTree = "<group>"; };
-		C1637764EC45DE9E914616C9 /* CategoryCoreDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCoreDataFetcher.swift; sourceTree = "<group>"; };
-		C7574B011579A432B509A112 /* CoreDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStore.swift; sourceTree = "<group>"; };
-		C957657E2A9AB9B5445C55D1 /* TransactionSectionCoreDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSectionCoreDataFetcher.swift; sourceTree = "<group>"; };
 		EF2512B90992648EF3D9A01F /* TransactionMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionMapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,15 +70,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		02FED91BC7DA1F0AA7163122 /* RawDataFetchers */ = {
+		0E9CA02F037B9C6F6F1ABB8B /* DataSources */ = {
 			isa = PBXGroup;
 			children = (
-				C1637764EC45DE9E914616C9 /* CategoryCoreDataFetcher.swift */,
-				39DBA03A91153B9E7282DBC0 /* TransactionCoreDataFetcher.swift */,
-				C957657E2A9AB9B5445C55D1 /* TransactionSectionCoreDataFetcher.swift */,
-				53569E13EA5C54ED2193D142 /* WalletCoreDataFetcher.swift */,
+				AAA9B7DA0593BE0953A18FC4 /* CategoriesCoreDataSource.swift */,
+				624F50362FD8A01CF93A2CD1 /* TransactionsCoreDataSource.swift */,
+				AF9529ECF7749A05169B7758 /* TransactionSectionsCoreDataSource.swift */,
+				3C3072E196CA5024DF7997CA /* WalletsCoreDataSource.swift */,
 			);
-			path = RawDataFetchers;
+			path = DataSources;
 			sourceTree = "<group>";
 		};
 		1774965D18057AFF7B82BB4D /* InfoPlists */ = {
@@ -111,22 +89,12 @@
 			path = InfoPlists;
 			sourceTree = "<group>";
 		};
-		1CADB971FEFE2AC71143F1AA /* Interfaces */ = {
+		1C539E2B06D7A7A314D3DB6B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				2243485A6772F93CC7347298 /* CoreDataFetcher */,
-				5F5A498D593898183F332C46 /* CoreDataStore */,
-				8CE9DA6908F166C3E5541BE0 /* RawDataFetchers */,
+				6C482786BB7BA0C584934294 /* CoreDataInfastructureConstants.swift */,
 			);
-			path = Interfaces;
-			sourceTree = "<group>";
-		};
-		2243485A6772F93CC7347298 /* CoreDataFetcher */ = {
-			isa = PBXGroup;
-			children = (
-				25C546F9D8B60D3A5F852B75 /* CoreDataFetcher.swift */,
-			);
-			path = CoreDataFetcher;
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		3B151BF5C9BD5005448CAA10 /* Sources */ = {
@@ -140,20 +108,12 @@
 		3F194220400F5C54E2783EF6 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				8F0370FCC0F5FFD3DD6070F0 /* Implementation */,
-				1CADB971FEFE2AC71143F1AA /* Interfaces */,
+				0E9CA02F037B9C6F6F1ABB8B /* DataSources */,
 				F6A9FAEB6BEB8377FB4972B0 /* Mappers */,
 				BEE97A0611A12A7B0FBF2B9F /* Store */,
+				1C539E2B06D7A7A314D3DB6B /* Utils */,
 			);
 			path = Sources;
-			sourceTree = "<group>";
-		};
-		5F5A498D593898183F332C46 /* CoreDataStore */ = {
-			isa = PBXGroup;
-			children = (
-				C7574B011579A432B509A112 /* CoreDataStore.swift */,
-			);
-			path = CoreDataStore;
 			sourceTree = "<group>";
 		};
 		60CDF153DBB4D819ACFAF664 /* Derived */ = {
@@ -173,55 +133,6 @@
 				186247F9B377E33A460B852C /* Domain.framework */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		8A80C8F7758E5B91763CC713 /* CoreDataStore */ = {
-			isa = PBXGroup;
-			children = (
-				2746EFF8CE02D1F7E8011241 /* CoreDataStorageManager.swift */,
-			);
-			path = CoreDataStore;
-			sourceTree = "<group>";
-		};
-		8CE9DA6908F166C3E5541BE0 /* RawDataFetchers */ = {
-			isa = PBXGroup;
-			children = (
-				6EDA6F785A6B2CC69349CEDD /* CategoryRawDataFetcher.swift */,
-				0F0270F45E629906CEE02EC4 /* TransactionRawDataFetcher.swift */,
-				7CBC0E1E69CE308C309B7D38 /* TransactionSectionRawDataFetcher.swift */,
-				B6C7B3D21921E5138299D6FB /* WalletRawDataFetcher.swift */,
-			);
-			path = RawDataFetchers;
-			sourceTree = "<group>";
-		};
-		8F0370FCC0F5FFD3DD6070F0 /* Implementation */ = {
-			isa = PBXGroup;
-			children = (
-				A03BDE0207B8B2D91AD75AD5 /* AppSpecificFetcher */,
-				8A80C8F7758E5B91763CC713 /* CoreDataStore */,
-				97F4843EE4BF5461625F0622 /* DataSources */,
-				02FED91BC7DA1F0AA7163122 /* RawDataFetchers */,
-			);
-			path = Implementation;
-			sourceTree = "<group>";
-		};
-		97F4843EE4BF5461625F0622 /* DataSources */ = {
-			isa = PBXGroup;
-			children = (
-				15FCB2FFF3CC22D0319258DA /* CategoriesCoreDataSource.swift */,
-				6F343A64CC5FD3A45B1D5E48 /* TransactionsCoreDataSource.swift */,
-				57756FCC6DC323E8E039F1A6 /* TransactionSectionsCoreDataSource.swift */,
-				4BDF8301BA9A1CBF8A8178D9 /* WalletsCoreDataSource.swift */,
-			);
-			path = DataSources;
-			sourceTree = "<group>";
-		};
-		A03BDE0207B8B2D91AD75AD5 /* AppSpecificFetcher */ = {
-			isa = PBXGroup;
-			children = (
-				9B6A7F33C84C12777A8EB720 /* AppSpecificCoreDataFetcher.swift */,
-			);
-			path = AppSpecificFetcher;
 			sourceTree = "<group>";
 		};
 		BEE97A0611A12A7B0FBF2B9F /* Store */ = {
@@ -355,26 +266,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				18389B0243E0DDA11A601528 /* TuistBundle+CoreDataInfastructure.swift in Sources */,
-				29F613EE430FB58B25BDE20E /* AppSpecificCoreDataFetcher.swift in Sources */,
-				1BD9101D87389931FA09029C /* CoreDataStorageManager.swift in Sources */,
-				CEF4D43920C63E64BE03FCCE /* CategoriesCoreDataSource.swift in Sources */,
-				372CAC58CB62DF0C82A26D9A /* TransactionSectionsCoreDataSource.swift in Sources */,
-				0218239CE6FA5648E8AAD2CD /* TransactionsCoreDataSource.swift in Sources */,
-				461F366E1C5E61597C394D5F /* WalletsCoreDataSource.swift in Sources */,
-				B58C8B90CA50C112FF6243F4 /* CategoryCoreDataFetcher.swift in Sources */,
-				1DCE12F958B71A07D35B9CD6 /* TransactionCoreDataFetcher.swift in Sources */,
-				DB55C8B98C233904374B6383 /* TransactionSectionCoreDataFetcher.swift in Sources */,
-				1EA9EC297B0BEEFE221B34DE /* WalletCoreDataFetcher.swift in Sources */,
-				9EFC798AC23D751EC816F65E /* CoreDataFetcher.swift in Sources */,
-				21FE233980694352515C844B /* CoreDataStore.swift in Sources */,
-				B1A6F39A370DD5C49A4CF62A /* CategoryRawDataFetcher.swift in Sources */,
-				ABDD5E086D527A80B74F4BA8 /* TransactionRawDataFetcher.swift in Sources */,
-				F7A111FE76DC026A2BA2664D /* TransactionSectionRawDataFetcher.swift in Sources */,
-				8CBBC2B829D5A1D5DD2FC46B /* WalletRawDataFetcher.swift in Sources */,
+				D626C714704A2573C31A8495 /* CategoriesCoreDataSource.swift in Sources */,
+				157DE2AA8D3A4D2BB2D8CFD6 /* TransactionSectionsCoreDataSource.swift in Sources */,
+				729E7C92C490647693FBAA09 /* TransactionsCoreDataSource.swift in Sources */,
+				8F8718373C8EFBDD801B9070 /* WalletsCoreDataSource.swift in Sources */,
 				3A05829BF366371BD5007D81 /* CategoryMapper.swift in Sources */,
 				5E74C23C8A3BA2DC0EE9BD3C /* TransactionMapper.swift in Sources */,
 				6866AA0C83780B0A2D5D8334 /* TransactionSectionMapper.swift in Sources */,
 				33B29900D9737174A81E945C /* WalletMapper.swift in Sources */,
+				00DC5B0DA1B8F013E8800DD1 /* CoreDataInfastructureConstants.swift in Sources */,
 				DD16D3BC90EB4FE3382E539C /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -592,8 +492,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/VadimBaby/MyCommon.git";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
 			};
 		};
 		9055440BFE25504FDA6320B0 /* XCRemoteSwiftPackageReference "MyCoreDataWrapped" */ = {
@@ -601,7 +501,7 @@
 			repositoryURL = "https://github.com/VadimBaby/MyCoreDataWrapped.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.1;
+				minimumVersion = 1.0.3;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

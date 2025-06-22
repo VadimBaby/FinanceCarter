@@ -11,22 +11,18 @@ import Foundation
 import Domain
 import Data
 import MyCommon
+import MyCoreDataWrapper
 
 public final class WalletsCoreDataSource: WalletsLocalDataSource {
-    private let walletRawDataFetcher: WalletRawDataFetcher
-    private let store: CoreDataStore
+    private let store: CoreDataStorage
     
-    public init(
-        walletRawDataFetcher: WalletRawDataFetcher,
-        store: CoreDataStore
-    ) {
-        self.walletRawDataFetcher = walletRawDataFetcher
+    public init(store: CoreDataStorage) {
         self.store = store
     }
     
     public func fetch() -> Result<[WalletEntity], DataSourceError> {
         do {
-            let entites = try walletRawDataFetcher.fetch()
+            let entites = try store.fetch(type: DBWallet.self)
             let domainEntities = WalletMapper.toDomain(from: entites)
             return .success(domainEntities)
         } catch {
@@ -51,7 +47,7 @@ public final class WalletsCoreDataSource: WalletsLocalDataSource {
     
     public func remove(by id: UUID) -> OperationResult<DataSourceError> {
         do {
-            guard let entity = try walletRawDataFetcher.fetch(by: id) else { return .success }
+            guard let entity = try store.fetch(by: id, type: DBWallet.self) else { return .success }
             try store.delete(entity: entity)
             return .success
         } catch {
@@ -61,7 +57,7 @@ public final class WalletsCoreDataSource: WalletsLocalDataSource {
     
     public func set(balance: Double, for wallet: WalletEntity) -> OperationResult<DataSourceError> {
         do {
-            guard let entity = try walletRawDataFetcher.fetch(by: wallet.id) else { return .success }
+            guard let entity = try store.fetch(by: wallet.id, type: DBWallet.self) else { return .success }
             try store.update(entity: entity) {
                 $0.balance = balance
             }

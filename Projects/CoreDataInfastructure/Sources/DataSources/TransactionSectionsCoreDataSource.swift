@@ -10,25 +10,18 @@ import MyCommon
 import Data
 import Domain
 import Foundation
+import MyCoreDataWrapper
 
 public final class TransactionSectionsCoreDataSource: TransactionSectionsLocalDataSource {
-    private let store: CoreDataStore
-    private let transactionSectionRawDataFetcher: TransactionSectionRawDataFetcher
-    private let transactionRawDataFetcher: TransactionRawDataFetcher
+    private let store: CoreDataStorage
     
-    public init(
-        transactionSectionRawDataFetcher: TransactionSectionRawDataFetcher,
-        transactionRawDataFetcher: TransactionRawDataFetcher,
-        store: CoreDataStore
-    ) {
+    public init(store: CoreDataStorage) {
         self.store = store
-        self.transactionRawDataFetcher = transactionRawDataFetcher
-        self.transactionSectionRawDataFetcher = transactionSectionRawDataFetcher
     }
     
     public func fetch() -> Result<[TransactionSectionEntity], DataSourceError> {
         do {
-            let entities = try transactionSectionRawDataFetcher.fetch()
+            let entities = try store.fetch(type: DBTransactionSection.self)
             let domainEntities = TransactionSectionMapper.toDomain(from: entities)
             return .success(domainEntities)
         } catch {
@@ -38,7 +31,7 @@ public final class TransactionSectionsCoreDataSource: TransactionSectionsLocalDa
     
     public func fetch(by date: Date) -> Result<TransactionSectionEntity, DataSourceError> {
         do {
-            guard let entity = try transactionSectionRawDataFetcher.fetch(by: date),
+            guard let entity = try store.fetch(by: date, type: DBTransactionSection.self),
                   let domain = TransactionSectionMapper.toDomain(from: entity) else { return .failure(.cannotFetch) }
             return .success(domain)
         } catch {
@@ -49,7 +42,7 @@ public final class TransactionSectionsCoreDataSource: TransactionSectionsLocalDa
     public func create(_ section: TransactionSectionEntity) -> OperationResult<DataSourceError> {
         do {
             let ids = section.transactions.map(\.id)
-            let dbTransactions = try transactionRawDataFetcher.fetch(by: ids)
+            let dbTransactions = try store.fetch(by: ids, type: DBTransaction.self)
             
             try store.create(type: DBTransactionSection.self) { entity in
                 entity.id = section.id
@@ -70,13 +63,15 @@ public final class TransactionSectionsCoreDataSource: TransactionSectionsLocalDa
         to section: TransactionSectionEntity
     ) -> OperationResult<DataSourceError> {
         do {
-            guard let entity = try transactionSectionRawDataFetcher.fetch(by: section.id) else { return .failure(.cannotUpdate) }
+            guard let entity = try store.fetch(by: section.id, type: DBTransactionSection.self) else { return .failure(.cannotUpdate) }
                   
             guard var domainTransactions = TransactionSectionMapper.toDomain(from: entity)?.transactions else { return .failure(.cannotUpdate) }
             
             domainTransactions.append(contentsOf: transactions)
             
-            let dbTransactions = try transactionRawDataFetcher.fetch(by: domainTransactions.map(\.id))
+            let ids = domainTransactions.map(\.id)
+            
+            let dbTransactions = try store.fetch(by: ids, type: DBTransaction.self)
             
             try store.update(entity: entity) {
                 $0.transactions = NSSet(array: dbTransactions)
@@ -90,7 +85,7 @@ public final class TransactionSectionsCoreDataSource: TransactionSectionsLocalDa
     
     public func remove(by id: UUID) -> OperationResult<DataSourceError> {
         do {
-            guard let entity = try transactionSectionRawDataFetcher.fetch(by: id) else { return .success }
+            guard let entity = try store.fetch(by: id, type: DBTransactionSection.self) else { return .success }
             try store.delete(entity: entity)
             return .success
         } catch {

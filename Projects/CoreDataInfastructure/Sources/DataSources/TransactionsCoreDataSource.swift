@@ -11,28 +11,18 @@ import Foundation
 import Data
 import MyCommon
 import Domain
+import MyCoreDataWrapper
 
 public final class TransactionsCoreDataSource: TransactionsLocalDataSource {
-    private let walletRawDataFetcher: WalletRawDataFetcher
-    private let categoryRawDataFetcher: CategoryRawDataFetcher
-    private let transactionRawDataFetcher: TransactionRawDataFetcher
-    private let store: CoreDataStore
+    private let store: CoreDataStorage
     
-    public init(
-        transactionRawDataFetcher: TransactionRawDataFetcher,
-        walletRawDataFetcher: WalletRawDataFetcher,
-        categoryRawDataFetcher: CategoryRawDataFetcher,
-        store: CoreDataStore
-    ) {
-        self.transactionRawDataFetcher = transactionRawDataFetcher
-        self.walletRawDataFetcher = walletRawDataFetcher
-        self.categoryRawDataFetcher = categoryRawDataFetcher
+    public init(store: CoreDataStorage) {
         self.store = store
     }
     
     public func fetch() -> Result<[TransactionEntity], DataSourceError> {
         do {
-            let entities = try transactionRawDataFetcher.fetch()
+            let entities = try store.fetch(type: DBTransaction.self)
             let domainEntities = TransactionMapper.toDomain(from: entities)
             return .success(domainEntities)
         } catch {
@@ -42,8 +32,11 @@ public final class TransactionsCoreDataSource: TransactionsLocalDataSource {
     
     public func create(_ transaction: TransactionEntity) -> OperationResult<DataSourceError> {
         do {
-            guard let category = try categoryRawDataFetcher.fetch(by: transaction.category.id),
-                  let wallet = try walletRawDataFetcher.fetch(by: transaction.wallet.id) else { return .failure(.cannotCreate)}
+            let categoryID = transaction.category.id
+            let walletID = transaction.wallet.id
+            
+            guard let category = try store.fetch(by: categoryID, type: DBCategory.self),
+                  let wallet = try store.fetch(by: walletID, type: DBWallet.self) else { return .failure(.cannotCreate)}
             
             try store.create(type: DBTransaction.self) { entity in
                 entity.id = transaction.id
@@ -61,7 +54,7 @@ public final class TransactionsCoreDataSource: TransactionsLocalDataSource {
     
     public func remove(by id: UUID) -> OperationResult<DataSourceError> {
         do {
-            guard let entity = try transactionRawDataFetcher.fetch(by: id) else { return .success }
+            guard let entity = try store.fetch(by: id, type: DBTransaction.self) else { return .success }
             try store.delete(entity: entity)
             return .success
         } catch {

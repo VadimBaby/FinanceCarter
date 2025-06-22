@@ -11,22 +11,18 @@ import Foundation
 import Data
 import MyCommon
 import Domain
+import MyCoreDataWrapper
 
 public final class CategoriesCoreDataSource: CategoriesLocalDataSource {
-    private let store: CoreDataStore
-    private let categoryRawDataFetcher: CategoryRawDataFetcher
+    private let store: CoreDataStorage
     
-    public init(
-        categoryRawDataFetcher: CategoryRawDataFetcher,
-        store: CoreDataStore
-    ) {
+    public init(store: CoreDataStorage) {
         self.store = store
-        self.categoryRawDataFetcher = categoryRawDataFetcher
     }
     
     public func fetch() -> Result<[CategoryEntity], DataSourceError> {
         do {
-            let entities = try categoryRawDataFetcher.fetch()
+            let entities = try store.fetch(type: DBCategory.self)
             let domainEntities = CategoryMapper.toDomain(from: entities)
             return .success(domainEntities)
         } catch {
@@ -52,7 +48,7 @@ public final class CategoriesCoreDataSource: CategoriesLocalDataSource {
     
     public func remove(by id: UUID) -> OperationResult<DataSourceError> {
         do {
-            guard let entity = try categoryRawDataFetcher.fetch(by: id) else { return .success }
+            guard let entity = try store.fetch(by: id, type: DBCategory.self) else { return .success }
             try store.delete(entity: entity)
             return .success
         } catch {

@@ -8,7 +8,8 @@ let project = Project(
     organizationName: Constants.ORGANIZATION_NAME,
     packages: [
         Constants.Packages.MyCommon.package,
-        Constants.Packages.Swinject.package
+        Constants.Packages.Swinject.package,
+        Constants.Packages.MyCoreDataWrapper.package
     ],
     targets: [
         .createTarget(
@@ -20,7 +21,8 @@ let project = Project(
                 Constants.Modules.Data.dependency,
                 Constants.Modules.Presentation.dependency,
                 Constants.Modules.CoreDataInfastructure.dependency,
-                Constants.Packages.Swinject.dependency
+                Constants.Packages.Swinject.dependency,
+                Constants.Packages.MyCoreDataWrapper.dependency
             ],
             resources: Constants.DEFAULT_LOCATE_RESOURCES
         )
